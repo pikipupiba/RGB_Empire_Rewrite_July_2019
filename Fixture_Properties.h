@@ -15,7 +15,7 @@
 
 const int NUM_STRIPS = 8;
 
-const int NUM_LEDS[NUM_STRIPS];
+int NUM_LEDS[NUM_STRIPS];
 
 
 

@@ -22,7 +22,7 @@ class LED_Strip
 	 int length_in_meters;
 	 int width_in_meters;
 
-	 CRGBSet leds;
+	 //CRGBSet leds;
 
 	 friend class LED_Fixture;
 

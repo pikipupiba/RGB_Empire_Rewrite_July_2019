@@ -24,9 +24,9 @@ class LED_Fixture
 
 	 Shape shape;
 
-	 CRGBSet leds;
+	 //CRGBSet leds;
 
-	 LED_Strip strips[8];
+	 //LED_Strip strips[8];
 
  public:
 	LED_Fixture();
