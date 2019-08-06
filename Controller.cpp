@@ -5,15 +5,20 @@
 #include "Controller.h"
 #include "Tasks.h"
 
-void ControllerClass::init()
+void Controller::create_fixture()
 {
 
-	Setup_Physical_Input();		// initialize physical buttons and knobs.
-	Setup_UDP_Input();			// initialize UDP Input ports.
+}
 
-	Create_Tasks();				// Start all the independently managed tasks.
+Controller::Controller()
+{
 
-	Create_Fixture();
+	setup_physical_input();		// initialize physical buttons and knobs.
+	setup_UDP_input();			// initialize UDP Input ports.
+
+	create_tasks();				// Start all the independently managed tasks.
+
+	create_fixture();
 
 	FastLED_Show_ESP32();
 
@@ -21,10 +26,20 @@ void ControllerClass::init()
 
 }
 
-void ControllerClass::run()
+Controller::~Controller()
 {
 }
 
+void Controller::run()
+{
 
-ControllerClass Controller;
+	check_physical_input();
+
+	check_UDP_input();
+
+	current_animation.run();
+
+	FastLED_Show_ESP32();
+}
+
 

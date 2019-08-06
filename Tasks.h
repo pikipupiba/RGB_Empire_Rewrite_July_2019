@@ -1,5 +1,9 @@
 // Tasks.h
 
+// This file is used to define any functions that run based on tasks.
+
+// I don't quite know how any of this works quite yet.
+
 #ifndef _TASKS_h
 #define _TASKS_h
 
@@ -17,7 +21,7 @@ This function runs on core 0 and just waits for requests to call FastLED.show()
 */
 void FastLED_Show_Task(void* pvParameters);
 
-void Create_Tasks();
+void create_tasks();
 
 
 #endif

@@ -4,10 +4,14 @@
 
 #include "Pattern.h"
 
-void Pattern::init()
+Pattern::Pattern()
 {
 
 
+}
+
+Pattern::~Pattern()
+{
 }
 
 void Pattern::run()

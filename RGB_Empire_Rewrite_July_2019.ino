@@ -18,7 +18,7 @@
 //**********************//
 #include "Controller.h"
 
-Controller controller;
+Controller *controller;
 
 
 // Define Function Prototypes that use User Types below here or use a .h file
@@ -35,7 +35,7 @@ void setup()
 
 	Serial.begin(115200);
 
-	controller.init();
+	controller = new Controller();
 
 }
 
@@ -43,7 +43,7 @@ void setup()
 void loop()
 {
 
-	controller.run();
+	controller->run();
 
 	fps(1);
 

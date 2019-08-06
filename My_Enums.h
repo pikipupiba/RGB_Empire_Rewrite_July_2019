@@ -1,5 +1,7 @@
 // My_Enums.h
 
+// I'll use this file to store any enumerated values until I decide where to put them for realsies.
+
 #ifndef _MY_ENUMS_h
 #define _MY_ENUMS_h
 

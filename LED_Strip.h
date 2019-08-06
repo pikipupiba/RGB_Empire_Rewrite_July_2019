@@ -1,5 +1,7 @@
 // LED_Strip.h
 
+// An LED Strip contains all information about a single LED strip in the physical world.
+
 #ifndef _LED_STRIP_h
 #define _LED_STRIP_h
 
@@ -13,18 +15,21 @@ class LED_Strip
 {
  protected:
 
-	 const int num_leds;
-	 const int leds_per_meter;
-	 const Shape shape;
+	 int num_leds;
+	 int leds_per_meter;
+	 Shape shape;
 
-	 const int length_in_meters;
-	 const int width_in_meters;
+	 int length_in_meters;
+	 int width_in_meters;
+
+	 CRGBSet leds;
 
 	 friend class LED_Fixture;
 
  public:
 
-	void init(int new_num_leds, int new_leds_per_meter, Shape new_shape);
+	LED_Strip(int new_num_leds, int new_leds_per_meter, Shape new_shape);
+	~LED_Strip();
 };
 
 #endif

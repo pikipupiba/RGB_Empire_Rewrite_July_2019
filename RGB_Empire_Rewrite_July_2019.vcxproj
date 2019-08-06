@@ -115,6 +115,7 @@
     <ClInclude Include="LED_Fixture.h" />
     <ClInclude Include="LED_Strip.h" />
     <ClInclude Include="My_Enums.h" />
+    <ClInclude Include="Oscillator.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="Physical_Input.h" />
     <ClInclude Include="resource.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Fixture_Properties.cpp" />
     <ClCompile Include="LED_Fixture.cpp" />
     <ClCompile Include="LED_Strip.cpp" />
+    <ClCompile Include="Oscillator.cpp" />
     <ClCompile Include="Pattern.cpp" />
     <ClCompile Include="Physical_Input.cpp" />
     <ClCompile Include="Tasks.cpp" />

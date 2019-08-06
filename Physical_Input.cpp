@@ -4,8 +4,14 @@
 
 #include "Physical_Input.h"
 
+bool physical_input_enabled = true;
 
-void Setup_Physical_Input()
+void setup_physical_input()
+{
+
+}
+
+void check_physical_input()
 {
 
 }

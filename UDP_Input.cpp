@@ -5,7 +5,12 @@
 #include "UDP_Input.h"
 
 
-void Setup_UDP_Input()
+void setup_UDP_input()
+{
+
+}
+
+void check_UDP_input()
 {
 
 }

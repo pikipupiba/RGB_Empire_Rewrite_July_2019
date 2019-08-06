@@ -5,10 +5,14 @@
 #include "LED_Fixture.h"
 
 
-void LED_Fixture::init()
+LED_Fixture::LED_Fixture()
 {
 
 
+}
+
+LED_Fixture::~LED_Fixture()
+{
 }
 
 

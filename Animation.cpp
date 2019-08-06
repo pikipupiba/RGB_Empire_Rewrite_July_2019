@@ -4,10 +4,19 @@
 
 #include "Animation.h"
 
-void Animation::init()
+void Animation::update_vars()
+{
+
+}
+
+Animation::Animation()
 {
 
 
+}
+
+Animation::~Animation()
+{
 }
 
 void Animation::run()
