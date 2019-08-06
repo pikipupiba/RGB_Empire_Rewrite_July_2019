@@ -33,6 +33,8 @@ class Animation
 	void init();
 
 	void run();
+
+	void update_vars();
 };
 
 #endif
