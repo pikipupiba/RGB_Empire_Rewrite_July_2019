@@ -7,18 +7,27 @@
 
 void Controller::create_fixture()
 {
-
 }
 
 Controller::Controller()
 {
+
+	Serial.println("there");
 
 	setup_physical_input();		// initialize physical buttons and knobs.
 	setup_UDP_input();			// initialize UDP Input ports.
 
 	create_tasks();				// Start all the independently managed tasks.
 
-	create_fixture();
+	fixture = new LED_Fixture();
+
+	fixture->print_info();
+
+	current_animation = new Animation(fixture);
+
+	current_animation->print_info();
+
+	FastLED.setBrightness(255);
 
 	FastLED_Show_ESP32();
 
@@ -28,18 +37,21 @@ Controller::Controller()
 
 Controller::~Controller()
 {
+	
 }
 
 void Controller::run()
 {
-
+	//Serial.println("Here");
 	check_physical_input();
 
 	check_UDP_input();
 
-	current_animation.run();
+	current_animation->run();
 
 	FastLED_Show_ESP32();
+
+
 }
 
 

@@ -30,9 +30,9 @@
 class Controller
 {
  protected:
-	 LED_Fixture fixture;			// The object containing all our LEDs.
-	 Animation current_animation;	// The animation that is currently running.
-	 Animation next_animation;		// The animation that we are transitioning to.
+	 LED_Fixture* fixture;			// The object containing all our LEDs.
+	 Animation* current_animation;	// The animation that is currently running.
+	 Animation* next_animation;		// The animation that we are transitioning to.
 
 	 void create_fixture();			// The method that creates our LED_Fixture object.
 	 
@@ -43,7 +43,7 @@ class Controller
 	void run();			// The run() method is called every frame.
 
 	// transition_to() is called to begin the process of transitioning to a new animation.
-	void transition_to(int new_animation_ID, int new_transition_type, float new_transition_time);
+	//void transition_to(int new_animation_ID, int new_transition_type, float new_transition_time);
 
 
 };

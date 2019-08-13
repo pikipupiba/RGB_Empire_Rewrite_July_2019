@@ -35,6 +35,8 @@ void setup()
 
 	Serial.begin(115200);
 
+	//Serial.println("start");
+
 	controller = new Controller();
 
 }
@@ -42,9 +44,11 @@ void setup()
 
 void loop()
 {
+	//Serial.println("loop");
+
 
 	controller->run();
 
-	fps(1);
+	fps(5);
 
 }

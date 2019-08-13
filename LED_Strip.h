@@ -15,20 +15,25 @@ class LED_Strip
 {
  protected:
 
+	 int strip_index;
+
+	 CRGBSet* leds;
+
 	 int num_leds;
 	 int leds_per_meter;
 	 Shape shape;
 
-	 int length_in_meters;
-	 int width_in_meters;
-
-	 //CRGBSet leds;
+	 int length_in_leds;
+	 int width_in_leds;
 
 	 friend class LED_Fixture;
+	 friend class Pattern;
+
+	 void print_info();
 
  public:
 
-	LED_Strip(int new_num_leds, int new_leds_per_meter, Shape new_shape);
+	LED_Strip(int new_strip_index, CRGBSet* leds, Strip_Parameters new_strip_parameters);
 	~LED_Strip();
 };
 

@@ -17,6 +17,11 @@
 #include "arduino.h"
 #include "Pattern.h"
 #include "Oscillator.h"
+#include "My_Enums.h"
+#include "LED_Fixture.h"
+
+constexpr int max_number_of_patterns = 8;
+constexpr int max_number_of_parameters = 32;
 
 class Animation
 {
@@ -24,21 +29,15 @@ class Animation
 
 	 int animation_ID;
 
-	 float brightness[32];
+	 LED_Fixture* fixture;
 
-	 float position[32];
-	 float speed[32];
-	 float acceleration[32];
+	 Pattern* pattern[max_number_of_patterns];
 
-	 float hue[32];
-	 float hue_speed[32];
-	 float hue_acceleration[32];
+	 int num_patterns;
 
-	 float offset[32];
-	 float size[32];
-	 float size_offset[32];
+	 Animation_Parameters animation_parameters[max_number_of_parameters];
 
-	 Oscillator osc[32];
+	 Oscillator osc[max_number_of_parameters];
 
 
 	 friend class Pattern;
@@ -47,8 +46,10 @@ class Animation
 
  public:
 
-	Animation();
+	Animation(LED_Fixture* new_fixture);
 	~Animation();
+
+	void print_info();
 
 	void run();
 

@@ -14,6 +14,8 @@
 
 #include "arduino.h"
 #include "FastLED.h"
+
+#include "Fixture_Parameters.h"
 #include "LED_Strip.h"
 
 class LED_Fixture
@@ -21,16 +23,25 @@ class LED_Fixture
  protected:
 
 	 int num_strips;
+	 int fixture_num_leds;
 
 	 Shape shape;
 
-	 //CRGBSet leds;
+	 Display_Mode display_mode;
 
-	 //LED_Strip strips[8];
+	 CRGBArray<fixture_parameters.total_num_leds> g_leds;
+
+	 LED_Strip* led_strips[fixture_parameters.num_strips];
+
+	 friend class Animation;
+
+	 void create_strips();
 
  public:
 	LED_Fixture();
 	~LED_Fixture();
+
+	void print_info();
 };
 
 
