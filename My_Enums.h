@@ -17,7 +17,8 @@ enum Shape
 	Panel = 2,
 	Circle = 3,
 	Plant = 10,
-	Tree = 11
+	Tree = 11,
+	Vertical_Lamp = 12
 };
 
 enum Display_Mode
@@ -26,6 +27,8 @@ enum Display_Mode
 	Sequential = 1,
 	Every_Other_Sequential = 2
 };
+
+// Use structs to make passing parameters into methods fast and easy.
 
 struct Strip_Parameters
 {
@@ -46,6 +49,7 @@ struct Fixture_Parameters
 	const Strip_Parameters* strip_parameters[8];
 };
 
+// Easy way to store all the parameters an animation or pattern needs to evolve over time.
 struct Animation_Parameters
 {
 	float brightness = 255;

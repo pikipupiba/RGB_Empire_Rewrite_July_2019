@@ -10,12 +10,13 @@
 
 void LED_Fixture::create_strips()
 {
-	Serial.println("bleh");
 
 	fixture_num_leds = 0;
 	int num_leds_so_far = 0;
 	num_strips = fixture_parameters.num_strips;
 
+
+	// Can use template metaprogramming to fix this section.
 	for (int i = 0; i < num_strips; i++)
 	{
 		if (i == 0)

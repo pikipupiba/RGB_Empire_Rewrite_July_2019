@@ -8,7 +8,7 @@
 
 // Floats are used to allow super smooth transitions and antialiased output.
 
-// I think this should be an interface class to allow individual patterns to be
+// This should be an interface class to allow individual patterns to be
 // seperated out into children classes.
 
 #ifndef _PATTERN_h
@@ -43,31 +43,6 @@ class Pattern
 
 	void run();
 
-	//void rainbow();
-	//void addGlitter			(fract8 chanceOfGlitter);
-	//void rainbowWithGlitter();
-	//void confetti();
-	//void sinelon();
-	//void bpm();
-	//void juggle();
-	//void showSolidColor();
-	//void showSolidColorChanging();
-	////void heatMap			(CRGBPalette16 palette, bool up);
-	//void fire();
-	//void water();
-	//void pride();
-	////void colorwaves			(CRGB* ledarray, uint16_t numleds, CRGBPalette16& palette);
-	//void colorWaves();
-	//void colorWipe();
-	//void continuousWipe();
-	//void dripper();
-	//void dripper2();
-	//void twinkle();
-	//void twinkleRain();
-	//void plasma();
-	//void meteor();
-	//void bouncingBalls();
-	//void dancingSisters();
 };
 
 typedef void(*Pattern_Function)(CRGBSet* leds, Animation_Parameters pattern_parameters[]);

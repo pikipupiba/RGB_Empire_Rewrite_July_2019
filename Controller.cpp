@@ -12,8 +12,6 @@ void Controller::create_fixture()
 Controller::Controller()
 {
 
-	Serial.println("there");
-
 	setup_physical_input();		// initialize physical buttons and knobs.
 	setup_UDP_input();			// initialize UDP Input ports.
 
@@ -42,7 +40,7 @@ Controller::~Controller()
 
 void Controller::run()
 {
-	//Serial.println("Here");
+
 	check_physical_input();
 
 	check_UDP_input();
@@ -50,7 +48,6 @@ void Controller::run()
 	current_animation->run();
 
 	FastLED_Show_ESP32();
-
 
 }
 

@@ -29,8 +29,6 @@ LED_Strip::LED_Strip(int new_strip_index, CRGBSet* new_leds, Strip_Parameters ne
 	width_in_leds(new_strip_parameters.width_in_leds)
 {
 
-	Serial.println("poop");
-
 }
 
 LED_Strip::~LED_Strip()

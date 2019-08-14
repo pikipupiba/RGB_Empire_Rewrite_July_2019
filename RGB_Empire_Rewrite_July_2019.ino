@@ -18,25 +18,23 @@
 //**********************//
 #include "Controller.h"
 
+// Create the pointer to our controller
 Controller *controller;
 
-
-// Define Function Prototypes that use User Types below here or use a .h file
-//
-
-
-// Define Functions below here or use other .ino or cpp files
-//
 
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
+	// Delay to allow uploader time to fix unstable software.
+	// Reduce or remove this for production.
 	delay(3000);
 
 	Serial.begin(115200);
 
 	//Serial.println("start");
 
+	// Create the controller object
+	// It initializes everything based on the values in Fixture_Parameters.h
 	controller = new Controller();
 
 }

@@ -80,6 +80,11 @@ void rainbowWithGlitter(CRGBSet* leds, Animation_Parameters pattern_parameters[]
 }
 
 
+//******************************************************************************************//
+//	Below this line are patterns that need to be modified to use the new data structures	//
+//******************************************************************************************//
+
+
 //void Pattern::confetti()
 //{
 //	// random colored speckles that blink in and fade smoothly
@@ -738,6 +743,9 @@ void rainbowWithGlitter(CRGBSet* leds, Animation_Parameters pattern_parameters[]
 //	}
 //	*/
 //}
+
+
+// To activate a pattern add it to this list
 
 Pattern_Function_List patterns = {	rainbow,
 									rainbowWithGlitter
