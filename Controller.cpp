@@ -45,6 +45,8 @@ void Controller::run()
 
 	check_UDP_input();
 
+	//change();
+
 	current_animation->run();
 
 	FastLED_Show_ESP32();

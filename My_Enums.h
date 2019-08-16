@@ -16,6 +16,7 @@ enum Shape
 	Folded = 1,
 	Panel = 2,
 	Circle = 3,
+	Spiral = 4,
 	Plant = 10,
 	Tree = 11,
 	Vertical_Lamp = 12
@@ -23,9 +24,10 @@ enum Shape
 
 enum Display_Mode
 {
-	Parallel = 0,
-	Sequential = 1,
-	Every_Other_Sequential = 2
+	Default = 0,
+	Parallel = 1,
+	Sequential = 2,
+	Every_Other_Sequential = 3
 };
 
 // Use structs to make passing parameters into methods fast and easy.
@@ -53,18 +55,33 @@ struct Fixture_Parameters
 struct Animation_Parameters
 {
 	float brightness = 255;
+	float brightness_speed = 0;
+	float brightness_acceleration = 0;
+	float brightness_offset = 0;
 
 	float position = 0;
 	float speed = 0.5;
 	float acceleration = 0;
+	float position_offset = 0;
 
 	float hue = 0;
 	float hue_speed = 0.5;
 	float hue_acceleration = 0;
+	float hue_offset = 0;
 
-	float offset = 0;
 	float size = 5;
+	float size_speed = 0;
+	float size_acceleration = 0;
 	float size_offset = 0;
+
+	float range_start = 0;
+	float range_end = 0;
+
+	int current_palette = 0;
+	int target_palete = 0;
+	float cycle_palettes = 0;	// =0 means palette does not cycle
+
+	int stage = 0;				// =0 means it has not started and must be initialized, >0 can be used to keep track of various stages
 };
 
 #endif

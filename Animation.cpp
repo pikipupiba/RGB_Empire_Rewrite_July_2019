@@ -60,9 +60,11 @@ void Animation::run()
 //	{
 //		for (int i = 0; i < num_patterns; i++)
 //		{
-//			pattern[i] = new Pattern(fixture->led_strips[i]);
+//			pattern[i] = new Pattern(patternID, fixture->led_strips[i]);
 //		}
 //	}
+//	else
+//	{}
 //}
 //
 //Animation_Function_List animations = {	//just_rainbow,

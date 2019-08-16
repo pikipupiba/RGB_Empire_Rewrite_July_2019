@@ -23,8 +23,6 @@ Pattern::Pattern(LED_Strip* new_strip)
 
 		pattern_parameters[i].hue = 0;
 		pattern_parameters[i].hue_speed = 0.5;
-
-
 	}
 
 }
