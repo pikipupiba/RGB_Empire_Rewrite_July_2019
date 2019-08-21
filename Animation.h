@@ -39,7 +39,6 @@ class Animation
 
 	 Oscillator osc[max_number_of_parameters];
 
-
 	 friend class Pattern;
 
 	 void update_vars();
