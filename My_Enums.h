@@ -79,7 +79,7 @@ struct Animation_Parameters
 
 	int current_palette = 0;
 	int target_palete = 0;
-	float cycle_palettes = 0;	// =0 means palette does not cycle
+	float cycle_palettes = 0;	// =0 means palette does not cycle, >0 equals the time between palette changes
 
 	int stage = 0;				// =0 means it has not started and must be initialized, >0 can be used to keep track of various stages
 };
