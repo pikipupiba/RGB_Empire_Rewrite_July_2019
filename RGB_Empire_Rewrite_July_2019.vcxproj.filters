@@ -79,6 +79,9 @@
     <ClInclude Include="Bug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Create_Arrangements.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Physical_Input.cpp">

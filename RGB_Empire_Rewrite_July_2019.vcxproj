@@ -115,6 +115,7 @@
     <ClInclude Include="Animation_Controller.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Bug.h" />
+    <ClInclude Include="Create_Arrangements.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Display_Test.h" />
     <ClInclude Include="Fixture_Parameters.h" />

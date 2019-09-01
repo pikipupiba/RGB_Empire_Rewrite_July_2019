@@ -12,16 +12,16 @@
 #include "vector"
 
 
-struct LED_Thing
+struct LED_Group
 {
-	CRGBSet* leds;
+	std::vector<CRGBSet*> leds;
 	int group_number;
 };
 
-struct LED_Group
+struct LED_Arrangement
 {
 	Display_Mode display_mode;
-	std::vector<LED_Thing> led_things;
+	std::vector<LED_Group> led_groups;
 };
 
 
@@ -40,16 +40,26 @@ class LED_Strip
 	 int length_in_leds;
 	 int width_in_leds;
 
-	 std::vector<LED_Group> led_groups;
+	 std::vector<LED_Arrangement> led_arrangements;
 
 	 friend class LED_Fixture;
 
 	 void print_info();
 
+	 
+	 void divide_linear();
+	 void divide_folded();
+	 void divide_panel();
+	 void divide_polygon();
+	 
+
  public:
 
 	LED_Strip(int new_strip_index, CRGBSet* leds, Strip_Parameters new_strip_parameters);
 	~LED_Strip();
+
+	LED_Arrangement* get_led_arrangement(Display_Mode new_display_mode);
+
 };
 
 #endif
