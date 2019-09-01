@@ -7,19 +7,43 @@
 // Update the animation variables to calculate the next frame.
 void Animation::update_vars()
 {
+	vars.brightness += vars.brightness_speed;
+	vars.brightness_speed += vars.brightness_acceleration;
+
+	vars.position += vars.speed;
+	vars.speed += vars.acceleration;
+
+	vars.hue += vars.hue_speed;
+	vars.hue_speed += vars.hue_acceleration;
+
+	vars.size += vars.size_speed;
+	vars.size_speed += vars.size_acceleration;
+}
+
+Animation::Animation()
+	:animation_ID(num_animations++)
+{
 
 }
 
-Animation::Animation(LED_Fixture* new_fixture)
-	:fixture(new_fixture)
+Animation::Animation(std::vector<CRGBSet*> new_leds)
+	:animation_ID(num_animations++),
+	leds(new_leds)
 {
-	num_patterns = fixture->num_strips;
 
-	for (int i = 0; i < num_patterns; i++)
+}
+
+
+Animation* Animation::create(Animation_Name new_animation_name)
+{
+	switch (new_animation_name)
 	{
-		pattern[i] = new Pattern(fixture->led_strips[i]);
+	case _Rainbow_Wave:					return new Rainbow_Wave;
+	case _Glitter:						return new Glitter;
+	case _Rainbow_Wave_With_Glitter:	return new Rainbow_Wave_With_Glitter;
+	//case _Random_Rainbow_Wave:			return new Random_Rainbow_Wave;
+	default:							return new Rainbow_Wave;
 	}
-
 }
 
 Animation::~Animation()
@@ -28,48 +52,34 @@ Animation::~Animation()
 
 void Animation::print_info()
 {
-	animation_ID = 0;
+	Serial.print("Animation #");
+	Serial.print(animation_ID);
+	Serial.println(" Information:");
 
-	for (int i = 0; i < num_patterns; i++)
-	{
-		pattern[i]->print_info();
-	}
+	Serial.print("   Position = ");
+	Serial.println(vars.position);
+
+	Serial.print("   Hue = ");
+	Serial.println(vars.hue);
 }
 
 void Animation::run()
 {
+	erase_previous_frame();
+
 	update_vars();
 
-	//animations[animation_ID](fixture, animation_parameters);
+	draw_next_frame();
 
-	for (int i = 0; i < num_patterns; i++)
-	{
-		pattern[i]->run();
+	for (auto& animation : animations) {
+		animation->run();
 	}
+
 }
 
-// This is my first attempt at using the new animation class for its intended purpose.
-// I have noticed a few things I need to alter about the data structure to make this work the way I would like.
-//		1. Patterns should probably be owned at the strip level as opposed to be the animation.
-
-//void alt_bpm_rainbow(LED_Fixture* fixture, Animation_Parameters animation_parameters[])
-//{
-//	static bool started = false;
-//
-//	if (started == false)
-//	{
-//		for (int i = 0; i < num_patterns; i++)
-//		{
-//			pattern[i] = new Pattern(patternID, fixture->led_strips[i]);
-//		}
-//	}
-//	else
-//	{}
-//}
-//
-//Animation_Function_List animations = {	//just_rainbow,
-//										//just_rainbowWithGlitter,
-//										//just_bpm,
-//										alt_bpm_rainbow
-//
-//};
+void Animation::erase_previous_frame()
+{
+	for (auto& led_set : leds) {
+		led_set->fill_solid(CRGB::Black);
+	}
+}

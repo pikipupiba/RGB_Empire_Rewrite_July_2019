@@ -76,10 +76,10 @@ void LED_Fixture::create_strips()
 			num_leds_so_far += strip_parameters[i].num_leds;
 		}
 
-		led_strips[i] = new LED_Strip
+		led_strips.push_back(new LED_Strip
 			(i,
 				new CRGBSet(g_leds(fixture_num_leds, num_leds_so_far - 1)),
-				strip_parameters[i]);
+				strip_parameters[i]));
 
 		fixture_num_leds = num_leds_so_far;
 	}
@@ -91,9 +91,9 @@ void LED_Fixture::create_strips()
 
 void LED_Fixture::print_info()
 {
-	for (int i = 0; i < num_strips; i++)
+	for (auto& strip: led_strips)
 	{
-		led_strips[i]->print_info();
+		strip->print_info();
 	}
 }
 
@@ -112,6 +112,11 @@ LED_Fixture::LED_Fixture()
 
 LED_Fixture::~LED_Fixture()
 {
+}
+
+LED_Fixture* LED_Fixture::create()
+{
+	return new LED_Fixture;
 }
 
 

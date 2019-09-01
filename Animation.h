@@ -15,45 +15,80 @@
 #define _ANIMATION_h
 
 #include "arduino.h"
-#include "Pattern.h"
+#include <vector>
+#include <typeinfo>
+#include <FastLED.h>
 #include "Oscillator.h"
 #include "My_Enums.h"
 #include "LED_Fixture.h"
 
-constexpr int max_number_of_patterns = 8;
-constexpr int max_number_of_parameters = 32;
+
+// Factory method eliminates this.
+//extern std::vector<Animation_Class_And_Name> animation_list;
+
 
 class Animation
 {
  protected:
 
-	 int animation_ID;
+	// Every animation should have a unique name.
+	// "Base" is t he name of the interface.
+	Animation_Name name = _Base;
 
-	 LED_Fixture* fixture;
+	// Unique ID for each animation object. Base animation has ID = 0.
+	const int animation_ID;
 
-	 Pattern* pattern[max_number_of_patterns];
+	// Moved this to the Animation_Controller class.
+	// Vector that contains all children of this interface. Push onto this vector in the header of each child.
+	//static std::vector<Animation> animation_list;
 
-	 int num_patterns;
+	// The current total number of animation objects.
+	static int num_animations;
 
-	 Animation_Parameters animation_parameters[max_number_of_parameters];
+	// Vector to contain any other animation objects this one creates.
+	std::vector<Animation*> animations;
 
-	 Oscillator osc[max_number_of_parameters];
+	// A pointer to the fixture object that contains all necessary information about the LEDs.
+	//LED_Fixture* fixture;
 
+	std::vector<Led_Group*> led_groups;
 
-	 friend class Pattern;
+	// A struct that contains all the variables associated with the animation.
+	Animation_Variables vars;
 
-	 void update_vars();
+	//friend class Animation_Controller;
+
+	void update_vars();
 
  public:
 
-	Animation(LED_Fixture* new_fixture);
-	~Animation();
+	Animation();
+	 
+	Animation(std::vector<CRGBSet*> new_leds);
 
+	static Animation* create(Animation_Name new_animation_name);
+
+	virtual ~Animation();
+
+	// Print out all relevant animation information.
 	void print_info();
 
+	// Do whatever is necessary to advance the animation to the next frame.
 	void run();
 
+	// Erase the previous frame to allow seemless overlapping of animations.
+	virtual void erase_previous_frame();
+
+
+	// Generate the next frame of the animation.
+	virtual void draw_next_frame() = 0;
+
 };
+
+//std::vector<boost::variant<first, second> > vec2;
+//std::vector<std::unique_ptr<Animation>> vec3;
+
+#include "All_Animations.h"
 
 #endif
 

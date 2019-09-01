@@ -5,32 +5,31 @@
 #include "Controller.h"
 #include "Tasks.h"
 
-void Controller::create_fixture()
-{
-}
+LED_Fixture* Controller::fixture = LED_Fixture::create();
+Animation_Controller* Controller::animation_controller = Animation_Controller::create();
+Display* Controller::display = Display::create();
+
 
 Controller::Controller()
 {
+	START;
 
 	setup_physical_input();		// initialize physical buttons and knobs.
 	setup_UDP_input();			// initialize UDP Input ports.
 
 	create_tasks();				// Start all the independently managed tasks.
 
-	fixture = new LED_Fixture();
-
 	fixture->print_info();
 
-	current_animation = new Animation(fixture);
-
-	current_animation->print_info();
+	animation_controller->print_info();
 
 	FastLED.setBrightness(255);
 
 	FastLED_Show_ESP32();
 
-	//Debug.Display_Memory(" after controller initialization.");
+	MEM;
 
+	END;
 }
 
 Controller::~Controller()
@@ -47,7 +46,7 @@ void Controller::run()
 
 	//change();
 
-	current_animation->run();
+	animation_controller->run();
 
 	FastLED_Show_ESP32();
 

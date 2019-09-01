@@ -24,10 +24,23 @@ enum Shape
 
 enum Display_Mode
 {
-	Default = 0,
-	Parallel = 1,
-	Sequential = 2,
-	Every_Other_Sequential = 3
+	Default,
+	Test,
+	Parallel,
+	Sequential,
+	Every_Other_Sequential,
+	Left_To_Right,
+	Middle_Out,
+	Around
+};
+
+enum Animation_Name
+{
+	_Base,
+	_Rainbow_Wave,
+	_Glitter,
+	_Rainbow_Wave_With_Glitter,
+	_Random_Rainbow_Wave
 };
 
 // Use structs to make passing parameters into methods fast and easy.
@@ -51,8 +64,7 @@ struct Fixture_Parameters
 	const Strip_Parameters* strip_parameters[8];
 };
 
-// Easy way to store all the parameters an animation or pattern needs to evolve over time.
-struct Animation_Parameters
+struct Animation_Variables
 {
 	float brightness = 255;
 	float brightness_speed = 0;
@@ -60,12 +72,12 @@ struct Animation_Parameters
 	float brightness_offset = 0;
 
 	float position = 0;
-	float speed = 0.5;
+	float speed = 1;
 	float acceleration = 0;
 	float position_offset = 0;
 
 	float hue = 0;
-	float hue_speed = 0.5;
+	float hue_speed = 1;
 	float hue_acceleration = 0;
 	float hue_offset = 0;
 
@@ -74,15 +86,20 @@ struct Animation_Parameters
 	float size_acceleration = 0;
 	float size_offset = 0;
 
+	float density = 25.0;
+
 	float range_start = 0;
 	float range_end = 0;
 
 	int current_palette = 0;
 	int target_palete = 0;
-	float cycle_palettes = 0;	// =0 means palette does not cycle
+	float cycle_palettes = 0;	// =0 means palette does not cycle, >0 signifies the amount of time it takes the palette to change
 
 	int stage = 0;				// =0 means it has not started and must be initialized, >0 can be used to keep track of various stages
+
+	Display_Mode display_mode;
 };
+
 
 #endif
 

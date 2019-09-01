@@ -22,9 +22,6 @@
     <ClInclude Include="__vm\.RGB_Empire_Rewrite_July_2019.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Physical_Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -43,9 +40,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pattern.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LED_Strip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -61,11 +55,32 @@
     <ClInclude Include="Fixture_Parameters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Rainbow_Wave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_Controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rainbow_Wave_With_Glitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Glitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="All_Animations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Display_Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Physical_Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,9 +99,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pattern.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LED_Strip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -94,6 +106,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Fixture_Parameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rainbow_Wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rainbow_Wave_With_Glitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Glitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Display_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

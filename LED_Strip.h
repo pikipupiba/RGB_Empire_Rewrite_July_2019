@@ -9,6 +9,20 @@
 #include "arduino.h"
 #include "FastLED.h"
 #include "My_Enums.h"
+#include "vector"
+
+
+struct LED_Thing
+{
+	CRGBSet* leds;
+	int group_number;
+};
+
+struct LED_Group
+{
+	Display_Mode display_mode;
+	std::vector<LED_Thing> led_things;
+};
 
 
 class LED_Strip
@@ -26,8 +40,9 @@ class LED_Strip
 	 int length_in_leds;
 	 int width_in_leds;
 
+	 std::vector<LED_Group> led_groups;
+
 	 friend class LED_Fixture;
-	 friend class Pattern;
 
 	 void print_info();
 

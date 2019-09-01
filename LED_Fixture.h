@@ -14,6 +14,7 @@
 
 #include "arduino.h"
 #include "FastLED.h"
+#include "vector"
 
 #include "Fixture_Parameters.h"
 #include "LED_Strip.h"
@@ -31,7 +32,7 @@ class LED_Fixture
 
 	 CRGBArray<fixture_parameters.total_num_leds> g_leds;
 
-	 LED_Strip* led_strips[fixture_parameters.num_strips];
+	 std::vector<LED_Strip*> led_strips;
 
 	 friend class Animation;
 
@@ -40,6 +41,8 @@ class LED_Fixture
  public:
 	LED_Fixture();
 	~LED_Fixture();
+
+	static LED_Fixture* create();
 
 	void print_info();
 };

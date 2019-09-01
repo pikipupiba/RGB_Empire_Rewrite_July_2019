@@ -6,7 +6,10 @@
 #ifndef _UDP_INPUT_h
 #define _UDP_INPUT_h
 
-#include "arduino.h"
+#include "Arduino.h"
+
+#include <WiFi.h>
+#include <WiFiUdp.h>
 
 void setup_UDP_input();
 

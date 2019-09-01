@@ -11,7 +11,7 @@
 //**********************//
 //	Helper Files		//
 //**********************//
-#include "Debug.h"
+#include "Bug.h"
 
 //**********************//
 //	Custom Libraries	//
@@ -19,34 +19,35 @@
 #include "Controller.h"
 
 // Create the pointer to our controller
-Controller *controller;
+Controller* controller;
 
 
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
+	START;
+
 	// Delay to allow uploader time to fix unstable software.
 	// Reduce or remove this for production.
 	delay(3000);
 
 	Serial.begin(115200);
 
-	//Serial.println("start");
-
 	// Create the controller object
 	// It initializes everything based on the values in Fixture_Parameters.h
 	controller = new Controller();
 
+	END;
 }
 
 
 void loop()
 {
-	//Serial.println("loop");
 
+	//controller->run();
 
-	controller->run();
+	delay(10);
 
-	fps(5);
+	BUG1(Bug::fps(5));
 
 }

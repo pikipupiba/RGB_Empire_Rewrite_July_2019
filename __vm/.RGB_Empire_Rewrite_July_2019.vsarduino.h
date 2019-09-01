@@ -15,10 +15,11 @@
 #define _VSARDUINO_H_
 #define __ESP32_esp32__
 #define __ESP32_ESP32__
+#define _VMDEBUG 1
 #define ESP_PLATFORM
 #define HAVE_CONFIG_H
 #define F_CPU 240000000L
-#define ARDUINO 10809
+#define ARDUINO 10807
 #define ARDUINO_NodeMCU_32S
 #define ARDUINO_ARCH_ESP32
 #define ESP32
