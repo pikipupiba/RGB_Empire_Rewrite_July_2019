@@ -18,6 +18,7 @@
 #include <vector>
 
 #define START BUG5(Bug::start(__PRETTY_FUNCTION__))
+#define THING BUG5(Bug::thing_counter())
 #define END BUG5(Bug::end())
 #define MEM Bug::display_memory(" after " + String(__PRETTY_FUNCTION__))
 
@@ -65,6 +66,7 @@ class Bug
 protected:
 
 	static std::vector<name_and_time> function_stack;
+	static std::vector<int> thing_stack;
 
 public:
 	Bug();
@@ -76,6 +78,8 @@ public:
 	static void start(String new_string);
 
 	static void end();
+
+	static void thing_counter();
 };
 
 #endif

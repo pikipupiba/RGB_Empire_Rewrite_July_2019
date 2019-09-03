@@ -28,6 +28,7 @@
 class Animation_Controller
 {
 private:
+	LED_Fixture* fixture;
 
 	Animation* current_animation;
 	Animation* next_animation;
@@ -40,10 +41,11 @@ private:
 public:
 	Animation_Controller();
 
-	static Animation_Controller* create();
 	void print_info();
 
 	void run();
+
+	void start_animation();
 
 	void change_animation(Animation_Name new_animation_name);
 

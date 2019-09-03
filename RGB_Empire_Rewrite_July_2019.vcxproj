@@ -115,7 +115,7 @@
     <ClInclude Include="Animation_Controller.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Bug.h" />
-    <ClInclude Include="Create_Arrangements.h" />
+    <ClInclude Include="Dancing_Sisters.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Display_Test.h" />
     <ClInclude Include="Fixture_Parameters.h" />
@@ -137,6 +137,7 @@
     <ClCompile Include="Animation_Controller.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Bug.cpp" />
+    <ClCompile Include="Dancing_Sisters.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Display_Test.cpp" />
     <ClCompile Include="Fixture_Parameters.cpp" />

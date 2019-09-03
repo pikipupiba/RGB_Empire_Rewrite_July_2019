@@ -8,6 +8,8 @@ Rainbow_Wave::Rainbow_Wave()
 
 void Rainbow_Wave::draw_next_frame()
 {
+	START;
+
 	switch (vars.display_mode)
 	{
 	case Parallel:
@@ -33,4 +35,5 @@ void Rainbow_Wave::draw_next_frame()
 		}
 	}
 
+	END;
 }

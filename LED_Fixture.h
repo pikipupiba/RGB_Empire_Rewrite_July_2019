@@ -19,6 +19,7 @@
 #include "Fixture_Parameters.h"
 #include "LED_Strip.h"
 
+
 class LED_Fixture
 {
  protected:
@@ -28,13 +29,13 @@ class LED_Fixture
 
 	 Shape shape;
 
-	 Display_Mode display_mode;
+	 Fixture_Display_Mode display_mode;
 
 	 CRGBArray<fixture_parameters.total_num_leds> g_leds;
 
-	 std::vector<LED_Strip*> led_strips;
+	 static std::vector<LED_Strip*> led_strips;
 
-	 friend class Animation;
+	 friend class Animation_Controller;
 
 	 void create_strips();
 
@@ -43,6 +44,8 @@ class LED_Fixture
 	~LED_Fixture();
 
 	static LED_Fixture* create();
+
+	static LED_Arrangements* get_arrangements();
 
 	void print_info();
 };

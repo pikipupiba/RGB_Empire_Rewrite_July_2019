@@ -37,6 +37,7 @@ void setup()
 	// It initializes everything based on the values in Fixture_Parameters.h
 	controller = new Controller();
 
+	MEM;
 	END;
 }
 

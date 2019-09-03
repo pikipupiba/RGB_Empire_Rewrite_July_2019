@@ -7,21 +7,26 @@
 
 
 #include "arduino.h"
-#include "FastLED.h"
+#include <FastLED.h>
 #include "My_Enums.h"
-#include "vector"
+#include <vector>
 
 
 struct LED_Group
 {
-	std::vector<CRGBSet*> leds;
+	std::vector<CRGBSet> leds;
 	int group_number;
 };
 
 struct LED_Arrangement
 {
-	Display_Mode display_mode;
+	Strip_Display_Mode strip_display_mode;
 	std::vector<LED_Group> led_groups;
+};
+
+struct LED_Arrangements
+{
+	std::vector<LED_Arrangement> arrangements;
 };
 
 
@@ -33,24 +38,19 @@ class LED_Strip
 
 	 CRGBSet* leds;
 
-	 int num_leds;
-	 int leds_per_meter;
-	 Shape shape;
+	 Strip_Parameters strip_parameters;
 
-	 int length_in_leds;
-	 int width_in_leds;
-
-	 std::vector<LED_Arrangement> led_arrangements;
+	 LED_Arrangements led_arrangements;
 
 	 friend class LED_Fixture;
 
 	 void print_info();
 
-	 
-	 void divide_linear();
-	 void divide_folded();
-	 void divide_panel();
-	 void divide_polygon();
+	 void create_arrangements();
+	 void create_linear_arrangements();
+	 void create_folded_arrangements();
+	 void create_panel_arrangements();
+	 void create_polygon_arrangements();
 	 
 
  public:
@@ -58,7 +58,7 @@ class LED_Strip
 	LED_Strip(int new_strip_index, CRGBSet* leds, Strip_Parameters new_strip_parameters);
 	~LED_Strip();
 
-	LED_Arrangement* get_led_arrangement(Display_Mode new_display_mode);
+	LED_Arrangement* get_led_arrangement(Strip_Display_Mode new_display_mode);
 
 };
 

@@ -26,24 +26,30 @@ Animation::Animation()
 
 }
 
-Animation::Animation(std::vector<CRGBSet*> new_leds)
-	:animation_ID(num_animations++),
-	leds(new_leds)
+Animation::Animation(std::vector<LED_Arrangement*> new_led_arrangements)
+	:animation_ID(num_animations++)
 {
-
+	led_arrangements = new_led_arrangements;
 }
 
 
-Animation* Animation::create(Animation_Name new_animation_name)
+Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements* new_led_arrangements)
 {
+	START;
+
 	switch (new_animation_name)
 	{
-	case _Rainbow_Wave:					return new Rainbow_Wave;
-	case _Glitter:						return new Glitter;
-	case _Rainbow_Wave_With_Glitter:	return new Rainbow_Wave_With_Glitter;
+	case _Default:						return new Rainbow_Wave_With_Glitter(new_led_arrangements);
+	case _Rainbow_Wave:					return new Rainbow_Wave(new_led_arrangements);
+	case _Glitter:						return new Glitter(new_led_arrangements);
+	case _Rainbow_Wave_With_Glitter:	return new Rainbow_Wave_With_Glitter(new_led_arrangements);
 	//case _Random_Rainbow_Wave:			return new Random_Rainbow_Wave;
-	default:							return new Rainbow_Wave;
+	default:							return new Rainbow_Wave(new_led_arrangements);
 	}
+
+	MEM;
+
+	END;
 }
 
 Animation::~Animation()
@@ -65,6 +71,8 @@ void Animation::print_info()
 
 void Animation::run()
 {
+	START;
+
 	erase_previous_frame();
 
 	update_vars();
@@ -75,11 +83,17 @@ void Animation::run()
 		animation->run();
 	}
 
+
+	END;
 }
 
 void Animation::erase_previous_frame()
 {
+	END;
+
 	for (auto& led_set : leds) {
 		led_set->fill_solid(CRGB::Black);
 	}
+
+	END;
 }

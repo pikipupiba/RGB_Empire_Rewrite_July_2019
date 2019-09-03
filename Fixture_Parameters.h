@@ -24,7 +24,7 @@ constexpr int milli_amps = 240000;
 // { strip_pin, num_leds, leds_per_meter, shape, length_in_leds, width_in_leds }
 constexpr Strip_Parameters strip_parameters[num_strips] = 
 {
-	{13,	500,	60,	Folded,	150,	2},
+	{13,	500,	60,	Folded,	250,	2},
 	{12,	500,	60,	Folded,	150,	2},
 	{15,	500,	60,	Folded,	150,	2},
 	{2,		500,	60,	Folded,	150,	2},

@@ -51,7 +51,7 @@ class Animation
 	// A pointer to the fixture object that contains all necessary information about the LEDs.
 	//LED_Fixture* fixture;
 
-	std::vector<Led_Group*> led_groups;
+	std::vector<Led_Arrangement*> led_arrangements;
 
 	// A struct that contains all the variables associated with the animation.
 	Animation_Variables vars;
@@ -63,10 +63,10 @@ class Animation
  public:
 
 	Animation();
-	 
-	Animation(std::vector<CRGBSet*> new_leds);
+	
+	Animation(LED_Arrangements* new_led_arrangements);
 
-	static Animation* create(Animation_Name new_animation_name);
+	static Animation* create(Animation_Name new_animation_name, LED_Arrangements* new_led_arrangements);
 
 	virtual ~Animation();
 

@@ -46,6 +46,8 @@ Display* Display::create()
 
 void Display::update()
 {
+	START;
+
 	switch (mode)
 	{
 	case Test:
@@ -54,4 +56,6 @@ void Display::update()
 	default:
 		build_screen();
 	}
+
+	END;
 }

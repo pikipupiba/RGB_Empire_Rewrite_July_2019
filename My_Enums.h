@@ -12,30 +12,45 @@
 // Shapes from 10-99 are fixtures.
 enum Shape
 {
-	Linear = 0,
-	Folded = 1,
-	Panel = 2,
-	Circle = 3,
-	Spiral = 4,
+	Linear,
+	Folded,
+	Sequential,
+	Panel,
+	Circle,
+	Polygon,
+	Spiral,
 	Plant = 10,
 	Tree = 11,
 	Vertical_Lamp = 12
 };
 
-enum Display_Mode
+enum Fixture_Display_Mode
 {
 	Default,
-	Test,
 	Parallel,
 	Sequential,
 	Every_Other_Sequential,
+};
+
+enum Display_Display_Mode
+{
+	Default,
+	SD_Card,
+	Artnet,
+	Test
+};
+
+enum Strip_Display_Mode
+{
+	Default,
 	Left_To_Right,
-	Middle_Out,
-	Around
+	Around,
+	Middle_Out
 };
 
 enum Animation_Name
 {
+	_Default,
 	_Base,
 	_Rainbow_Wave,
 	_Glitter,
@@ -44,7 +59,6 @@ enum Animation_Name
 };
 
 // Use structs to make passing parameters into methods fast and easy.
-
 struct Strip_Parameters
 {
 	const int strip_pin;
@@ -71,7 +85,7 @@ struct Animation_Variables
 	float brightness_acceleration = 0;
 	float brightness_offset = 0;
 
-	float position = 0;
+	float position = 1;
 	float speed = 1;
 	float acceleration = 0;
 	float position_offset = 0;
@@ -97,7 +111,7 @@ struct Animation_Variables
 
 	int stage = 0;				// =0 means it has not started and must be initialized, >0 can be used to keep track of various stages
 
-	Display_Mode display_mode;
+	Strip_Display_Mode strip_display_mode;
 };
 
 

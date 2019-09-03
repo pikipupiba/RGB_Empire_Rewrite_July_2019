@@ -32,6 +32,7 @@ void Bug::fps(const int seconds) {
 
 void Bug::display_memory(String new_string)
 {
+
 	Serial.println();
 
 	for (int i = 0; i < function_stack.size() - 1; i++)
@@ -54,6 +55,7 @@ void Bug::start(String new_string)
 	n_and_t.start_time = millis();
 
 	function_stack.push_back(n_and_t);
+	thing_stack.push_back(0);
 
 	for (int i = 0; i < function_stack.size() - 1; i++)
 	{
@@ -74,7 +76,20 @@ void Bug::end()
 	name_and_time n_and_t = function_stack.back();
 
 	function_stack.pop_back();
+	thing_stack.pop_back();
 
 	Serial.println("Ending " + n_and_t.function_name + " after " + (millis() - n_and_t.start_time) + " millis");
 
+}
+
+void Bug::thing_counter()
+{
+	thing_stack[thing_stack.size() - 1] ++;
+
+	for (int i = 0; i < thing_stack.size() - 1; i++)
+	{
+		Serial.print("   ");
+	}
+
+	Serial.println("Thing #" + thing_stack.back);
 }

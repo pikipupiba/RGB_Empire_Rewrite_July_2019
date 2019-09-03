@@ -10,6 +10,7 @@
 
 void LED_Fixture::create_strips()
 {
+	START;
 
 	fixture_num_leds = 0;
 	int num_leds_so_far = 0;
@@ -87,6 +88,10 @@ void LED_Fixture::create_strips()
 	FastLED.setMaxPowerInVoltsAndMilliamps(volts, milli_amps);
 
 	g_leds.fill_solid(CRGB::Black);
+
+	MEM;
+
+	END;
 }
 
 void LED_Fixture::print_info()
@@ -103,10 +108,13 @@ void LED_Fixture::print_info()
 
 LED_Fixture::LED_Fixture()
 {
+	START;
 
 	create_strips();
 
 	//initilize_vars();
+
+	START;
 
 }
 
@@ -116,7 +124,23 @@ LED_Fixture::~LED_Fixture()
 
 LED_Fixture* LED_Fixture::create()
 {
+	START;
+
 	return new LED_Fixture;
+
+	END;
+}
+
+LED_Arrangements* LED_Fixture::get_arrangements()
+{
+	LED_Arrangements* temp_arrangements;
+
+	for (auto& strip : led_strips)
+	{
+		temp_arrangements->arrangements.push_back(&strip->led_arrangements[Default]);
+	}
+
+	return temp_arrangements;
 }
 
 

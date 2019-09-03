@@ -39,6 +39,7 @@ Controller::~Controller()
 
 void Controller::run()
 {
+	START;
 
 	check_physical_input();
 
@@ -50,6 +51,7 @@ void Controller::run()
 
 	FastLED_Show_ESP32();
 
+	END;
 }
 
 
