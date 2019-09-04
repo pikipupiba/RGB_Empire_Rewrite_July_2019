@@ -1,8 +1,15 @@
 #include "Rainbow_Wave.h"
 
 
-Rainbow_Wave::Rainbow_Wave()
+Rainbow_Wave::Rainbow_Wave(LED_Arrangements* new_led_arrangements)
 {
+	START;
+
+	led_arrangements = new_led_arrangements;
+	
+	print_arrangement_info();
+	
+	END;
 	
 }
 
@@ -10,28 +17,14 @@ void Rainbow_Wave::draw_next_frame()
 {
 	START;
 
-	switch (vars.display_mode)
+	for (LED_Arrangement& arrangement : led_arrangements->arrangements)
 	{
-	case Parallel:
-		for (auto& led_set : leds) {
-			led_set->fill_rainbow(vars.hue, vars.hue_offset);
-		}
-		break;
-	case Sequential:
+		for (LED_Group& group : arrangement.led_groups)
 		{
-			int offset = 0;
-
-			for (auto& led_set : leds) {
-				led_set->fill_rainbow(vars.hue + offset, vars.hue_offset);
-
-				offset += led_set->size() % (int)vars.hue_offset;
+			for (CRGBSet& led_set : group.leds)
+			{
+				led_set.fill_rainbow(vars.hue, vars.hue_offset);
 			}
-		}
-	
-		break;
-	default:
-		for (auto& led_set : leds) {
-			led_set->fill_rainbow(vars.hue, vars.hue_offset);
 		}
 	}
 

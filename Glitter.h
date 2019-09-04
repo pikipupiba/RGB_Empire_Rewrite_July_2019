@@ -18,7 +18,7 @@ protected:
 	const Animation_Name name = _Glitter;
 
 public:
-	Glitter();
+	Glitter(LED_Arrangements* new_led_arrangements);
 
 	void draw_next_frame();
 };

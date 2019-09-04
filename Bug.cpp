@@ -5,6 +5,7 @@
 #include "Bug.h"
 
 std::vector<name_and_time> Bug::function_stack;
+std::vector<int> Bug::thing_stack;
 
 Bug::Bug()
 {
@@ -35,10 +36,11 @@ void Bug::display_memory(String new_string)
 
 	Serial.println();
 
+	BUG5(
 	for (int i = 0; i < function_stack.size() - 1; i++)
 	{
-		Serial.print("   ");
-	}
+		Serial.print("      ");
+	})
 
 	Serial.print("Memory remaining " + new_string + ": ");
 
@@ -59,7 +61,7 @@ void Bug::start(String new_string)
 
 	for (int i = 0; i < function_stack.size() - 1; i++)
 	{
-		Serial.print("   ");
+		Serial.print("      ");
 	}
 
 	Serial.println("Starting " + new_string);
@@ -70,7 +72,7 @@ void Bug::end()
 {
 	for (int i = 0; i < function_stack.size() - 1; i++)
 	{
-		Serial.print("   ");
+		Serial.print("      ");
 	}
 
 	name_and_time n_and_t = function_stack.back();
@@ -84,12 +86,12 @@ void Bug::end()
 
 void Bug::thing_counter()
 {
-	thing_stack[thing_stack.size() - 1] ++;
+	thing_stack.back()++;
 
 	for (int i = 0; i < thing_stack.size() - 1; i++)
 	{
-		Serial.print("   ");
+		Serial.print("      ");
 	}
 
-	Serial.println("Thing #" + thing_stack.back);
+	Serial.println("Thing #" + (String)thing_stack.back());
 }

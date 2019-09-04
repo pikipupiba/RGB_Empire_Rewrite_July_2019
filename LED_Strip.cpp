@@ -4,6 +4,24 @@
 
 #include "LED_Strip.h"
 
+void reset_group(LED_Group& group)
+{
+	group.group_number = 0;
+
+	group.leds.clear();
+}
+
+void next_group(LED_Group& group)
+{
+	group.group_number++;
+
+	group.leds.clear();
+}
+
+void reset_arrangement(LED_Arrangement& arrangement)
+{
+	arrangement.led_groups.clear();
+}
 
 void LED_Strip::create_arrangements()
 {
@@ -41,7 +59,7 @@ void LED_Strip::create_linear_arrangements()
 	LED_Group temp_group;
 
 
-	temp_arrangement.strip_display_mode = Default;
+	temp_arrangement.strip_display_mode = Default_Strip;
 	reset_group(temp_group);
 	reset_arrangement(temp_arrangement);
 	
@@ -67,8 +85,8 @@ void LED_Strip::create_linear_arrangements()
 	reset_arrangement(temp_arrangement);
 
 
-	temp_group.leds.push_back(leds[leds->size() / 2, 0]);
-	temp_group.leds.push_back(leds[leds->size() / 2, leds->size()]);
+	temp_group.leds.push_back(leds[0](leds->len, 0));
+	temp_group.leds.push_back(leds[0](leds->len / 2, leds->size()));
 
 	temp_arrangement.led_groups.push_back(temp_group);
 
@@ -85,7 +103,7 @@ void LED_Strip::create_folded_arrangements()
 	LED_Arrangement temp_arrangement;
 	LED_Group temp_group;
 
-	temp_arrangement.strip_display_mode = Default;
+	temp_arrangement.strip_display_mode = Default_Strip;
 	reset_group(temp_group);
 	reset_arrangement(temp_arrangement);
 
@@ -93,15 +111,14 @@ void LED_Strip::create_folded_arrangements()
 	{
 		THING;
 
-		if (i % 2)
+		if (i % 2 == 1)
 		{
-			temp_group.leds.push_back(leds[strip_parameters.length_in_leds * (i + 1) - 1, strip_parameters.length_in_leds * i]);
+			temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds * (i + 1) - 1, strip_parameters.length_in_leds * i));
 		}
 		else
 		{
-			temp_group.leds.push_back(leds[strip_parameters.length_in_leds * i, strip_parameters.length_in_leds * (i + 1) - 1]);
+			temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds * i, strip_parameters.length_in_leds * (i + 1) - 1));
 		}
-
 	}
 
 	temp_arrangement.led_groups.push_back(temp_group);
@@ -128,13 +145,13 @@ void LED_Strip::create_folded_arrangements()
 	reset_group(temp_group);
 	reset_arrangement(temp_arrangement);
 
-	temp_group.leds.push_back(leds[strip_parameters.length_in_leds / 2 - 1, 0]);
+	temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds / 2 - 1, 0));
 
-	temp_group.leds.push_back(leds[strip_parameters.length_in_leds / 2, strip_parameters.length_in_leds - 1]);
+	temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds / 2, strip_parameters.length_in_leds - 1));
 
-	temp_group.leds.push_back(leds[strip_parameters.length_in_leds * 3 / 2 - 1, strip_parameters.length_in_leds]);
+	temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds * 3 / 2 - 1, strip_parameters.length_in_leds));
 
-	temp_group.leds.push_back(leds[strip_parameters.length_in_leds * 3 / 2, strip_parameters.length_in_leds * 2 - 1]);
+	temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds * 3 / 2, strip_parameters.length_in_leds * 2 - 1));
 
 	temp_arrangement.led_groups.push_back(temp_group);
 
@@ -187,38 +204,45 @@ LED_Strip::~LED_Strip()
 	
 }
 
-LED_Arrangement* LED_Strip::get_led_arrangement(Strip_Display_Mode new_display_mode)
+LED_Arrangement LED_Strip::get_led_arrangement(Strip_Display_Mode new_display_mode)
 {
 	START;
 
 	for (auto& arrangement : led_arrangements.arrangements)
 	{
-		if (arrangement.strip_display_mode = new_display_mode)
+		if (arrangement.strip_display_mode == new_display_mode)
 		{
-			return &arrangement;
+			return arrangement;
 		}
 	}
 
-	return &led_arrangements.arrangements[Default];
+	return led_arrangements.arrangements[Default_Strip];
 
 	END;
 }
 
-void reset_group(LED_Group &group)
+void LED_Strip::print_arrangement_info(Strip_Display_Mode new_display_mode)
 {
-	group.group_number = 0;
+	START;
 
-	group.leds.clear();
-}
+	Serial.println("LED Arrangement Info for Strip #" + (String)strip_index);
 
-void next_group(LED_Group& group)
-{
-	group.group_number++;
+	for (auto& arrangement : led_arrangements.arrangements)
+	{
+		if (arrangement.strip_display_mode == new_display_mode)
+		{
+			int i = 0;
 
-	group.leds.clear();
-}
+			for (auto& group : arrangement.led_groups)
+			{
+				Serial.println("      LED_Group #" + (String)i++);
+				for (auto& led_set : group.leds)
+				{
+					Serial.println("            -" + (String)led_set.len + "LEDs");
+				}
+			}
+		}
+	}
 
-void reset_arrangement(LED_Arrangement& arrangement)
-{
-	arrangement.led_groups.clear();
+	END;
 }

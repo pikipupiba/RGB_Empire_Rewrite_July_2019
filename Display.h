@@ -28,7 +28,7 @@ protected:
 
 	static uint8_t errorCode;
 
-	static Display_Mode mode;
+	static Display_Display_Mode mode;
 
 	//void display_test();
 	static void build_screen();
@@ -36,7 +36,7 @@ protected:
 public:
 	Display();
 
-	static Display* create();
+	static Display create();
 
 	static void update();
 	

@@ -10,24 +10,9 @@
 #include <FastLED.h>
 #include "My_Enums.h"
 #include <vector>
+#include "Bug.h"
 
 
-struct LED_Group
-{
-	std::vector<CRGBSet> leds;
-	int group_number;
-};
-
-struct LED_Arrangement
-{
-	Strip_Display_Mode strip_display_mode;
-	std::vector<LED_Group> led_groups;
-};
-
-struct LED_Arrangements
-{
-	std::vector<LED_Arrangement> arrangements;
-};
 
 
 class LED_Strip
@@ -58,8 +43,9 @@ class LED_Strip
 	LED_Strip(int new_strip_index, CRGBSet* leds, Strip_Parameters new_strip_parameters);
 	~LED_Strip();
 
-	LED_Arrangement* get_led_arrangement(Strip_Display_Mode new_display_mode);
+	LED_Arrangement get_led_arrangement(Strip_Display_Mode new_display_mode);
 
+	void print_arrangement_info(Strip_Display_Mode new_display_mode);
 };
 
 #endif

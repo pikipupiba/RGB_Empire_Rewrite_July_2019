@@ -4,6 +4,8 @@
 
 #include "LED_Fixture.h"
 
+std::vector<LED_Strip> LED_Fixture::led_strips;
+
 //**********************//
 //	Protected Methods	//
 //**********************//
@@ -77,7 +79,7 @@ void LED_Fixture::create_strips()
 			num_leds_so_far += strip_parameters[i].num_leds;
 		}
 
-		led_strips.push_back(new LED_Strip
+		led_strips.push_back(LED_Strip
 			(i,
 				new CRGBSet(g_leds(fixture_num_leds, num_leds_so_far - 1)),
 				strip_parameters[i]));
@@ -98,7 +100,7 @@ void LED_Fixture::print_info()
 {
 	for (auto& strip: led_strips)
 	{
-		strip->print_info();
+		strip.print_info();
 	}
 }
 
@@ -114,7 +116,7 @@ LED_Fixture::LED_Fixture()
 
 	//initilize_vars();
 
-	START;
+	END;
 
 }
 
@@ -122,25 +124,41 @@ LED_Fixture::~LED_Fixture()
 {
 }
 
-LED_Fixture* LED_Fixture::create()
+LED_Fixture LED_Fixture::create()
 {
 	START;
 
-	return new LED_Fixture;
-
 	END;
+
+	return LED_Fixture();
 }
 
 LED_Arrangements* LED_Fixture::get_arrangements()
 {
-	LED_Arrangements* temp_arrangements;
+	START;
+
+	LED_Arrangements* temp_arrangements = new LED_Arrangements;
 
 	for (auto& strip : led_strips)
 	{
-		temp_arrangements->arrangements.push_back(&strip->led_arrangements[Default]);
+		temp_arrangements->arrangements.push_back(strip.led_arrangements.arrangements[Default_Strip]);
 	}
 
+	END;
+
 	return temp_arrangements;
+}
+
+void LED_Fixture::print_arrangement_info(Strip_Display_Mode new_display_mode)
+{
+	START;
+
+	for (auto& strip : led_strips)
+	{
+		strip.print_arrangement_info(new_display_mode);
+	}
+
+	END;
 }
 
 

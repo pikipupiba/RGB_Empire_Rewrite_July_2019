@@ -7,6 +7,8 @@
 #define _MY_ENUMS_h
 
 #include "arduino.h"
+#include <vector>
+#include <FastLED.h>
 
 // Shapes from 0-9 are strips.
 // Shapes from 10-99 are fixtures.
@@ -14,7 +16,6 @@ enum Shape
 {
 	Linear,
 	Folded,
-	Sequential,
 	Panel,
 	Circle,
 	Polygon,
@@ -26,7 +27,7 @@ enum Shape
 
 enum Fixture_Display_Mode
 {
-	Default,
+	Default_Fixture,
 	Parallel,
 	Sequential,
 	Every_Other_Sequential,
@@ -34,7 +35,7 @@ enum Fixture_Display_Mode
 
 enum Display_Display_Mode
 {
-	Default,
+	Default_Display,
 	SD_Card,
 	Artnet,
 	Test
@@ -42,7 +43,7 @@ enum Display_Display_Mode
 
 enum Strip_Display_Mode
 {
-	Default,
+	Default_Strip,
 	Left_To_Right,
 	Around,
 	Middle_Out
@@ -76,6 +77,23 @@ struct Fixture_Parameters
 	const int volts;
 	const int milli_amps;
 	const Strip_Parameters* strip_parameters[8];
+};
+
+struct LED_Group
+{
+	std::vector<CRGBSet> leds;
+	int group_number;
+};
+
+struct LED_Arrangement
+{
+	Strip_Display_Mode strip_display_mode;
+	std::vector<LED_Group> led_groups;
+};
+
+struct LED_Arrangements
+{
+	std::vector<LED_Arrangement> arrangements;
 };
 
 struct Animation_Variables

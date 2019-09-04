@@ -21,6 +21,7 @@
 #include "Oscillator.h"
 #include "My_Enums.h"
 #include "LED_Fixture.h"
+#include "Bug.h"
 
 
 // Factory method eliminates this.
@@ -51,7 +52,7 @@ class Animation
 	// A pointer to the fixture object that contains all necessary information about the LEDs.
 	//LED_Fixture* fixture;
 
-	std::vector<Led_Arrangement*> led_arrangements;
+	LED_Arrangements* led_arrangements;
 
 	// A struct that contains all the variables associated with the animation.
 	Animation_Variables vars;
@@ -73,11 +74,13 @@ class Animation
 	// Print out all relevant animation information.
 	void print_info();
 
+	void print_arrangement_info();
+
 	// Do whatever is necessary to advance the animation to the next frame.
 	void run();
 
 	// Erase the previous frame to allow seemless overlapping of animations.
-	virtual void erase_previous_frame();
+	void erase_previous_frame();
 
 
 	// Generate the next frame of the animation.

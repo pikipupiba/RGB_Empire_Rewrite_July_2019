@@ -33,7 +33,7 @@ class LED_Fixture
 
 	 CRGBArray<fixture_parameters.total_num_leds> g_leds;
 
-	 static std::vector<LED_Strip*> led_strips;
+	 static std::vector<LED_Strip> led_strips;
 
 	 friend class Animation_Controller;
 
@@ -43,9 +43,11 @@ class LED_Fixture
 	LED_Fixture();
 	~LED_Fixture();
 
-	static LED_Fixture* create();
+	static LED_Fixture create();
 
 	static LED_Arrangements* get_arrangements();
+
+	static void print_arrangement_info(Strip_Display_Mode new_display_mode);
 
 	void print_info();
 };

@@ -19,7 +19,7 @@ protected:
 	const Animation_Name name = _Rainbow_Wave;
 
 public:
-	Rainbow_Wave();
+	Rainbow_Wave(LED_Arrangements* new_led_arrangements);
 
 	void draw_next_frame();
 };

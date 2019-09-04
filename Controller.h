@@ -11,7 +11,10 @@
 //	Public Libraries	//
 //**********************//
 #include "arduino.h"
-#include <FastLED.h>
+
+#define FASTLED_ESP32_I2S true
+
+#include "FastLED.h"
 
 //**********************//
 //	Custom Classes		//
@@ -30,15 +33,15 @@
 class Controller
 {
  protected:
-	 static LED_Fixture* fixture;						// The object containing all our LEDs.
-	 static Animation_Controller* animation_controller;	// The animation that is currently running.
-	 static Display* display;
+	 LED_Fixture fixture;						// The object containing all our LEDs.
+	 Animation_Controller animation_controller;	// The animation that is currently running.
+	 Display display;
 	 
  public:
 	Controller();
 	~Controller();
 
-	static void run();			// The run() method is called every frame.
+	void run();			// The run() method is called every frame.
 
 	// transition_to() is called to begin the process of transitioning to a new animation.
 	//void transition_to(int new_animation_ID, int new_transition_type, float new_transition_time);

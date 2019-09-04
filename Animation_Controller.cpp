@@ -2,6 +2,29 @@
 
 Animation_Controller::Animation_Controller()
 {
+	START;
+
+	transitioning = false;
+	transition_total_time = 3;
+	transition_current_time = 0;
+	transition_speed = 0.1;
+
+	LED_Fixture::print_arrangement_info(Default_Strip);
+
+	start_animation();
+
+	current_animation->print_arrangement_info();
+
+	MEM;
+	END;
+}
+
+Animation_Controller Animation_Controller::create()
+{
+	START;
+	END;
+
+	return Animation_Controller();
 }
 
 
@@ -51,9 +74,11 @@ void Animation_Controller::start_animation()
 {
 	START;
 
-	delete current_animation;
+	//delete current_animation;
 
-	current_animation = Animation::create(_Default, LED_Fixture::get_arrangements);
+	THING;
+
+	current_animation = Animation::create(_Default, LED_Fixture::get_arrangements());
 
 	END;
 }
@@ -66,7 +91,7 @@ void Animation_Controller::change_animation(Animation_Name new_animation_name)
 
 	transition_current_time = 0;
 
-	next_animation = Animation::create(new_animation_name);
+	next_animation = Animation::create(new_animation_name, LED_Fixture::get_arrangements());
 
 	END;
 }
@@ -82,4 +107,28 @@ void Animation_Controller::change_animation_variables(Animation_Variables new_va
 
 	//current_animation->vars.acceleration = (new_vars.acceleration == NULL) ? current_animation->vars.acceleration : new_vars.acceleration;
 
+	//switch (vars.strip_display_mode)
+	//{
+	//case Parallel:
+	//	for (auto& led_set : leds) {
+	//		led_set->fill_rainbow(vars.hue, vars.hue_offset);
+	//	}
+	//	break;
+	//case Sequential:
+	//{
+	//	int offset = 0;
+
+	//	for (auto& led_set : leds) {
+	//		led_set->fill_rainbow(vars.hue + offset, vars.hue_offset);
+
+	//		offset += led_set->size() % (int)vars.hue_offset;
+	//	}
+	//}
+
+	//break;
+	//default:
+	//	for (auto& led_set : leds) {
+	//		led_set->fill_rainbow(vars.hue, vars.hue_offset);
+	//	}
+	//}
 }

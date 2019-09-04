@@ -79,9 +79,6 @@
     <ClInclude Include="Bug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dancing_Sisters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Physical_Input.cpp">
@@ -130,9 +127,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Bug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dancing_Sisters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

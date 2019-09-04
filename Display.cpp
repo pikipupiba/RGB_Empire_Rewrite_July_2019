@@ -1,6 +1,6 @@
 #include "Display.h"
 
-Display_Mode Display::mode = Test;
+Display_Display_Mode Display::mode = Test;
 SSD_13XX Display::tft = SSD_13XX(_cs, _dc);
 uint8_t Display::errorCode = 0;
 
@@ -16,7 +16,7 @@ Display::Display()
 	
 }
 
-Display* Display::create()
+Display Display::create()
 {
 	START;
 
@@ -39,9 +39,9 @@ Display* Display::create()
 		tft.setTextScale(2);
 	}
 
-	return new Display;
-
 	END;
+	return Display();
+
 }
 
 void Display::update()

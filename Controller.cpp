@@ -5,12 +5,11 @@
 #include "Controller.h"
 #include "Tasks.h"
 
-LED_Fixture* Controller::fixture = LED_Fixture::create();
-Animation_Controller* Controller::animation_controller = Animation_Controller::create();
-Display* Controller::display = Display::create();
 
-
-Controller::Controller()
+Controller::Controller():
+	fixture(LED_Fixture::create()),
+	animation_controller(Animation_Controller::create()),
+	display(Display::create())
 {
 	START;
 
@@ -19,9 +18,9 @@ Controller::Controller()
 
 	create_tasks();				// Start all the independently managed tasks.
 
-	fixture->print_info();
+	fixture.print_info();
 
-	animation_controller->print_info();
+	animation_controller.print_info();
 
 	FastLED.setBrightness(255);
 
@@ -47,7 +46,7 @@ void Controller::run()
 
 	//change();
 
-	animation_controller->run();
+	animation_controller.run();
 
 	FastLED_Show_ESP32();
 

@@ -6,8 +6,6 @@
     Author:     DESKTOP-UV9PIGM\pikipupiba
 */
 
-
-
 //**********************//
 //	Helper Files		//
 //**********************//
@@ -45,9 +43,7 @@ void setup()
 void loop()
 {
 
-	//controller->run();
-
-	delay(10);
+	controller->run();
 
 	BUG1(Bug::fps(5));
 

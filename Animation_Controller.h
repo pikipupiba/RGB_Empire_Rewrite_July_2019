@@ -41,6 +41,8 @@ private:
 public:
 	Animation_Controller();
 
+	static Animation_Controller create();
+
 	void print_info();
 
 	void run();
