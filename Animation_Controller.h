@@ -39,9 +39,9 @@ private:
 	float transition_speed;
 
 public:
-	Animation_Controller();
+	Animation_Controller(LED_Fixture* new_fixture);
 
-	static Animation_Controller create();
+	static Animation_Controller create(LED_Fixture* new_fixture);
 
 	void print_info();
 
@@ -52,4 +52,8 @@ public:
 	void change_animation(Animation_Name new_animation_name);
 
 	void change_animation_variables(Animation_Variables new_vars);
+
+	void erase_prev_frame();
+
+	void show();
 };

@@ -7,7 +7,25 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RGB_Empire_Rewrite_July_201
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FastLED-3.2.10", "..\..\..\..\Documents\Arduino\libraries\FastLED\FastLED-3.2.10.vcxitems", "{6BEDE9AE-2DE1-4F53-BC9C-69B76EBFF385}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FastLED-3.3.2", "Libraries\FastLED\3.3.2\FastLED\FastLED-3.3.2.vcxitems", "{59446662-0FEA-4359-B365-C3CA7DBF61E6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SSD_13XX-1.0", "Libraries\SSD_13XX\1.0\SSD_13XX\SSD_13XX-1.0.vcxitems", "{8F1D6CC4-6549-4B8D-8AF0-A0454F911575}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPI-1.0", "Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems", "{E6C23868-B4F1-41E4-A101-8DF758B849E2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WiFi-1.0", "Libraries\WiFi\1.0\WiFi\WiFi-1.0.vcxitems", "{92A4F555-76F2-48DD-A42C-538377B48286}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Libraries\FastLED\3.3.2\FastLED\FastLED-3.3.2.vcxitems*{59446662-0fea-4359-b365-c3ca7dbf61e6}*SharedItemsImports = 9
+		Libraries\SSD_13XX\1.0\SSD_13XX\SSD_13XX-1.0.vcxitems*{8f1d6cc4-6549-4b8d-8af0-a0454f911575}*SharedItemsImports = 9
+		Libraries\WiFi\1.0\WiFi\WiFi-1.0.vcxitems*{92a4f555-76f2-48dd-a42c-538377b48286}*SharedItemsImports = 9
+		Libraries\FastLED\3.3.2\FastLED\FastLED-3.3.2.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\SSD_13XX\1.0\SSD_13XX\SSD_13XX-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\WiFi\1.0\WiFi\WiFi-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems*{e6c23868-b4f1-41e4-a101-8df758b849e2}*SharedItemsImports = 9
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86

@@ -21,6 +21,6 @@ protected:
 public:
 	Rainbow_Wave(LED_Arrangements* new_led_arrangements);
 
-	void draw_next_frame();
+	void calculate_frame();
 };
 

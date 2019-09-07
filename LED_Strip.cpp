@@ -113,7 +113,7 @@ void LED_Strip::create_folded_arrangements()
 
 		if (i % 2 == 1)
 		{
-			temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds * (i + 1) - 1, strip_parameters.length_in_leds * i));
+			temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds* (i + 1) - 1, strip_parameters.length_in_leds * i));
 		}
 		else
 		{

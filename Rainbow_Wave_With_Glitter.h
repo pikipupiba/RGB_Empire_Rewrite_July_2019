@@ -19,6 +19,6 @@ protected:
 public:
 	Rainbow_Wave_With_Glitter(LED_Arrangements* new_led_arrangements);
 
-	void draw_next_frame() {};
+	void calculate_frame() {};
 };
 

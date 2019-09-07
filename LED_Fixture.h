@@ -50,6 +50,13 @@ class LED_Fixture
 	static void print_arrangement_info(Strip_Display_Mode new_display_mode);
 
 	void print_info();
+
+	template <int pin>
+	void setStrip(int num_leds_so_far, int new_num_leds);
+
+	template<int n>
+	void stripLoop(int num_leds_so_far);
+
 };
 
 

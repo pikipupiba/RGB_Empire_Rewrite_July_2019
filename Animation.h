@@ -52,20 +52,31 @@ class Animation
 	// A pointer to the fixture object that contains all necessary information about the LEDs.
 	//LED_Fixture* fixture;
 
+	// Each animation object should store its own LED data to be combined by the animation_controller.
+	// Maybe store led data like this?
+	int num_leds;
+	CRGB* leds;
+	CRGBSet led_set;
+
+	//CRGBArray* leds;
 	LED_Arrangements* led_arrangements;
 
 	// A struct that contains all the variables associated with the animation.
 	Animation_Variables vars;
 
 	//friend class Animation_Controller;
-
 	void update_vars();
 
- public:
+	// Erase the previous frame to allow seemless overlapping of animations.
+	// Not sure if this is necessary now that each animation has its own led data.
+	//void erase_previous_frame();
 
+	friend class Animation_Controller;
+
+ public:
 	Animation();
-	
-	Animation(LED_Arrangements* new_led_arrangements);
+
+	//Animation(LED_Arrangements* new_led_arrangements);
 
 	static Animation* create(Animation_Name new_animation_name, LED_Arrangements* new_led_arrangements);
 
@@ -79,12 +90,10 @@ class Animation
 	// Do whatever is necessary to advance the animation to the next frame.
 	void run();
 
-	// Erase the previous frame to allow seemless overlapping of animations.
-	void erase_previous_frame();
-
-
 	// Generate the next frame of the animation.
-	virtual void draw_next_frame() = 0;
+	virtual void calculate_frame() = 0;
+
+	CRGB* next_frame();
 
 };
 

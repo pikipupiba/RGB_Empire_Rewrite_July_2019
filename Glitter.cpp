@@ -6,29 +6,32 @@ Glitter::Glitter(LED_Arrangements* new_led_arrangements)
 
 	led_arrangements = new_led_arrangements;
 
-	print_arrangement_info();
+	num_leds = led_arrangements->get_size();
+
+	Serial.println("num leds = " + String(num_leds));
+
+	leds = new CRGB[num_leds];
+
+	led_set = CRGBSet(leds, num_leds);
 
 	END;
 }
 
-void Glitter::draw_next_frame()
+void Glitter::erase_previous_frame()
 {
 	START;
 
-	for (LED_Arrangement& arrangement : led_arrangements->arrangements)
+	END;
+}
+
+void Glitter::calculate_frame()
+{
+	START;
+
+	for (auto& pixel : led_set)
 	{
-		for (LED_Group& group : arrangement.led_groups)
-		{
-			for (CRGBSet& led_set : group.leds)
-			{
-				for (CRGB& pixel : led_set) {
-					if (rand() * 100 < vars.density)
-					{
-						pixel = CRGB::White;
-					}
-				}
-			}
-		}
+		pixel = CRGB::White;
+
 	}
 
 	END;

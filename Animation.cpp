@@ -27,20 +27,26 @@ void Animation::update_vars()
 }
 
 Animation::Animation()
-	:animation_ID(num_animations++)
-{
-
-}
-
-Animation::Animation(LED_Arrangements* new_led_arrangements)
 	:animation_ID(num_animations++),
-	led_arrangements(new_led_arrangements)
+	led_set(CRGBSet(leds,num_leds))
+	
 {
 	START;
 
-	MEM;
 	END;
 }
+
+//Animation::Animation(LED_Arrangements* new_led_arrangements)
+//	:animation_ID(num_animations++),
+//	led_arrangements(new_led_arrangements)
+//{
+//	START;
+//
+//	//leds = malloc(led_arrangements[Default_Strip].get_size(), sizeof(CRGBArray));
+//
+//	MEM;
+//	END;
+//}
 
 
 Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements* new_led_arrangements)
@@ -52,7 +58,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Rainbow_Wave(new_led_arrangements);
+		return new Rainbow_Wave_With_Glitter(new_led_arrangements);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_led_arrangements);
 	case _Glitter:
@@ -67,6 +73,8 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 
 Animation::~Animation()
 {
+	delete leds;
+	delete led_set;
 }
 
 void Animation::print_info()
@@ -111,13 +119,9 @@ void Animation::run()
 {
 	START;
 
-	yield();
-
-	erase_previous_frame();
-
 	update_vars();
 
-	draw_next_frame();
+	calculate_frame();
 
 	for (auto& animation : animations) {
 		animation->run();
@@ -126,20 +130,38 @@ void Animation::run()
 	END;
 }
 
-void Animation::erase_previous_frame()
+//void Animation::erase_previous_frame()
+//{
+//	START;
+//
+//	for (LED_Arrangement& arrangement : led_arrangements->arrangements)
+//	{
+//		for (LED_Group& group : arrangement.led_groups)
+//		{
+//			for (CRGBSet& led_set : group.leds)
+//			{
+//				led_set.fill_solid(CRGB::Black);
+//			}
+//		}
+//	}
+//
+//	END;
+//}
+
+CRGB* Animation::next_frame()
 {
 	START;
 
-	for (LED_Arrangement& arrangement : led_arrangements->arrangements)
+	int cur_led_num = 0;
+
+	for (auto& animation : animations)
 	{
-		for (LED_Group& group : arrangement.led_groups)
-		{
-			for (CRGBSet& led_set : group.leds)
-			{
-				led_set.fill_solid(CRGB::Black);
-			}
-		}
+		*leds += *animation->next_frame();
 	}
 
 	END;
+
+	return leds;
+
+	
 }

@@ -8,7 +8,7 @@
 
 Controller::Controller():
 	fixture(LED_Fixture::create()),
-	animation_controller(Animation_Controller::create()),
+	animation_controller(Animation_Controller::create(&fixture)),
 	display(Display::create())
 {
 	START;
@@ -22,7 +22,7 @@ Controller::Controller():
 
 	animation_controller.print_info();
 
-	FastLED.setBrightness(255);
+	FastLED.setBrightness(100);
 
 	FastLED_Show_ESP32();
 

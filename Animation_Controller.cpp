@@ -1,6 +1,7 @@
 #include "Animation_Controller.h"
 
-Animation_Controller::Animation_Controller()
+Animation_Controller::Animation_Controller(LED_Fixture* new_fixture)
+	:fixture(new_fixture)
 {
 	START;
 
@@ -19,12 +20,12 @@ Animation_Controller::Animation_Controller()
 	END;
 }
 
-Animation_Controller Animation_Controller::create()
+Animation_Controller Animation_Controller::create(LED_Fixture* new_fixture)
 {
 	START;
 	END;
 
-	return Animation_Controller();
+	return Animation_Controller(new_fixture);
 }
 
 
@@ -35,6 +36,8 @@ void Animation_Controller::print_info()
 void Animation_Controller::run()
 {
 	START;
+
+	erase_prev_frame();
 
 	if (transitioning)
 	{
@@ -66,6 +69,8 @@ void Animation_Controller::run()
 	{
 		current_animation->run();
 	}
+
+	show();
 
 	END;
 }
@@ -131,4 +136,47 @@ void Animation_Controller::change_animation_variables(Animation_Variables new_va
 	//		led_set->fill_rainbow(vars.hue, vars.hue_offset);
 	//	}
 	//}
+}
+
+void Animation_Controller::erase_prev_frame()
+{
+	START;
+
+	//FastLED.clear();
+
+	fixture->g_leds.fill_solid(CRGB::Black);
+
+	END;
+}
+
+void Animation_Controller::show()
+{
+
+	START;
+
+	int cur_led_num = 0;
+
+	for (LED_Arrangement& arrangement : current_animation->led_arrangements->arrangements)
+	{
+		for (LED_Group& group : arrangement.led_groups)
+		{
+			for (CRGBSet& arr_led_set : group.leds)
+			{
+				int i = 0;
+
+				for (auto& led : arr_led_set)
+				{
+					//Serial.println(cur_led_num + i);
+					led += current_animation->leds[cur_led_num + i++];
+					//Serial.println(arr_led_set.len);
+				}
+
+			}
+
+			cur_led_num += abs(group.leds[0].len);
+			//Serial.println(cur_led_num);
+		}
+	}
+
+	END;
 }

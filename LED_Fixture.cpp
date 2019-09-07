@@ -18,9 +18,8 @@ void LED_Fixture::create_strips()
 	int num_leds_so_far = 0;
 	num_strips = fixture_parameters.num_strips;
 
-
 	// Can use template metaprogramming to fix this section.
-	for (int i = 0; i < num_strips; i++)
+	/*for (int i = 0; i < num_strips; i++)
 	{
 		if (i == 0)
 		{
@@ -85,7 +84,9 @@ void LED_Fixture::create_strips()
 				strip_parameters[i]));
 
 		fixture_num_leds = num_leds_so_far;
-	}
+	}*/
+	// DONE IT!
+	stripLoop<fixture_parameters.num_strips>(num_leds_so_far);
 
 	FastLED.setMaxPowerInVoltsAndMilliamps(volts, milli_amps);
 
@@ -161,4 +162,33 @@ void LED_Fixture::print_arrangement_info(Strip_Display_Mode new_display_mode)
 	END;
 }
 
+template <int pin>
+void LED_Fixture::setStrip(int num_leds_so_far, int new_num_leds)
+{
+	FastLED.addLeds<WS2812B, pin, GRB>
+		(g_leds, num_leds_so_far, new_num_leds).setCorrection(TypicalLEDStrip);
 
+}
+
+template<int n>
+void LED_Fixture::stripLoop(int num_leds_so_far)
+{
+
+	setStrip<strip_parameters[n - 1].strip_pin>(num_leds_so_far, strip_parameters[n-1].num_leds);
+	num_leds_so_far += strip_parameters[n - 1].num_leds;
+
+	led_strips.push_back(
+		LED_Strip
+		(n-1,
+		new CRGBSet(g_leds(fixture_num_leds, num_leds_so_far - 1)),
+		strip_parameters[n-1])
+	);
+
+	fixture_num_leds = num_leds_so_far;
+
+	stripLoop<n - 1>(num_leds_so_far);
+}
+
+template<>
+void LED_Fixture::stripLoop<0>(int num_leds_so_far) {};
+ 

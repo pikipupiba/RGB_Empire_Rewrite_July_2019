@@ -9,6 +9,7 @@
 #include "arduino.h"
 #include <vector>
 #include <FastLED.h>
+#include "Bug.h"
 
 // Shapes from 0-9 are strips.
 // Shapes from 10-99 are fixtures.
@@ -79,6 +80,11 @@ struct Fixture_Parameters
 	const Strip_Parameters* strip_parameters[8];
 };
 
+struct led_set
+{
+	CRGBSet* leds;
+};
+
 struct LED_Group
 {
 	std::vector<CRGBSet> leds;
@@ -89,11 +95,15 @@ struct LED_Arrangement
 {
 	Strip_Display_Mode strip_display_mode;
 	std::vector<LED_Group> led_groups;
+
+	int get_size();
 };
 
 struct LED_Arrangements
 {
 	std::vector<LED_Arrangement> arrangements;
+
+	int get_size();
 };
 
 struct Animation_Variables
@@ -111,14 +121,14 @@ struct Animation_Variables
 	float hue = 0;
 	float hue_speed = 1;
 	float hue_acceleration = 0;
-	float hue_offset = 0;
+	float hue_offset = 5;
 
 	float size = 5;
 	float size_speed = 0;
 	float size_acceleration = 0;
 	float size_offset = 0;
 
-	float density = 25.0;
+	float density = 5.0;
 
 	float range_start = 0;
 	float range_end = 0;
@@ -132,6 +142,13 @@ struct Animation_Variables
 	Strip_Display_Mode strip_display_mode;
 };
 
+
+//class CRGBArray2 : public CPixelView<CRGB> {
+//	CRGB rawleds[];
+//public:
+//	CRGBArray2(int size) : CPixelView<CRGB>(rawleds, size), rawleds(new CRGB[size]) {}
+//	using CPixelView::operator=;
+//};
 
 #endif
 
