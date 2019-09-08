@@ -7,15 +7,19 @@
 #define _PHYSICAL_INPUT_h
 
 #include "arduino.h"
+#include "EasyButton.h"
+
 
 class Physical_Input
 {
 protected:
 	bool enabled;
 
+	EasyButton button;
 
 public:
 	Physical_Input();
+
 
 	void setup();
 

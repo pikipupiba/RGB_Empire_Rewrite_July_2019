@@ -67,6 +67,14 @@ enum Transition_Type
 	_Dissolve
 };
 
+enum Input_Type
+{
+	_Button,
+	_Encoder,
+	_Potentiometer,
+	_Switch
+};
+
 // Use structs to make passing parameters into methods fast and easy.
 struct Strip_Parameters
 {
