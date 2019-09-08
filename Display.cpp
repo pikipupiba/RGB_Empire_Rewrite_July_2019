@@ -1,9 +1,5 @@
 #include "Display.h"
 
-Display_Display_Mode Display::mode = Test;
-SSD_13XX Display::tft = SSD_13XX(_cs, _dc);
-uint8_t Display::errorCode = 0;
-
 void Display::build_screen()
 {
 	START;
@@ -12,14 +8,10 @@ void Display::build_screen()
 }
 
 Display::Display()
+	:mode(_Test),
+	tft(SSD_13XX(_cs, _dc)),
+	errorCode(0)
 {
-	
-}
-
-Display Display::create()
-{
-	START;
-
 	long unsigned debug_start = millis();
 	while (!Serial && ((millis() - debug_start) <= 5000));
 	tft.begin(false);
@@ -38,6 +30,11 @@ Display Display::create()
 		tft.setTextColor(YELLOW);
 		tft.setTextScale(2);
 	}
+}
+
+Display Display::create()
+{
+	START;
 
 	END;
 	return Display();
@@ -50,12 +47,19 @@ void Display::update()
 
 	switch (mode)
 	{
-	case Test:
-		display_test(&tft);
+	case _Default_Display:
+		break;
+	case _Test:
+		//display_test(&tft);
+		show_button_presses();
 		break;
 	default:
 		build_screen();
 	}
 
 	END;
+}
+
+void Display::show_button_presses()
+{
 }

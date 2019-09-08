@@ -9,11 +9,12 @@
 Controller::Controller():
 	fixture(LED_Fixture::create()),
 	animation_controller(Animation_Controller::create(&fixture)),
-	display(Display::create())
+	display(Display::create()),
+	physical_input(Physical_Input())
 {
 	START;
 
-	setup_physical_input();		// initialize physical buttons and knobs.
+	//setup_physical_input();		// initialize physical buttons and knobs.
 	setup_UDP_input();			// initialize UDP Input ports.
 
 	create_tasks();				// Start all the independently managed tasks.
@@ -21,6 +22,8 @@ Controller::Controller():
 	fixture.print_info();
 
 	animation_controller.print_info();
+
+	physical_input.check();
 
 	FastLED.setBrightness(100);
 
@@ -40,11 +43,11 @@ void Controller::run()
 {
 	START;
 
-	check_physical_input();
+	physical_input.check();
 
 	check_UDP_input();
 
-	//change();
+	display.update();
 
 	animation_controller.run();
 

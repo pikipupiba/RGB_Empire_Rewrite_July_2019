@@ -36,10 +36,10 @@ enum Fixture_Display_Mode
 
 enum Display_Display_Mode
 {
-	Default_Display,
-	SD_Card,
-	Artnet,
-	Test
+	_Default_Display,
+	_SD_Card,
+	_Artnet,
+	_Test
 };
 
 enum Strip_Display_Mode
@@ -53,11 +53,18 @@ enum Strip_Display_Mode
 enum Animation_Name
 {
 	_Default,
-	_Base,
 	_Rainbow_Wave,
 	_Glitter,
 	_Rainbow_Wave_With_Glitter,
-	_Random_Rainbow_Wave
+	_Random_Rainbow_Wave,
+	_Base
+};
+
+enum Transition_Type
+{
+	_Fade,
+	_Wipe,
+	_Dissolve
 };
 
 // Use structs to make passing parameters into methods fast and easy.
@@ -108,27 +115,28 @@ struct LED_Arrangements
 
 struct Animation_Variables
 {
-	float brightness = 255;
+	float brightness = 255.0;
 	float brightness_speed = 0;
 	float brightness_acceleration = 0;
 	float brightness_offset = 0;
 
-	float position = 1;
-	float speed = 1;
+	float position = 1.0;
+	float speed = 1.0;
 	float acceleration = 0;
 	float position_offset = 0;
 
 	float hue = 0;
-	float hue_speed = 1;
+	float hue_speed = 1.0;
 	float hue_acceleration = 0;
 	float hue_offset = 5;
 
-	float size = 5;
+	float size = 5.0;
 	float size_speed = 0;
 	float size_acceleration = 0;
 	float size_offset = 0;
 
 	float density = 5.0;
+	float fade = 80.0;
 
 	float range_start = 0;
 	float range_end = 0;

@@ -26,27 +26,42 @@ void Animation::update_vars()
 	END;
 }
 
+void Animation::erase_previous_frame()
+{
+	START;
+
+	for (auto& pixel : *led_set)
+	{
+		pixel = CRGB::Black;
+	}
+
+	END;
+}
+
 Animation::Animation()
-	:animation_ID(num_animations++),
-	led_set(CRGBSet(leds,num_leds))
-	
+	:animation_ID(num_animations++)
 {
 	START;
 
 	END;
 }
 
-//Animation::Animation(LED_Arrangements* new_led_arrangements)
-//	:animation_ID(num_animations++),
-//	led_arrangements(new_led_arrangements)
-//{
-//	START;
-//
-//	//leds = malloc(led_arrangements[Default_Strip].get_size(), sizeof(CRGBArray));
-//
-//	MEM;
-//	END;
-//}
+Animation::Animation(LED_Arrangements* new_led_arrangements)
+	:animation_ID(num_animations++),
+	led_arrangements(new_led_arrangements),
+	num_leds(led_arrangements->get_size()),
+	leds(new CRGB[num_leds]),
+	led_set(new CRGBSet(leds, num_leds))
+{
+	START;
+
+	Serial.println("what the heck = " + (String)led_set->len);
+
+	//leds = malloc(led_arrangements[Default_Strip].get_size(), sizeof(CRGBArray));
+
+	MEM;
+	END;
+}
 
 
 Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements* new_led_arrangements)
@@ -73,12 +88,23 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 
 Animation::~Animation()
 {
+	START;
+
+	for (auto& animation : animations)
+	{
+		delete animation;
+	}
+
 	delete leds;
 	delete led_set;
+
+	END;
 }
 
 void Animation::print_info()
 {
+	START;
+
 	Serial.print("Animation #");
 	Serial.print(animation_ID);
 	Serial.println(" Information:");
@@ -88,6 +114,8 @@ void Animation::print_info()
 
 	Serial.print("   Hue = ");
 	Serial.println(vars.hue);
+
+	END;
 }
 
 void Animation::print_arrangement_info()
@@ -107,7 +135,7 @@ void Animation::print_arrangement_info()
 			Serial.println("      LED_Arrangement #" + (String)i++);
 			for (auto& led_set : group.leds)
 			{
-				Serial.println("            -" + (String)led_set.len + "LEDs");
+				Serial.println("            -" + (String)led_set.len + " LEDs");
 			}
 		}
 	}
@@ -119,11 +147,14 @@ void Animation::run()
 {
 	START;
 
+	erase_previous_frame();
+
 	update_vars();
 
 	calculate_frame();
 
 	for (auto& animation : animations) {
+		THING;
 		animation->run();
 	}
 
@@ -148,15 +179,26 @@ void Animation::run()
 //	END;
 //}
 
+void Animation::calculate_frame()
+{
+	START;
+
+	END;
+}
+
 CRGB* Animation::next_frame()
 {
 	START;
 
-	int cur_led_num = 0;
-
 	for (auto& animation : animations)
 	{
-		*leds += *animation->next_frame();
+		CRGB* next_frame = animation->next_frame();
+		//CRGBSet next_frame_set = CRGBSet(next_frame, animation->num_leds);
+
+		for (int i = 0; i < animation->num_leds - 1; i++)
+		{
+			leds[i] +=  next_frame[i];
+		}
 	}
 
 	END;

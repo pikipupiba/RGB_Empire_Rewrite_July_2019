@@ -34,7 +34,7 @@ class Animation
 
 	// Every animation should have a unique name.
 	// "Base" is t he name of the interface.
-	Animation_Name name = _Base;
+	const Animation_Name name = _Base;
 
 	// Unique ID for each animation object. Base animation has ID = 0.
 	const int animation_ID;
@@ -52,14 +52,14 @@ class Animation
 	// A pointer to the fixture object that contains all necessary information about the LEDs.
 	//LED_Fixture* fixture;
 
+	//CRGBArray* leds;
+	LED_Arrangements* led_arrangements;
+
 	// Each animation object should store its own LED data to be combined by the animation_controller.
 	// Maybe store led data like this?
 	int num_leds;
 	CRGB* leds;
-	CRGBSet led_set;
-
-	//CRGBArray* leds;
-	LED_Arrangements* led_arrangements;
+	CRGBSet* led_set;
 
 	// A struct that contains all the variables associated with the animation.
 	Animation_Variables vars;
@@ -69,14 +69,14 @@ class Animation
 
 	// Erase the previous frame to allow seemless overlapping of animations.
 	// Not sure if this is necessary now that each animation has its own led data.
-	//void erase_previous_frame();
+	virtual void erase_previous_frame();
 
 	friend class Animation_Controller;
 
  public:
 	Animation();
 
-	//Animation(LED_Arrangements* new_led_arrangements);
+	Animation(LED_Arrangements* new_led_arrangements);
 
 	static Animation* create(Animation_Name new_animation_name, LED_Arrangements* new_led_arrangements);
 
@@ -91,7 +91,7 @@ class Animation
 	void run();
 
 	// Generate the next frame of the animation.
-	virtual void calculate_frame() = 0;
+	virtual void calculate_frame();
 
 	CRGB* next_frame();
 

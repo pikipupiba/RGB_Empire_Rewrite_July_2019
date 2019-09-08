@@ -8,12 +8,19 @@
 
 #include "arduino.h"
 
-extern bool physical_input_enabled;
+class Physical_Input
+{
+protected:
+	bool enabled;
 
-void setup_physical_input();
 
-void check_physical_input();
+public:
+	Physical_Input();
 
+	void setup();
+
+	void check();
+};
 
 #endif
 

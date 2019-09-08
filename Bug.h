@@ -6,10 +6,10 @@
 
 // Uncomment the following lines to enable BUGging code.
 #define BUG_1	// Free memory after constructors and FPS.
-//#define BUG_2	// 
+#define BUG_2	// 
 //#define BUG_3	// 
 //#define BUG_4	// 
-#define BUG_5	// Beginning, middle, and end of every function.
+//#define BUG_5	// Beginning, middle, and end of every function.
 
 #ifndef _BUG_h
 #define _BUG_h
@@ -18,8 +18,11 @@
 #include <vector>
 
 #define START BUG5(Bug::start(__PRETTY_FUNCTION__))
+#define START2 BUG2(Bug::start(__PRETTY_FUNCTION__))
 #define THING BUG5(Bug::thing_counter())
-#define END BUG5(Bug::end())
+#define THING2 BUG2(Bug::thing_counter())
+#define END BUG5(Bug::end(__PRETTY_FUNCTION__))
+#define END2 BUG2(Bug::end(__PRETTY_FUNCTION__))
 #define MEM Bug::display_memory(" after " + String(__PRETTY_FUNCTION__))
 
 #if defined BUG_1
@@ -77,7 +80,7 @@ public:
 
 	static void start(String new_string);
 
-	static void end();
+	static void end(String new_string);
 
 	static void thing_counter();
 };

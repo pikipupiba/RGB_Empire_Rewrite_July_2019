@@ -28,13 +28,15 @@ void Bug::fps(const int seconds) {
 		Serial.println(framesPerSecond);
 		frameCount = 0;
 		lastMillis = now;
+
+		MEM;
 	}
 }
 
 void Bug::display_memory(String new_string)
 {
 
-	Serial.println();
+	//Serial.println();
 
 	BUG5(
 	for (int i = 0; i < function_stack.size() - 1; i++)
@@ -68,30 +70,40 @@ void Bug::start(String new_string)
 
 }
 
-void Bug::end()
+void Bug::end(String new_string)
 {
-	for (int i = 0; i < function_stack.size() - 1; i++)
-	{
-		Serial.print("      ");
-	}
-
 	name_and_time n_and_t = function_stack.back();
 
-	function_stack.pop_back();
-	thing_stack.pop_back();
+	if (n_and_t.function_name.equals(new_string))
+	{
 
-	Serial.println("Ending " + n_and_t.function_name + " after " + (millis() - n_and_t.start_time) + " millis");
+		for (int i = 0; i < function_stack.size() - 1; i++)
+		{
+			Serial.print("      ");
+		}
 
+		function_stack.pop_back();
+		thing_stack.pop_back();
+
+		Serial.println("Ending " + n_and_t.function_name + " after " + (millis() - n_and_t.start_time) + " millis");
+	}
+	else
+	{
+		Serial.println("START/END MISMATCH IN " + new_string);
+	}
 }
 
 void Bug::thing_counter()
 {
 	thing_stack.back()++;
 
+	BUG5
+	(
 	for (int i = 0; i < thing_stack.size() - 1; i++)
 	{
 		Serial.print("      ");
 	}
+	)
 
 	Serial.println("Thing #" + (String)thing_stack.back());
 }

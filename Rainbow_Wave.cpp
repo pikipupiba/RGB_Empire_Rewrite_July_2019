@@ -2,17 +2,9 @@
 
 
 Rainbow_Wave::Rainbow_Wave(LED_Arrangements* new_led_arrangements)
+	:Animation(new_led_arrangements)
 {
-	led_arrangements = new_led_arrangements;
-
-	num_leds = led_arrangements->get_size();
-
-	Serial.println("num leds = " + String(num_leds));
-
-	leds = new CRGB[num_leds];
-
-	led_set = CRGBSet(leds, num_leds);
-	
+	START;
 
 	//Serial.println("what the heck = " + led_set.len);
 	
@@ -37,8 +29,8 @@ void Rainbow_Wave::calculate_frame()
 	//	}
 	//}
 
-	//led_set.fill_rainbow(vars.hue, vars.hue_offset);
-	fill_rainbow(leds, num_leds, vars.hue, vars.hue_offset);
+	led_set->fill_rainbow(vars.hue, vars.hue_offset);
+	//fill_rainbow(leds, num_leds, vars.hue, vars.hue_offset);
 
 	END;
 }

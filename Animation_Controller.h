@@ -33,10 +33,13 @@ private:
 	Animation* current_animation;
 	Animation* next_animation;
 
+	Transition_Type transition_type;
 	bool transitioning;
-	float transition_total_time;
-	float transition_current_time;
-	float transition_speed;
+	int transition_total_time;
+	long transition_start_time;
+
+	bool* mask;
+	int num_dissolved;
 
 public:
 	Animation_Controller(LED_Fixture* new_fixture);
@@ -56,4 +59,10 @@ public:
 	void erase_prev_frame();
 
 	void show();
+
+	void transition_fade();
+
+	void transition_wipe();
+
+	void transition_dissolve();
 };

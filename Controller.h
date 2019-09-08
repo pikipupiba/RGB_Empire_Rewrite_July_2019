@@ -22,12 +22,12 @@
 #include "LED_Fixture.h"
 #include "Animation_Controller.h"
 #include "Display.h"
+#include "Physical_Input.h"
 
 //**********************//
 //	Helper Files		//
 //**********************//
 #include "Bug.h"
-#include "Physical_Input.h"
 #include "UDP_Input.h"
 
 class Controller
@@ -36,6 +36,8 @@ class Controller
 	 LED_Fixture fixture;						// The object containing all our LEDs.
 	 Animation_Controller animation_controller;	// The animation that is currently running.
 	 Display display;
+
+	 Physical_Input physical_input;
 	 
  public:
 	Controller();

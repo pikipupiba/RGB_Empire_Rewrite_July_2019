@@ -4,14 +4,18 @@
 
 #include "Physical_Input.h"
 
-bool physical_input_enabled = true;
 
-void setup_physical_input()
+Physical_Input::Physical_Input()
+	:enabled(true)
+{
+}
+
+void Physical_Input::setup()
 {
 
 }
 
-void check_physical_input()
+void Physical_Input::check()
 {
 
 }

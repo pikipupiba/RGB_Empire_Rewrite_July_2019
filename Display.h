@@ -21,14 +21,14 @@ class Display
 {
 protected:
 	// Put all variables associated with the display itself here.
-	static int height;
-	static int width;
+	int height;
+	int width;
 
-	static SSD_13XX tft;
+	SSD_13XX tft;
 
-	static uint8_t errorCode;
+	uint8_t errorCode;
 
-	static Display_Display_Mode mode;
+	Display_Display_Mode mode;
 
 	//void display_test();
 	static void build_screen();
@@ -38,7 +38,9 @@ public:
 
 	static Display create();
 
-	static void update();
+	void update();
+
+	void show_button_presses();
 	
 
 };

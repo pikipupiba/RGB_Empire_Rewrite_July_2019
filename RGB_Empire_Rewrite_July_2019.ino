@@ -23,13 +23,15 @@ Controller* controller;
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
-	START;
+	delay(1500);
+
+	Serial.begin(115200);
 
 	// Delay to allow uploader time to fix unstable software.
 	// Reduce or remove this for production.
-	delay(3000);
+	delay(1500);
 
-	Serial.begin(115200);
+	START;
 
 	// Create the controller object
 	// It initializes everything based on the values in Fixture_Parameters.h
@@ -42,7 +44,6 @@ void setup()
 
 void loop()
 {
-
 	controller->run();
 
 	BUG1(Bug::fps(5));
