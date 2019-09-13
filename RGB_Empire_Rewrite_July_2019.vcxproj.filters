@@ -22,9 +22,6 @@
     <ClInclude Include="Physical_Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UDP_Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tasks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -79,12 +76,15 @@
     <ClInclude Include="__vm\.RGB_Empire_Rewrite_July_2019.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Artnet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wifi_Class.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Physical_Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UDP_Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tasks.cpp">
@@ -130,6 +130,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="My_Enums.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Artnet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wifi_Class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

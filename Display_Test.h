@@ -7,7 +7,7 @@
 
 extern SSD_13XX* tft_test;
 
-void display_test(SSD_13XX* new_tft);
+void display_test(SSD_13XX& new_tft);
 
 unsigned long testFillScreen();
 unsigned long testText();

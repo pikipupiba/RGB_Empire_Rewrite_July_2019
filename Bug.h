@@ -1,5 +1,8 @@
 // Bug.h
 
+// elf file location
+// C:\Users\pikipupiba\AppData\Local\Temp\VMBuilds\RGB_Empire_Rewrite_July_2019\esp32_esp32wrover\Release/RGB_Empire_Rewrite_July_2019.ino.elf
+
 // All functions and variables related to BUGging will go here.
 
 // Use the macro D(1-5)(*your code here*) when putting in BUG code.
@@ -16,6 +19,7 @@
 
 #include "Arduino.h"
 #include <vector>
+#include "FastLED.h"
 
 #define START BUG5(Bug::start(__PRETTY_FUNCTION__))
 #define START2 BUG2(Bug::start(__PRETTY_FUNCTION__))
@@ -72,15 +76,17 @@ protected:
 	static std::vector<int> thing_stack;
 
 public:
+	//static int framesPerSecond;
+
 	Bug();
 
-	static void fps(const int seconds);
+	//static void fps(const int mseconds, const int display_interval);
 
 	static void display_memory(String new_string);
 
 	static void start(String new_string);
 
-	static void end(String new_string);
+	static int end(String new_string);
 
 	static void thing_counter();
 };

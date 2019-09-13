@@ -16,22 +16,22 @@
 
 
 constexpr int num_strips = 8;
-constexpr int total_num_leds = 2400;
+constexpr int total_num_leds = 1152;
 
 constexpr int volts = 5;
-constexpr int milli_amps = 240000;
+constexpr int milli_amps = 60000;
 
 // { strip_pin, num_leds, leds_per_meter, shape, length_in_leds, width_in_leds }
 constexpr Strip_Parameters strip_parameters[num_strips] = 
 {
-	{13,	300,	60,	Linear,	300,	1},
-	{12,	300,	60,	Linear,	300,	1},
-	{15,	300,	60,	Linear,	300,	1},
-	{2,		300,	60,	Linear,	300,	1},
-	{0,		300,	60,	Folded,	150,	2},
-	{4,		300,	60,	Folded,	150,	2},
-	{16,	300,	60,	Folded,	75,		4},
-	{17,	300,	60,	Folded,	75,		4}
+	{21,	144,	144,	Linear,	144,	1},
+	{19,	144,	144,	Linear,	144,	1},
+	{18,	144,	144,	Linear,	144,	1},
+	{15,	144,	144,	Linear,	144,	1},
+	{2,		144,	144,	Linear,	144,	1},
+	{0,		144,	144,	Linear,	144,	1},
+	{4,		144,	144,	Linear,	144,	1},
+	{5,		144,	144,	Linear,	144,	1}
 };
 
 // { num_strips, total_num_leds, volts, milliamps, strip_parameters[] }

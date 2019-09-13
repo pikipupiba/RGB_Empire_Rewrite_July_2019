@@ -38,7 +38,6 @@ enum Display_Display_Mode
 {
 	_Default_Display,
 	_SD_Card,
-	_Artnet,
 	_Test
 };
 
@@ -57,6 +56,7 @@ enum Animation_Name
 	_Glitter,
 	_Rainbow_Wave_With_Glitter,
 	_Random_Rainbow_Wave,
+	_Artnet,
 	_Base
 };
 

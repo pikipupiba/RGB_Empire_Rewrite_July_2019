@@ -9,6 +9,7 @@
 //**********************//
 //	Helper Files		//
 //**********************//
+
 #include "Bug.h"
 
 //**********************//
@@ -46,6 +47,7 @@ void loop()
 {
 	controller->run();
 
-	BUG1(Bug::fps(5));
+	// Obsolete ever since I discovered FastLED.getFPS()
+	//BUG1(Bug::fps(500, 5));
 
 }

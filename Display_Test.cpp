@@ -2,9 +2,9 @@
 
 SSD_13XX* tft_test;
 
-void display_test(SSD_13XX* new_tft)
+void display_test(SSD_13XX& new_tft)
 {
-	tft_test = new_tft;
+	tft_test = &new_tft;
 
 	for (uint8_t rotation = 0; rotation < 4; rotation++) {
 		tft_test->setRotation(rotation);

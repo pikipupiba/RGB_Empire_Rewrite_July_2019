@@ -7,7 +7,7 @@ Animation_Controller::Animation_Controller(LED_Fixture* new_fixture)
 
 	transition_type = _Fade;
 	transitioning = false;
-	transition_total_time = 6000;
+	transition_total_time = 5000;
 	transition_start_time = 0;
 
 	LED_Fixture::print_arrangement_info(Default_Strip);
@@ -41,16 +41,18 @@ void Animation_Controller::run()
 
 	erase_prev_frame();
 
-	EVERY_N_SECONDS(10)
+	EVERY_N_SECONDS(15)
 	{
 		static bool z = true;
 		if (z)
 		{
-			change_animation(_Glitter);
+			change_animation(_Artnet);
+
+			//z = false;
 		}
 		else
 		{
-			change_animation(_Rainbow_Wave);
+			change_animation(_Glitter);
 		}
 
 		z = !z;
@@ -161,7 +163,7 @@ void Animation_Controller::erase_prev_frame()
 {
 	START;
 
-	//fixture->g_leds.fill_solid(CRGB::Black);
+	fixture->g_leds.fill_solid(CRGB::Black);
 
 	END;
 }
@@ -251,6 +253,8 @@ void Animation_Controller::transition_fade()
 				for (CRGB& led : arr_led_set)
 				{
 					//Serial.println(cur_led_num + i);
+					THING;
+
 					led = next_animation->leds[cur_led_num + i].fadeLightBy(255 * ratio);
 					led += current_animation->leds[cur_led_num + i++].fadeLightBy(255 * (1 - ratio));
 					//Serial.println(arr_led_set.len);

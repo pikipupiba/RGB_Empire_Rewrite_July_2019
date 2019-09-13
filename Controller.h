@@ -15,6 +15,8 @@
 #define FASTLED_ESP32_I2S true
 
 #include "FastLED.h"
+#include <WiFi.h>
+#include <WiFiUdp.h>
 
 //**********************//
 //	Custom Classes		//
@@ -23,12 +25,12 @@
 #include "Animation_Controller.h"
 #include "Display.h"
 #include "Physical_Input.h"
+#include "Wifi_Class.h"
 
 //**********************//
 //	Helper Files		//
 //**********************//
 #include "Bug.h"
-#include "UDP_Input.h"
 
 class Controller
 {

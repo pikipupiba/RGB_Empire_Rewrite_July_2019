@@ -57,7 +57,7 @@ Animation::Animation(LED_Arrangements* new_led_arrangements)
 
 	Serial.println("what the heck = " + (String)led_set->len);
 
-	//leds = malloc(led_arrangements[Default_Strip].get_size(), sizeof(CRGBArray));
+	//fill_solid(leds, num_leds, CRGB::Black);
 
 	MEM;
 	END;
@@ -81,6 +81,8 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	case _Rainbow_Wave_With_Glitter:
 		return new Rainbow_Wave_With_Glitter(new_led_arrangements);
 	//case _Random_Rainbow_Wave:			return new Random_Rainbow_Wave;
+	case _Artnet:
+		return new Artnet(new_led_arrangements);
 	default:
 		return new Rainbow_Wave(new_led_arrangements);
 	}

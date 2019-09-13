@@ -17,6 +17,7 @@
 #include "arduino.h"
 #include <vector>
 #include <typeinfo>
+
 #include <FastLED.h>
 #include "Oscillator.h"
 #include "My_Enums.h"
@@ -88,7 +89,7 @@ class Animation
 	void print_arrangement_info();
 
 	// Do whatever is necessary to advance the animation to the next frame.
-	void run();
+	virtual void run();
 
 	// Generate the next frame of the animation.
 	virtual void calculate_frame();
