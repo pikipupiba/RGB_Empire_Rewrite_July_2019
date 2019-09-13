@@ -24,13 +24,13 @@ Controller* controller;
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
-	delay(1500);
+	delay(500);
 
 	Serial.begin(115200);
 
 	// Delay to allow uploader time to fix unstable software.
 	// Reduce or remove this for production.
-	delay(1500);
+	delay(500);
 
 	START;
 

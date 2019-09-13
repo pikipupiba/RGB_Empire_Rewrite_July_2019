@@ -143,6 +143,7 @@
     <ClInclude Include="Rainbow_Wave_With_Glitter.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Tasks.h" />
+    <ClInclude Include="Template_Animation.h" />
     <ClInclude Include="Wifi_Class.h" />
     <ClInclude Include="__vm\.RGB_Empire_Rewrite_July_2019.vsarduino.h" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClCompile Include="Rainbow_Wave.cpp" />
     <ClCompile Include="Rainbow_Wave_With_Glitter.cpp" />
     <ClCompile Include="Tasks.cpp" />
+    <ClCompile Include="Template_Animation.cpp" />
     <ClCompile Include="Wifi_Class.cpp" />
   </ItemGroup>
   <ItemGroup>

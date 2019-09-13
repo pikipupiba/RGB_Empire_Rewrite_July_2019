@@ -57,7 +57,7 @@ Animation::Animation(LED_Arrangements* new_led_arrangements)
 
 	Serial.println("what the heck = " + (String)led_set->len);
 
-	//fill_solid(leds, num_leds, CRGB::Black);
+	fill_solid(leds, num_leds, CRGB::Black);
 
 	MEM;
 	END;
@@ -73,7 +73,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Rainbow_Wave_With_Glitter(new_led_arrangements);
+		return new Glitter(new_led_arrangements);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_led_arrangements);
 	case _Glitter:
@@ -82,7 +82,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 		return new Rainbow_Wave_With_Glitter(new_led_arrangements);
 	//case _Random_Rainbow_Wave:			return new Random_Rainbow_Wave;
 	case _Artnet:
-		return new Artnet(new_led_arrangements);
+		//return new Artnet(new_led_arrangements);
 	default:
 		return new Rainbow_Wave(new_led_arrangements);
 	}

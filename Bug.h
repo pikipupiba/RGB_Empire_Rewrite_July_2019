@@ -84,12 +84,74 @@ public:
 
 	static void display_memory(String new_string);
 
-	static void start(String new_string);
+	static inline void start(String new_string);
 
-	static int end(String new_string);
+	static inline int end(String new_string);
 
-	static void thing_counter();
+	static inline void thing_counter();
 };
+
+inline void Bug::start(String new_string)
+{
+	name_and_time n_and_t;
+
+	n_and_t.function_name = new_string;
+	n_and_t.start_time = millis();
+
+	function_stack.push_back(n_and_t);
+	thing_stack.push_back(0);
+
+	for (int i = 0; i < function_stack.size() - 1; i++)
+	{
+		Serial.print("      ");
+	}
+
+	Serial.println("Starting " + new_string);
+
+}
+
+inline int Bug::end(String new_string)
+{
+	name_and_time n_and_t = function_stack.back();
+
+	int function_time = millis() - n_and_t.start_time;
+
+	if (n_and_t.function_name.equals(new_string))
+	{
+
+		for (int i = 0; i < function_stack.size() - 1; i++)
+		{
+			Serial.print("      ");
+		}
+
+		function_stack.pop_back();
+		thing_stack.pop_back();
+
+		Serial.println("Ending " + n_and_t.function_name + " after " + (function_time)+" millis");
+	}
+	else
+	{
+		Serial.println("START/END MISMATCH IN " + new_string);
+	}
+
+	return function_time;
+}
+
+inline void Bug::thing_counter()
+{
+	thing_stack.back()++;
+
+	BUG5
+	(
+		for (int i = 0; i < thing_stack.size() - 1; i++)
+		{
+			Serial.print("      ");
+		}
+	)
+
+		Serial.println("Thing #" + (String)thing_stack.back());
+}
+
 
 #endif
 

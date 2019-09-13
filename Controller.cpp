@@ -24,7 +24,7 @@ bool connect_wifi(void)
 	// Wait for connection
 	Serial.print("Connecting");
 	while (WiFi.status() != WL_CONNECTED) {
-		delay(500);
+		delay(250);
 		Serial.print(".");
 		if (i > 20) {
 			state = false;
@@ -73,7 +73,7 @@ Controller::Controller():
 
 	FastLED.setBrightness(80);
 
-	FastLED_Show_ESP32();
+	//FastLED_Show_ESP32();
 
 	MEM;
 

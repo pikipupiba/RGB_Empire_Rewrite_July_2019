@@ -1,8 +1,6 @@
 #pragma once
 #include "Animation.h"
 
-#include <WiFi.h>
-#include <WiFiUdp.h>
 #include <ArtnetWifi.h>
 
 class Artnet :
@@ -11,7 +9,6 @@ class Artnet :
 protected:
 	const Animation_Name name = _Artnet;
 
-	//WiFiUDP UdpSend;
 	ArtnetWifi artnet;
 	const int startUniverse = 0;
 

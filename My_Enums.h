@@ -57,7 +57,8 @@ enum Animation_Name
 	_Rainbow_Wave_With_Glitter,
 	_Random_Rainbow_Wave,
 	_Artnet,
-	_Base
+	_Base,
+	_Template_Animation
 };
 
 enum Transition_Type

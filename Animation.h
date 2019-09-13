@@ -66,7 +66,7 @@ class Animation
 	Animation_Variables vars;
 
 	//friend class Animation_Controller;
-	void update_vars();
+	virtual void update_vars();
 
 	// Erase the previous frame to allow seemless overlapping of animations.
 	// Not sure if this is necessary now that each animation has its own led data.

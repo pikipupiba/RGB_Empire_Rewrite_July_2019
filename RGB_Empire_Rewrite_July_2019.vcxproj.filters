@@ -82,6 +82,9 @@
     <ClInclude Include="Wifi_Class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Template_Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Physical_Input.cpp">
@@ -136,6 +139,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Wifi_Class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Template_Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

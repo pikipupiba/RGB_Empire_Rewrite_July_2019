@@ -39,6 +39,7 @@ void Animation_Controller::run()
 {
 	START;
 
+	//delay(400);
 	erase_prev_frame();
 
 	EVERY_N_SECONDS(15)
@@ -46,7 +47,7 @@ void Animation_Controller::run()
 		static bool z = true;
 		if (z)
 		{
-			change_animation(_Artnet);
+			change_animation(_Rainbow_Wave);
 
 			//z = false;
 		}
@@ -214,7 +215,7 @@ void Animation_Controller::show()
 						//Serial.println(arr_led_set.len);
 					}
 
-					THING;
+					//THING;
 				}
 
 				cur_led_num += abs(group.leds[0].len);
@@ -253,14 +254,14 @@ void Animation_Controller::transition_fade()
 				for (CRGB& led : arr_led_set)
 				{
 					//Serial.println(cur_led_num + i);
-					THING;
+					//THING;
 
 					led = next_animation->leds[cur_led_num + i].fadeLightBy(255 * ratio);
 					led += current_animation->leds[cur_led_num + i++].fadeLightBy(255 * (1 - ratio));
 					//Serial.println(arr_led_set.len);
 				}
 
-				THING;
+				//THING;
 			}
 
 			cur_led_num += abs(group.leds[0].len);
@@ -309,7 +310,7 @@ void Animation_Controller::transition_wipe()
 					i++;
 				}
 
-				THING;
+				//THING;
 			}
 
 			cur_led_num += abs(group.leds[0].len);
@@ -403,7 +404,7 @@ void Animation_Controller::transition_dissolve()
 					i++;
 				}
 
-				THING;
+				//THING;
 			}
 
 			cur_led_num += abs(group.leds[0].len);
