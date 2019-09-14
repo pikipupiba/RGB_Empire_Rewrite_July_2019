@@ -74,7 +74,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Artnet(new_led_arrangements);
+		return new Mr_Poopy_Worm(new_led_arrangements);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_led_arrangements);
 	case _Glitter:
@@ -85,7 +85,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	case _Sinelon:
 		return new Sinelon(new_led_arrangements);
 	case _Artnet:
-		return new Artnet(new_led_arrangements);
+		//return new Artnet(new_led_arrangements);
 	default:
 		return new Rainbow_Wave(new_led_arrangements);
 	}
