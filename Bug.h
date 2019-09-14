@@ -12,7 +12,7 @@
 #define BUG_2	// 
 //#define BUG_3	// 
 //#define BUG_4	// 
-#define BUG_5	// Beginning, middle, and end of every function.
+//#define BUG_5	// Beginning, middle, and end of every function.
 
 #ifndef _BUG_h
 #define _BUG_h

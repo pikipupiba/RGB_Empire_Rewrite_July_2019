@@ -42,22 +42,22 @@ void Animation_Controller::run()
 	//delay(400);
 	erase_prev_frame();
 
-	//EVERY_N_SECONDS(20)
-	//{
-	//	static bool z = true;
-	//	if (z)
-	//	{
-	//		change_animation(_Rainbow_Wave);
+	EVERY_N_SECONDS(20)
+	{
+		static bool z = true;
+		if (z)
+		{
+			change_animation(_Rainbow_Wave);
 
-	//		//z = false;
-	//	}
-	//	else
-	//	{
-	//		change_animation(_Sinelon);
-	//	}
+			//z = false;
+		}
+		else
+		{
+			change_animation(_Sinelon);
+		}
 
-	//	z = !z;
-	//}
+		z = !z;
+	}
 
 	if (transitioning)
 	{
