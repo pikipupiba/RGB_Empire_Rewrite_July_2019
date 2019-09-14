@@ -1,5 +1,7 @@
 // Bug.h
 
+//ya'll can suck a butt.
+
 // elf file location
 // C:\Users\pikipupiba\AppData\Local\Temp\VMBuilds\RGB_Empire_Rewrite_July_2019\esp32_esp32wrover\Release/RGB_Empire_Rewrite_July_2019.ino.elf
 
