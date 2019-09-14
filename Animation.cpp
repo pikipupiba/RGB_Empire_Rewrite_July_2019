@@ -7,6 +7,7 @@
 int Animation::num_animations;
 
 // Update the animation variables to calculate the next frame.
+// TODO currently incomplete
 void Animation::update_vars()
 {
 	START;
@@ -73,7 +74,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Glitter(new_led_arrangements);
+		return new Artnet(new_led_arrangements);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_led_arrangements);
 	case _Glitter:
@@ -81,8 +82,10 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	case _Rainbow_Wave_With_Glitter:
 		return new Rainbow_Wave_With_Glitter(new_led_arrangements);
 	//case _Random_Rainbow_Wave:			return new Random_Rainbow_Wave;
+	case _Sinelon:
+		return new Sinelon(new_led_arrangements);
 	case _Artnet:
-		//return new Artnet(new_led_arrangements);
+		return new Artnet(new_led_arrangements);
 	default:
 		return new Rainbow_Wave(new_led_arrangements);
 	}
@@ -92,13 +95,21 @@ Animation::~Animation()
 {
 	START;
 
+	//print_info();
+
 	for (auto& animation : animations)
 	{
+		THING;
 		delete animation;
 	}
 
-	delete leds;
+	THING;
+	//delete leds;
+
+	THING;
 	delete led_set;
+
+	THING;
 
 	END;
 }

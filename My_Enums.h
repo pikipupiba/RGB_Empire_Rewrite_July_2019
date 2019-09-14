@@ -57,6 +57,8 @@ enum Animation_Name
 	_Rainbow_Wave_With_Glitter,
 	_Random_Rainbow_Wave,
 	_Artnet,
+	_Sinelon,
+	_Mr_Poopy_Worm,
 	_Base,
 	_Template_Animation
 };
@@ -105,6 +107,8 @@ struct LED_Group
 {
 	std::vector<CRGBSet> leds;
 	int group_number;
+
+	int get_size();
 };
 
 struct LED_Arrangement
@@ -112,12 +116,18 @@ struct LED_Arrangement
 	Strip_Display_Mode strip_display_mode;
 	std::vector<LED_Group> led_groups;
 
+	int num_groups;
+	int size;
+
+	int get_num_groups();
 	int get_size();
 };
 
 struct LED_Arrangements
 {
 	std::vector<LED_Arrangement> arrangements;
+
+	int num_groups;
 
 	int get_size();
 };
@@ -130,7 +140,7 @@ struct Animation_Variables
 	float brightness_offset = 0;
 
 	float position = 1.0;
-	float speed = 1.0;
+	float speed = 0.2;
 	float acceleration = 0;
 	float position_offset = 0;
 
@@ -139,7 +149,7 @@ struct Animation_Variables
 	float hue_acceleration = 0;
 	float hue_offset = 5;
 
-	float size = 5.0;
+	float size = 10.0;
 	float size_speed = 0;
 	float size_acceleration = 0;
 	float size_offset = 0;
@@ -147,6 +157,9 @@ struct Animation_Variables
 	float density = 5.0;
 	float fade = 80.0;
 
+
+	float start = 0;
+	float end = 0;
 	float range_start = 0;
 	float range_end = 0;
 

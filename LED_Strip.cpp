@@ -67,6 +67,9 @@ void LED_Strip::create_linear_arrangements()
 
 	temp_arrangement.led_groups.push_back(temp_group);
 
+	temp_arrangement.num_groups = temp_arrangement.get_num_groups();
+	temp_arrangement.size = temp_arrangement.get_size();
+
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
 
@@ -85,10 +88,13 @@ void LED_Strip::create_linear_arrangements()
 	reset_arrangement(temp_arrangement);
 
 
-	temp_group.leds.push_back(leds[0](leds->len, 0));
-	temp_group.leds.push_back(leds[0](leds->len / 2, leds->size()));
+	temp_group.leds.push_back(leds[0](leds->len - 1, leds->len / 2));
+	temp_group.leds.push_back(leds[0](0, leds->len / 2 - 1));
 
 	temp_arrangement.led_groups.push_back(temp_group);
+
+	temp_arrangement.num_groups = temp_arrangement.get_num_groups();
+	temp_arrangement.size = temp_arrangement.get_size();
 
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
@@ -123,6 +129,9 @@ void LED_Strip::create_folded_arrangements()
 
 	temp_arrangement.led_groups.push_back(temp_group);
 
+	temp_arrangement.num_groups = temp_arrangement.get_num_groups();
+	temp_arrangement.size = temp_arrangement.get_size();
+
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
 
@@ -139,6 +148,9 @@ void LED_Strip::create_folded_arrangements()
 
 	temp_arrangement.led_groups.push_back(temp_group);
 
+	temp_arrangement.num_groups = temp_arrangement.get_num_groups();
+	temp_arrangement.size = temp_arrangement.get_size();
+
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
 	temp_arrangement.strip_display_mode = Middle_Out;
@@ -154,6 +166,9 @@ void LED_Strip::create_folded_arrangements()
 	temp_group.leds.push_back(leds[0](strip_parameters.length_in_leds * 3 / 2, strip_parameters.length_in_leds * 2 - 1));
 
 	temp_arrangement.led_groups.push_back(temp_group);
+
+	temp_arrangement.num_groups = temp_arrangement.get_num_groups();
+	temp_arrangement.size = temp_arrangement.get_size();
 
 	led_arrangements.arrangements.push_back(temp_arrangement);
 

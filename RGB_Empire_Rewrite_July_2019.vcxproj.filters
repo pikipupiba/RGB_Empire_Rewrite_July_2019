@@ -16,7 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="RGB_Empire_Rewrite_July_2019.ino" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Physical_Input.h">
@@ -85,6 +84,12 @@
     <ClInclude Include="Template_Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Sinelon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mr_Poopy_Worm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Physical_Input.cpp">
@@ -142,6 +147,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Template_Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sinelon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mr_Poopy_Worm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

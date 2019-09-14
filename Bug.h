@@ -12,7 +12,7 @@
 #define BUG_2	// 
 //#define BUG_3	// 
 //#define BUG_4	// 
-//#define BUG_5	// Beginning, middle, and end of every function.
+#define BUG_5	// Beginning, middle, and end of every function.
 
 #ifndef _BUG_h
 #define _BUG_h
@@ -28,6 +28,8 @@
 #define END BUG5(Bug::end(__PRETTY_FUNCTION__))
 #define END2 BUG2(Bug::end(__PRETTY_FUNCTION__))
 #define MEM Bug::display_memory(" after " + String(__PRETTY_FUNCTION__))
+
+#define P(x) Bug::print(#x, x);
 
 #if defined BUG_1
 #	define BUG1(x) x
@@ -89,6 +91,10 @@ public:
 	static inline int end(String new_string);
 
 	static inline void thing_counter();
+
+	static inline void print(String new_string, float value);
+
+	static inline void print(String new_string, int value);
 };
 
 inline void Bug::start(String new_string)
@@ -150,6 +156,16 @@ inline void Bug::thing_counter()
 	)
 
 		Serial.println("Thing #" + (String)thing_stack.back());
+}
+
+inline void Bug::print(String new_string, float value)
+{
+	Serial.println(new_string + String(value));
+}
+
+inline void Bug::print(String new_string, int value)
+{
+	Serial.println(new_string + String(value));
 }
 
 

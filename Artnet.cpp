@@ -14,8 +14,15 @@ Artnet::Artnet(LED_Arrangements* new_led_arrangements)
 	bool sendFrame = 1;
 	int previousDataLength = 0;
 	
+	THING;
+
 	artnet.begin();
+
+	THING;
+
 	artnet.setArtDmxCallback(Artnet::on_DMX_frame_wrapper);
+
+	THING;
 
 	pt2Object = (void*) this;
 

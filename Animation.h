@@ -62,19 +62,12 @@ class Animation
 	CRGB* leds;
 	CRGBSet* led_set;
 
-	// A struct that contains all the variables associated with the animation.
-	Animation_Variables vars;
-
-	//friend class Animation_Controller;
-	virtual void update_vars();
-
-	// Erase the previous frame to allow seemless overlapping of animations.
-	// Not sure if this is necessary now that each animation has its own led data.
-	virtual void erase_previous_frame();
-
 	friend class Animation_Controller;
 
  public:
+	 // A struct that contains all the variables associated with the animation.
+	Animation_Variables vars;
+
 	Animation();
 
 	Animation(LED_Arrangements* new_led_arrangements);
@@ -87,6 +80,14 @@ class Animation
 	void print_info();
 
 	void print_arrangement_info();
+
+
+	virtual void update_vars();
+
+	// Erase the previous frame to allow seemless overlapping of animations.
+	// Not sure if this is necessary now that each animation has its own led data.
+	virtual void erase_previous_frame();
+
 
 	// Do whatever is necessary to advance the animation to the next frame.
 	virtual void run();

@@ -15,44 +15,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WiFi-1.0", "Libraries\WiFi\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EasyButton-1.0.1", "Libraries\EasyButton\1.0.1\EasyButton\EasyButton-1.0.1.vcxitems", "{0EA3A49D-37E0-410B-B905-A6A989DB426D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Encoder-1.4.1", "Libraries\Encoder\1.4.1\Encoder\Encoder-1.4.1.vcxitems", "{80786380-5E06-4F84-B0A9-BCA4074C8AD0}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ESP32-1.0", "Libraries\ESP32\1.0\ESP32\ESP32-1.0.vcxitems", "{C0E22943-8B01-4689-B018-731759E73142}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Artnet_Test", "..\..\..\..\Documents\Arduino\Artnet_Test\Artnet_Test.vcxproj", "{5CE3E9D5-7FDD-4983-9E1F-776BA0CC18B0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsyncTCP-1.0.3", "Libraries\AsyncTCP\1.0.3\AsyncTCP\AsyncTCP-1.0.3.vcxitems", "{C4C9C8F7-DE54-424E-821E-AB173C780B3B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtnetWifi-master-1.2.2", "Libraries\ArtnetWifi-master\1.2.2\ArtnetWifi-master\ArtnetWifi-master-1.2.2.vcxitems", "{19CC7F79-4E6F-4F94-B06F-87F12606B734}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lvgl-master-0.0.0", "Libraries\lvgl-master\0.0.0\lvgl-master\lvgl-master-0.0.0.vcxitems", "{447AD357-AE61-4460-9843-D11DF3BB8C0A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lv_arduino-2.0.3", "Libraries\lv_arduino\2.0.3\lv_arduino\lv_arduino-2.0.3.vcxitems", "{F39111B9-FA23-4B3F-836C-94CB78084457}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ESP32_TFT_eSPI", "..\..\..\..\Documents\Arduino\libraries\lv_arduino\examples\ESP32_TFT_eSPI\ESP32_TFT_eSPI.vcxproj", "{85163758-1777-4E8A-95A9-6F2CEB1F113A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FS-1.0", "Libraries\FS\1.0\FS\FS-1.0.vcxitems", "{FBB3E0C4-AFF8-4A03-AB0B-F3F380EEEB86}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPIFFS-1.0", "Libraries\SPIFFS\1.0\SPIFFS\SPIFFS-1.0.vcxitems", "{DFE81D7E-FE92-4E36-BC16-D55AC1E0A177}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pong_Example", "..\..\..\..\Documents\Arduino\Pong_Example\Pong_Example.vcxproj", "{1392868C-5BAC-4A70-995C-2055F8F8F4D8}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Libraries\EasyButton\1.0.1\EasyButton\EasyButton-1.0.1.vcxitems*{0ea3a49d-37e0-410b-b905-a6a989db426d}*SharedItemsImports = 9
-		..\..\..\..\Documents\Arduino\Pong_Example\Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems*{1392868c-5bac-4a70-995c-2055f8f8f4d8}*SharedItemsImports = 4
-		Libraries\FS\1.0\FS\FS-1.0.vcxitems*{1392868c-5bac-4a70-995c-2055f8f8f4d8}*SharedItemsImports = 4
-		Libraries\SPIFFS\1.0\SPIFFS\SPIFFS-1.0.vcxitems*{1392868c-5bac-4a70-995c-2055f8f8f4d8}*SharedItemsImports = 4
 		Libraries\ArtnetWifi-master\1.2.2\ArtnetWifi-master\ArtnetWifi-master-1.2.2.vcxitems*{19cc7f79-4e6f-4f94-b06f-87f12606b734}*SharedItemsImports = 9
-		Libraries\lvgl-master\0.0.0\lvgl-master\lvgl-master-0.0.0.vcxitems*{447ad357-ae61-4460-9843-d11df3bb8c0a}*SharedItemsImports = 9
 		Libraries\FastLED\3.3.2\FastLED\FastLED-3.3.2.vcxitems*{59446662-0fea-4359-b365-c3ca7dbf61e6}*SharedItemsImports = 9
-		Libraries\ArtnetWifi-master\1.2.2\ArtnetWifi-master\ArtnetWifi-master-1.2.2.vcxitems*{5ce3e9d5-7fdd-4983-9e1f-776ba0cc18b0}*SharedItemsImports = 4
-		Libraries\AsyncTCP\1.0.3\AsyncTCP\AsyncTCP-1.0.3.vcxitems*{5ce3e9d5-7fdd-4983-9e1f-776ba0cc18b0}*SharedItemsImports = 4
-		Libraries\Encoder\1.4.1\Encoder\Encoder-1.4.1.vcxitems*{80786380-5e06-4f84-b0a9-bca4074c8ad0}*SharedItemsImports = 9
-		Libraries\FastLED\3.3.2\FastLED\FastLED-3.3.2.vcxitems*{85163758-1777-4e8a-95a9-6f2ceb1f113a}*SharedItemsImports = 4
-		Libraries\FS\1.0\FS\FS-1.0.vcxitems*{85163758-1777-4e8a-95a9-6f2ceb1f113a}*SharedItemsImports = 4
-		Libraries\SPIFFS\1.0\SPIFFS\SPIFFS-1.0.vcxitems*{85163758-1777-4e8a-95a9-6f2ceb1f113a}*SharedItemsImports = 4
-		Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems*{85163758-1777-4e8a-95a9-6f2ceb1f113a}*SharedItemsImports = 4
 		Libraries\SSD_13XX\1.0\SSD_13XX\SSD_13XX-1.0.vcxitems*{8f1d6cc4-6549-4b8d-8af0-a0454f911575}*SharedItemsImports = 9
 		Libraries\WiFi\1.0\WiFi\WiFi-1.0.vcxitems*{92a4f555-76f2-48dd-a42c-538377b48286}*SharedItemsImports = 9
 		Libraries\ESP32\1.0\ESP32\ESP32-1.0.vcxitems*{c0e22943-8b01-4689-b018-731759e73142}*SharedItemsImports = 9
@@ -68,7 +45,6 @@ Global
 		Libraries\WiFi\1.0\WiFi\WiFi-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
 		Libraries\SPIFFS\1.0\SPIFFS\SPIFFS-1.0.vcxitems*{dfe81d7e-fe92-4e36-bc16-d55ac1e0a177}*SharedItemsImports = 9
 		Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems*{e6c23868-b4f1-41e4-a101-8df758b849e2}*SharedItemsImports = 9
-		Libraries\lv_arduino\2.0.3\lv_arduino\lv_arduino-2.0.3.vcxitems*{f39111b9-fa23-4b3f-836c-94cb78084457}*SharedItemsImports = 9
 		Libraries\FS\1.0\FS\FS-1.0.vcxitems*{fbb3e0c4-aff8-4a03-ab0b-f3f380eeeb86}*SharedItemsImports = 9
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,18 +56,6 @@ Global
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
-		{5CE3E9D5-7FDD-4983-9E1F-776BA0CC18B0}.Debug|x86.ActiveCfg = Debug|Win32
-		{5CE3E9D5-7FDD-4983-9E1F-776BA0CC18B0}.Debug|x86.Build.0 = Debug|Win32
-		{5CE3E9D5-7FDD-4983-9E1F-776BA0CC18B0}.Release|x86.ActiveCfg = Release|Win32
-		{5CE3E9D5-7FDD-4983-9E1F-776BA0CC18B0}.Release|x86.Build.0 = Release|Win32
-		{85163758-1777-4E8A-95A9-6F2CEB1F113A}.Debug|x86.ActiveCfg = Debug|Win32
-		{85163758-1777-4E8A-95A9-6F2CEB1F113A}.Debug|x86.Build.0 = Debug|Win32
-		{85163758-1777-4E8A-95A9-6F2CEB1F113A}.Release|x86.ActiveCfg = Release|Win32
-		{85163758-1777-4E8A-95A9-6F2CEB1F113A}.Release|x86.Build.0 = Release|Win32
-		{1392868C-5BAC-4A70-995C-2055F8F8F4D8}.Debug|x86.ActiveCfg = Debug|Win32
-		{1392868C-5BAC-4A70-995C-2055F8F8F4D8}.Debug|x86.Build.0 = Debug|Win32
-		{1392868C-5BAC-4A70-995C-2055F8F8F4D8}.Release|x86.ActiveCfg = Release|Win32
-		{1392868C-5BAC-4A70-995C-2055F8F8F4D8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
