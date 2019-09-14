@@ -69,7 +69,7 @@ void Animation_Controller::run()
 
 			next_animation = nullptr;
 
-			transitioning = false;
+			transitioning =  false;
 		}
 		else
 		{
