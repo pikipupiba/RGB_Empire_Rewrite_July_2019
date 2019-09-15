@@ -7,22 +7,53 @@
 int Animation::num_animations;
 
 // Update the animation variables to calculate the next frame.
+// The default way exactly as you would expect.
+// You can change this in the specific animation if you want.
 // TODO currently incomplete
 void Animation::update_vars()
 {
 	START;
 
-	vars.brightness += vars.brightness_speed;
-	vars.brightness_speed += vars.brightness_acceleration;
+	//vars.brightness += vars.brightness_speed;
+	//vars.brightness_speed += vars.brightness_acceleration;
 
-	vars.position += vars.speed;
-	vars.speed += vars.acceleration;
+	//vars.position += vars.speed;
+	//vars.speed += vars.acceleration;
 
-	vars.hue += vars.hue_speed;
-	vars.hue_speed += vars.hue_acceleration;
+	//vars.hue += vars.hue_speed;
+	//vars.hue_speed += vars.hue_acceleration;
 
-	vars.size += vars.size_speed;
-	vars.size_speed += vars.size_acceleration;
+	//vars.size += vars.size_speed;
+	//vars.size_speed += vars.size_acceleration;
+
+	//vars.density += vars.density_speed;
+	//vars.density_speed += vars.density_acceleration;
+
+	//vars.fade += vars.fade_speed;
+	//vars.fade_speed += vars.fade_acceleration;
+
+	//vars.start = vars.position - vars.size / 2;
+	//vars.end = vars.position + vars.size / 2;
+
+	vars_new.brightness.update();
+	vars_new.position.update();
+	vars_new.hue.update();
+	vars_new.size.update();
+	vars_new.density.update();
+	vars_new.fade.update();
+
+	//if (vars.palette_cycle != 0)
+	//{
+	//	unsigned long now = millis();
+
+	//	// abs() allows palette_cycle to be positive or negative0
+	//	if (now - vars.palette_last_time > abs(vars.palette_cycle))
+	//	{
+	//		vars.palette_next_ID = next(vars.palette_current_ID, vars.palette_cycle, vars.palette_mask);
+	//	}
+	//}
+
+	//nblendPaletteTowardPalette(vars.palette_current, vars.palette_next, vars.palette_cycle_speed);
 
 	END;
 }
@@ -39,20 +70,14 @@ void Animation::erase_previous_frame()
 	END;
 }
 
-Animation::Animation()
-	:animation_ID(num_animations++)
-{
-	START;
-
-	END;
-}
-
 Animation::Animation(LED_Arrangements* new_led_arrangements)
 	:animation_ID(num_animations++),
 	led_arrangements(new_led_arrangements),
 	num_leds(led_arrangements->get_size()),
 	leds(new CRGB[num_leds]),
-	led_set(new CRGBSet(leds, num_leds))
+	led_set(new CRGBSet(leds, num_leds)),
+	vars_new(Animation_Variables(0,num_leds - 1)),
+	compressed_arrangement(led_arrangements->compress())
 {
 	START;
 
@@ -84,8 +109,10 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	//case _Random_Rainbow_Wave:			return new Random_Rainbow_Wave;
 	case _Sinelon:
 		return new Sinelon(new_led_arrangements);
+	case _Mr_Poopy_Worm:
+		return new Mr_Poopy_Worm(new_led_arrangements);
 	case _Artnet:
-		//return new Artnet(new_led_arrangements);
+		return new Artnet(new_led_arrangements);
 	default:
 		return new Rainbow_Wave(new_led_arrangements);
 	}
@@ -99,18 +126,14 @@ Animation::~Animation()
 
 	for (auto& animation : animations)
 	{
-		THING;
 		delete animation;
 	}
 
-	THING;
-	//delete leds;
+	delete leds;
 
-	THING;
 	delete led_set;
 
-	THING;
-
+	MEM;
 	END;
 }
 
@@ -123,10 +146,10 @@ void Animation::print_info()
 	Serial.println(" Information:");
 
 	Serial.print("   Position = ");
-	Serial.println(vars.position);
+	//Serial.println(vars.position);
 
 	Serial.print("   Hue = ");
-	Serial.println(vars.hue);
+	//Serial.println(vars.hue);
 
 	END;
 }
@@ -159,6 +182,7 @@ void Animation::print_arrangement_info()
 void Animation::run()
 {
 	START;
+	//MEM;
 
 	erase_previous_frame();
 
@@ -167,10 +191,10 @@ void Animation::run()
 	calculate_frame();
 
 	for (auto& animation : animations) {
-		THING;
 		animation->run();
 	}
 
+	//MEM;
 	END;
 }
 
@@ -195,8 +219,59 @@ void Animation::run()
 void Animation::calculate_frame()
 {
 	START;
+	//MEM;
+
+	//MEM;
+	END;
+}
+
+int Animation::next(int cur, int dir, bool mask[])
+{
+	START;
+
+	int mask_size = sizeof(mask);
+	int next = cur;
+	bool finished = false;
+
+	int increment;
+
+	if (dir > 0)
+	{
+		increment = 1;
+	}
+	else
+	{
+		increment = -1;
+	}
+
+	do
+	{
+		next = (next + increment);
+
+		// Keep next within the bounds of the mask array.
+		if (next > mask_size - 1)
+		{
+			next = 0;
+		}
+		else if (next < 0)
+		{
+			next = mask_size - 1;
+		}
+
+		if (mask[next])			// found the next available index
+		{
+			finished = true;
+		}
+		else if (next == cur)	// have gone all the way around the mask array
+		{
+			finished = true;
+		}
+	}
+	while (!finished);
 
 	END;
+
+	return next;
 }
 
 CRGB* Animation::next_frame()

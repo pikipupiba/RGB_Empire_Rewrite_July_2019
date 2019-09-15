@@ -5,7 +5,7 @@ Sinelon::Sinelon(LED_Arrangements* new_led_arrangements)
 {
 	START;
 
-	vars.range_end = num_leds - 1;
+	vars_new.range_end = num_leds - 1;
 
 	END;
 }
@@ -57,44 +57,31 @@ void Sinelon::update_vars()
 {
 	START;
 
-	vars.brightness += vars.brightness_speed;
-	vars.brightness_speed += vars.brightness_acceleration;
-
-	vars.position += vars.speed;
-	vars.speed += vars.acceleration;
-
-	//P(vars.position);
-	//P(vars.speed);
-	//P(vars.position + vars.speed);
-
-	vars.hue += vars.hue_speed;
-	vars.hue_speed += vars.hue_acceleration;
-
-	vars.size += vars.size_speed;
-	vars.size_speed += vars.size_acceleration;
-
-	//Animation::update_vars();
-
-	float new_start = vars.position - vars.size / 2;
-	float new_end = vars.position + vars.size / 2;
+	Animation::update_vars();
 	
-	if (new_start < vars.range_start)
+	float new_start = vars_new.position.value.value - vars_new.size.value.value / 2;
+	float new_end = vars_new.position.value.value + vars_new.size.value.value / 2;
+	
+	if (new_start < vars_new.range_start)
 	{
-		if (vars.speed < 0)
-		{
-			vars.speed = -vars.speed;
-		}
+		vars_new.position.speed.make_positive();
 	}
-	else if (new_end > vars.range_end - 1)
+	if (new_end > vars_new.range_end - 1)
 	{
-		if (vars.speed > 0)
-		{
-			vars.speed = -vars.speed;
-		}
+		vars_new.position.speed.make_negative();
 	}
 
-	vars.start = new_start;
-	vars.end = new_end;
+	if (new_start < 0)
+	{
+		new_start = 0;
+	}
+	if (new_end > num_leds - 1)
+	{
+		new_end = num_leds - 1;
+	}
+
+	start = new_start;
+	end = new_end;
 
 	END;
 }
@@ -107,33 +94,54 @@ void Sinelon::update_vars()
 void Sinelon::calculate_frame()
 {
 	START;
+	//MEM;
+	//leds[(int)vars.start] += CHSV(vars.hue, 255, vars.brightness * (1 - (vars.start - (long)vars.start)));
 
-	leds[(int)vars.start] += CHSV(vars.hue, 255, vars.brightness * (1 - (vars.start - (long)vars.start)));
+	//if (vars.start < vars.end) {
+	//	for (int i = vars.start + 1; i < vars.end - 1; i++) {
+	//		leds[i] = CHSV(vars.hue, 255, vars.brightness);
+	//	}
+	//}
+	//else {
+	//	for (int i = vars.start + 1; i <= vars.range_end; i++) {
+	//		leds[i] += CHSV(vars.hue, 255, vars.brightness);
+	//	}
+	//	for (int i = vars.end - 1; i >= (int)vars.range_start && vars.end > 1; i--) {
+	//		leds[i] += CHSV(vars.hue, 255, vars.brightness);
+	//	}
+	//}
 
-	if (vars.start < vars.end) {
-		for (int i = vars.start + 1; i < vars.end - 1; i++) {
-			leds[i] = CHSV(vars.hue, 255, vars.brightness);
+	//leds[(int)vars.end] += CHSV(vars.hue, 255, vars.brightness * (vars.end - (long)vars.end));
+
+	//P(animation_ID);
+	//P(vars_new.position.name);
+
+	//P(vars_new.position.value.value);
+	//P(vars_new.position.speed.value);
+	//P(vars_new.hue.value.value);
+	//P(vars_new.size.value.value);
+	//P(start);
+	//P(end);
+
+
+	leds[(int)start] += CHSV(vars_new.hue.value.value, 255, vars_new.brightness.value.value * (1 - (start - (int)start)));
+
+	if (start < end) {
+		for (int i = start + 1; i < end - 1; i++) {
+			leds[i] = CHSV(vars_new.hue.value.value, 255, vars_new.brightness.value.value);
 		}
 	}
 	else {
-		for (int i = vars.start + 1; i <= vars.range_end; i++) {
-			leds[i] += CHSV(vars.hue, 255, vars.brightness);
+		for (int i = start; i <= vars_new.range_end; i++) {
+			leds[i] += CHSV(vars_new.hue.value.value, 255, vars_new.brightness.value.value);
 		}
-		for (int i = vars.end - 1; i >= (int)vars.range_start && vars.end > 1; i--) {
-			leds[i] += CHSV(vars.hue, 255, vars.brightness);
+		for (int i = end; i >= (int)vars_new.range_start && end > 1; i--) {
+			leds[i] += CHSV(vars_new.hue.value.value, 255, vars_new.brightness.value.value);
 		}
 	}
 
-	leds[(int)vars.end] += CHSV(vars.hue, 255, vars.brightness * (vars.end - (long)vars.end));
+	leds[(int)end] += CHSV(vars_new.hue.value.value, 255, vars_new.brightness.value.value * (end - (int)end));
 
-	//if (reflect) {
-	//	leds[NUM_LEDS - (int)vars.start - 1] += CHSV(hue, 255, brightness * (1 - (vars.start - (long)vars.start)));
-
-	//	for (int i = vars.start + 1; i < vars.end - 1; i++) {
-	//		leds[NUM_LEDS - i - 1] += CHSV(hue, 255, brightness);
-	//	}
-	//	leds[NUM_LEDS - (int)vars.end - 1] += CHSV(hue, 255, brightness * (vars.end - (long)vars.end));
-	//}
-
+	//MEM;
 	END;
 }

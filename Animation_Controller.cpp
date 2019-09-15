@@ -7,7 +7,7 @@ Animation_Controller::Animation_Controller(LED_Fixture* new_fixture)
 
 	transition_type = _Fade;
 	transitioning = false;
-	transition_total_time = 10000;
+	transition_total_time = 4000;
 	transition_start_time = 0;
 
 	LED_Fixture::print_arrangement_info(Default_Strip);
@@ -39,24 +39,13 @@ void Animation_Controller::run()
 {
 	START;
 
-	//delay(400);
+	speed_scale_factor = FastLED.getFPS() > 0 ? float(100.0 / FastLED.getFPS()) : 1;
+
 	erase_prev_frame();
 
-	EVERY_N_SECONDS(20)
+	EVERY_N_SECONDS(12)
 	{
-		static bool z = true;
-		if (z)
-		{
-			change_animation(_Rainbow_Wave);
-
-			//z = false;
-		}
-		else
-		{
-			change_animation(_Sinelon);
-		}
-
-		z = !z;
+		change_animation(Animation_Name(random8(0,5)));
 	}
 
 	if (transitioning)
@@ -103,6 +92,8 @@ void Animation_Controller::change_animation(Animation_Name new_animation_name)
 	{
 		//delete mask;
 
+		transition_type = Transition_Type(random8(0, 3));
+
 		transitioning = true;
 
 		transition_start_time = millis();
@@ -120,12 +111,13 @@ void Animation_Controller::change_animation(Animation_Name new_animation_name)
 			}
 		}
 	}
+
 	END;
 }
 
 // Surely there is a better way to do this that doesn't require so many comparisons?
 // Make the input classes friend class of the animation class!
-void Animation_Controller::change_animation_variables(Animation_Variables new_vars)
+void Animation_Controller::change_animation_variables(Animation_Variables_Old new_vars)
 {
 	//current_animation->vars.brightness = (new_vars.brightness == NULL) ? current_animation->vars.brightness : new_vars.brightness;
 	//current_animation->vars.brightness_speed = (new_vars.brightness_speed == NULL) ? current_animation->vars.brightness_speed : new_vars.brightness_speed;
@@ -195,39 +187,21 @@ void Animation_Controller::show()
 	{
 		int cur_led_num = 0;
 
-		int cur_group_num = 0;
-
 		CRGB* current_next_frame = current_animation->next_frame();
 		CRGBSet current_next_frame_set = CRGBSet(current_next_frame, current_animation->num_leds);
 
-		for (LED_Arrangement& arrangement : current_animation->led_arrangements->arrangements)
+		for (LED_Group& group : current_animation->compressed_arrangement.led_groups)
 		{
-			for (LED_Group& group : arrangement.led_groups)
+			for (CRGBSet& arr_led_set : group.leds)
 			{
-				for (CRGBSet& arr_led_set : group.leds)
+				int i = 0;
+
+				for (auto& led : arr_led_set)
 				{
-					//arr_led_set = next_frame_set(cur_led_num, cur_led_num + arr_led_set.len);
-
-					int i = 0;
-
-					for (auto& led : arr_led_set)
-					{
-						//Serial.println(cur_led_num + i);
-						led = current_animation->leds[cur_led_num + i++];
-						//Serial.println(arr_led_set.len);
-					}
-
-					//THING;
+					led = current_animation->leds[cur_led_num + i++];
 				}
-
-				if (group.group_number != cur_group_num)
-				{
-					cur_led_num += group.get_size();
-					
-					cur_group_num = group.group_number;
-				}
-				//Serial.println(cur_led_num);
 			}
+			cur_led_num += group.size;
 		}
 	}
 
@@ -240,8 +214,6 @@ void Animation_Controller::transition_fade()
 
 	int cur_led_num = 0;
 
-	int cur_group_num = 0;
-
 	CRGB* current_next_frame = current_animation->next_frame();
 	CRGBSet current_next_frame_set = CRGBSet(current_next_frame, current_animation->num_leds);
 
@@ -250,39 +222,21 @@ void Animation_Controller::transition_fade()
 
 	float ratio = (float)(transition_total_time - (millis() - transition_start_time)) / transition_total_time;
 
-	for (LED_Arrangement& arrangement : current_animation->led_arrangements->arrangements)
+	for (LED_Group& group : current_animation->compressed_arrangement.led_groups)
 	{
-		for (LED_Group& group : arrangement.led_groups)
+		for (CRGBSet& arr_led_set : group.leds)
 		{
-			for (CRGBSet& arr_led_set : group.leds)
+			int i = 0;
+
+			for (auto& led : arr_led_set)
 			{
-				//arr_led_set = next_frame_set(cur_led_num, cur_led_num + arr_led_set.len);
+				led = next_animation->leds[cur_led_num + i].nscale8_video(255 * (1 - ratio));
+				led += current_animation->leds[cur_led_num + i].nscale8_video(255 * ratio);
 
-				int i = 0;
-
-				for (CRGB& led : arr_led_set)
-				{
-					//Serial.println(cur_led_num + i);
-					//THING;
-
-					led = next_animation->leds[cur_led_num + i].nscale8_video(255 * (1 - ratio));
-					led += current_animation->leds[cur_led_num + i++].nscale8_video(255 * ratio);
-					//Serial.println(arr_led_set.len);
-				}
-
-				//THING;
+				i++;
 			}
-
-			if (group.group_number != cur_group_num)
-			{
-				cur_led_num += group.get_size();
-
-				cur_group_num = group.group_number;
-			}
-
-			//cur_led_num += abs(group.leds[0].len);
-			//Serial.println(cur_led_num);
 		}
+		cur_led_num += group.size;
 	}
 
 	END;
@@ -301,46 +255,30 @@ void Animation_Controller::transition_wipe()
 	CRGB* next_next_frame = next_animation->next_frame();
 	CRGBSet next_next_frame_set = CRGBSet(next_next_frame, next_animation->num_leds);
 
-
 	float ratio = (float)(transition_total_time - (millis() - transition_start_time)) / transition_total_time;
 
-	for (LED_Arrangement& arrangement : current_animation->led_arrangements->arrangements)
+
+	for (LED_Group& group : current_animation->compressed_arrangement.led_groups)
 	{
-		for (LED_Group& group : arrangement.led_groups)
+		for (CRGBSet& arr_led_set : group.leds)
 		{
-			for (CRGBSet& arr_led_set : group.leds)
+			int i = 0;
+
+			for (auto& led : arr_led_set)
 			{
-				//arr_led_set = next_frame_set(cur_led_num, cur_led_num + arr_led_set.len);
-
-				int i = 0;
-
-				for (CRGB& led : arr_led_set)
+				if (i < abs(arr_led_set.len) * (1 - ratio))
 				{
-					if (i < abs(arr_led_set.len) * (1 - ratio))
-					{
-						led = next_animation->leds[cur_led_num + i];
-					}
-					else
-					{
-						led = current_animation->leds[cur_led_num + i];
-					}
-
-					i++;
+					led = next_animation->leds[cur_led_num + i];
+				}
+				else
+				{
+					led = current_animation->leds[cur_led_num + i];
 				}
 
-				//THING;
+				i++;
 			}
-
-			if (group.group_number != cur_group_num)
-			{
-				cur_led_num += group.get_size();
-
-				cur_group_num = group.group_number;
-			}
-
-			//cur_led_num += abs(group.leds[0].len);
-			//Serial.println(cur_led_num);
 		}
+		cur_led_num += group.size;
 	}
 }
 
@@ -408,37 +346,26 @@ void Animation_Controller::transition_dissolve()
 		num_dissolved++;
 	}
 
-	for (LED_Arrangement& arrangement : current_animation->led_arrangements->arrangements)
+	for (LED_Group& group : current_animation->compressed_arrangement.led_groups)
 	{
-		for (LED_Group& group : arrangement.led_groups)
+		for (CRGBSet& arr_led_set : group.leds)
 		{
-			cur_led_num = group.group_number * 144;
+			int i = 0;
 
-			for (CRGBSet& arr_led_set : group.leds)
+			for (auto& led : arr_led_set)
 			{
-				//arr_led_set = next_frame_set(cur_led_num, cur_led_num + arr_led_set.len);
-
-				int i = 0;
-
-				for (CRGB& led : arr_led_set)
+				if (mask[i])
 				{
-					if (mask[i])
-					{
-						led = next_animation->leds[cur_led_num + i];
-					}
-					else
-					{
-						led = current_animation->leds[cur_led_num + i];
-					}
-					i++;
+					led = next_animation->leds[cur_led_num + i];
 				}
-
-				//THING;
+				else
+				{
+					led = current_animation->leds[cur_led_num + i];
+				}
+				i++;
 			}
-
-			//cur_led_num += abs(group.leds[0].len);
-			//Serial.println(cur_led_num);
 		}
+		cur_led_num += group.size;
 	}
 
 	END;

@@ -24,6 +24,9 @@ class Sinelon :
 protected:
 	const Animation_Name name = _Template_Animation;
 
+	float start;
+	float end;
+
 public:
 	Sinelon(LED_Arrangements* new_led_arrangements);
 

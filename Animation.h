@@ -66,9 +66,9 @@ class Animation
 
  public:
 	 // A struct that contains all the variables associated with the animation.
-	Animation_Variables vars;
+	Animation_Variables vars_new;
+	LED_Arrangement compressed_arrangement;
 
-	Animation();
 
 	Animation(LED_Arrangements* new_led_arrangements);
 
@@ -94,6 +94,8 @@ class Animation
 
 	// Generate the next frame of the animation.
 	virtual void calculate_frame();
+
+	int next(int cur, int dir, bool mask[]);
 
 	CRGB* next_frame();
 

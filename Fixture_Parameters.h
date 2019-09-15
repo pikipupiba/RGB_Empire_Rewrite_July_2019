@@ -15,11 +15,11 @@
 #include "My_Enums.h"
 
 
-constexpr int num_strips = 8;
-constexpr int total_num_leds = 1152;
+constexpr int num_strips = 8;			// You will also need to change the Strip_Parameter array size in Fixture_Parameters in My_Enums.h
+constexpr int total_num_leds = 1152;	// TODO: make this programatic
 
 constexpr int volts = 5;
-constexpr int milli_amps = 60000;
+constexpr int milli_amps = 100000;		// Maximum power output of the connected power supply. Setting this properly will prevent brown outs!
 
 // { strip_pin, num_leds, leds_per_meter, shape, length_in_leds, width_in_leds }
 constexpr Strip_Parameters strip_parameters[num_strips] = 
@@ -41,31 +41,6 @@ constexpr Fixture_Parameters fixture_parameters =
 	strip_parameters
 
 };
-
-/*
-template <uint8_t pin>
-void addStrip() {
-	FastLED.addLeds<WS2812B, pin, GRB>
-		(g_leds, num_leds_so_far, num_leds_per_strip).setCorrection(TypicalLEDStrip);
-
-	char buffer[100];
-	sprintf(buffer, "Initialized pin %d with LED offset %d", pin, num_leds_so_far);
-	Serial.println(buffer);
-
-	num_leds_so_far += num_leds_per_strip;
-}
-
-template<uint8_t n>
-void forLoop() {
-	addStrip<strip_pin[n - 1]>();
-	forLoop<n - 1>();
-}
-
-template<>
-void forLoop<0>() {
-	// Do nothing
-}
-*/
 
 #endif
 

@@ -6,49 +6,51 @@
 #include "Tasks.h"
 
 // connect to wifi – returns true if successful or false if not
-bool connect_wifi(void)
-{
-	START;
+// TODO: move this to Wifi_Class
+//bool connect_wifi(void)
+//{
+	//START;
 
-	char* ssid = "Trap_House";
-	char* password = "ThIsHoUsEisatrap72";
+	//char* ssid = "Trap_House";
+	//char* password = "ThIsHoUsEisatrap72";
 
 
-	boolean state = true;
-	int i = 0;
+	//boolean state = true;
+	//int i = 0;
 
-	WiFi.begin(ssid, password);
-	Serial.println("");
-	Serial.println("Connecting to WiFi");
+	//WiFi.begin(ssid, password);
+	//Serial.println("");
+	//Serial.println("Connecting to WiFi");
 
-	// Wait for connection
-	Serial.print("Connecting");
-	while (WiFi.status() != WL_CONNECTED) {
-		delay(250);
-		Serial.print(".");
-		if (i > 20) {
-			state = false;
-			break;
-		}
-		i++;
-	}
-	if (state) {
-		Serial.println("");
-		Serial.print("Connected to ");
-		Serial.println(ssid);
-		Serial.print("IP address: ");
-		Serial.println(WiFi.localIP());
-	}
-	else {
-		Serial.println("");
-		Serial.println("Connection failed.");
-	}
+	//// Wait for connection
+	//Serial.print("Connecting");
+	//while (WiFi.status() != WL_CONNECTED)
+	//{
+	//	delay(250);
+	//	Serial.print(".");
+	//	if (i > 40) {
+	//		state = false;
+	//		break;
+	//	}
+	//	i++;
+	//}
+	//if (state) {
+	//	Serial.println("");
+	//	Serial.print("Connected to ");
+	//	Serial.println(ssid);
+	//	Serial.print("IP address: ");
+	//	Serial.println(WiFi.localIP());
+	//}
+	//else {
+	//	Serial.println("");
+	//	Serial.println("Connection failed.");
+	//}
 
-	MEM;
-	END;
+	//MEM;
+	//END;
 
-	return state;
-}
+	//return state;
+//}
 
 Controller::Controller():
 	fixture(LED_Fixture::create()),
@@ -58,22 +60,20 @@ Controller::Controller():
 {
 	START;
 
-	//setup_physical_input();		// initialize physical buttons and knobs.
-	//setup_UDP_input();			// initialize UDP Input ports.
+	create_tasks();	// Start all the independently managed tasks.
 
-	create_tasks();				// Start all the independently managed tasks.
-
+	// Print some info about the fixture and animation to make sure everything initialized correctly.
 	fixture.print_info();
-
 	animation_controller.print_info();
 
-	physical_input.check();
+	physical_input.check();	// TODO: implement this
 
-	connect_wifi();
+	//connect_wifi();
 
-	FastLED.setBrightness(80);
+	//wifi_input.connect();	// TODO: implement this
+	//wifi_input.check();	// TODO: implement this
 
-	//FastLED_Show_ESP32();
+	FastLED.setBrightness(10);
 
 	MEM;
 
@@ -89,11 +89,14 @@ void Controller::run()
 {
 	START;
 
-	physical_input.check();
+	// Check for input from buttons and wifi.
+	//physical_input.check();
+	//wifi_input.check();	// TODO: implement this
 
-	//check_UDP_input();
-
-	display.update();
+	EVERY_N_MILLISECONDS(250)
+	{
+		display.update();	// Update the oled screen.
+	}
 
 	animation_controller.run();
 

@@ -3,13 +3,16 @@
 #include "arduino.h"
 #include <vector>
 #include <typeinfo>
-#include <FastLED.h>
+#include "FastLED.h"
 #include "Oscillator.h"
 #include "My_Enums.h"
 #include "LED_Fixture.h"
 #include "Animation.h"
 
 // Factory method gets rid of all of this.
+// Would still like a dynamically built list of animations, however.
+// for some insight on how to maybe do this, visit
+// https://www.reddit.com/r/Cplusplus/comments/cxli09/help_creating_a_vector_of_derived_classes/
 
 // Define Animation_Class as a pointer to an animation object.
 //typedef Animation* Animation_Class;
@@ -41,6 +44,11 @@ private:
 	bool* mask;
 	int num_dissolved;
 
+	// All speeds will be scaled as though they were running at this rate.
+	// For example, if an animation is currently running at 200 fps, all speeds are cut in half.
+	// If an animation is running at 50 fps, all speeds are doubled.
+	const int target_fps = 100;
+
 public:
 	Animation_Controller(LED_Fixture* new_fixture);
 
@@ -54,7 +62,7 @@ public:
 
 	void change_animation(Animation_Name new_animation_name);
 
-	void change_animation_variables(Animation_Variables new_vars);
+	void change_animation_variables(Animation_Variables_Old new_vars);
 
 	void erase_prev_frame();
 

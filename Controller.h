@@ -1,8 +1,8 @@
 // Controller.h
 
-// The Controller class is responsible for creating all LED_Fixture and
-// Animation objects, recieving input from the outside world, and using
-// that input to coordinate all activities.
+// The Controller class is responsible for creating all LED_Fixture, Display,
+// Input, and Animation_Controller objects, recieving input from the outside world,
+// and using that input to coordinate all activities.
 
 #ifndef _CONTROLLER_h
 #define _CONTROLLER_h
@@ -12,10 +12,11 @@
 //**********************//
 #include "arduino.h"
 
+// Had to define this in FastLED_esp32.h for some reason it didn't work here.
 #define FASTLED_ESP32_I2S true
 
-#include "FastLED.h"
-#include <WiFi.h>
+#include <FastLED.h>
+#include <WiFi.h>		// TODO: Move wifi stuff to Wifi_Class when ready.
 #include <WiFiUdp.h>
 
 //**********************//
@@ -37,20 +38,16 @@ class Controller
  protected:
 	 LED_Fixture fixture;						// The object containing all our LEDs.
 	 Animation_Controller animation_controller;	// The animation that is currently running.
-	 Display display;
+	 Display display;							// The oled screen object.
 
-	 Physical_Input physical_input;
+	 Physical_Input physical_input;	// The object that interacts with the buttons.
+	 Wifi_Class wifi_input;			// The object for sending and recieving wifi data.
 	 
  public:
 	Controller();
 	~Controller();
 
-	void run();			// The run() method is called every frame.
-
-	// transition_to() is called to begin the process of transitioning to a new animation.
-	//void transition_to(int new_animation_ID, int new_transition_type, float new_transition_time);
-
-
+	void run();	// The run() method is called every frame.
 };
 
 #endif

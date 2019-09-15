@@ -20,7 +20,6 @@
 // Create the pointer to our controller
 Controller* controller;
 
-
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
@@ -45,9 +44,13 @@ void setup()
 
 void loop()
 {
+	START;
+
 	controller->run();
 
 	// Obsolete ever since I discovered FastLED.getFPS()
 	//BUG1(Bug::fps(500, 5));
+
+	END;
 
 }

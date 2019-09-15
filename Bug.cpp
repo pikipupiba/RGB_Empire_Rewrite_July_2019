@@ -50,21 +50,5 @@ Bug::Bug()
 //	END;
 //}
 
-void Bug::display_memory(String new_string)
-{
-
-	//Serial.println();
-
-	BUG5(
-	for (int i = 0; i < function_stack.size() - 1; i++)
-	{
-		Serial.print("      ");
-	})
-
-	Serial.print("Memory remaining " + new_string + ": ");
-
-	Serial.print((ESP.getFreeHeap() / 1024));
-
-	Serial.println(" KB");
-}
+float speed_scale_factor = 1;
 

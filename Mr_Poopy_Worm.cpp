@@ -3,9 +3,9 @@
 Mr_Poopy_Worm::Mr_Poopy_Worm(LED_Arrangements* new_led_arrangements)
 	:Animation(new_led_arrangements)
 {
-	START;
+	START2;
 
-	int num_worms = 4;
+	int num_worms = random8(3,20);
 
 	// This is where you can combine animations.
 
@@ -13,12 +13,13 @@ Mr_Poopy_Worm::Mr_Poopy_Worm(LED_Arrangements* new_led_arrangements)
 	{
 		animations.push_back(Animation::create(_Sinelon, new_led_arrangements));
 
-		animations.back()->vars.range_start = i * num_leds / num_worms;
-		animations.back()->vars.range_end = (i + 1) * num_leds / num_worms - 1;
-		animations.back()->vars.speed = 0.2;
+		animations.back()->vars_new.range_start = i * num_leds / num_worms;
+		animations.back()->vars_new.range_end = (i + 1) * num_leds / num_worms - 1;
 	}
 
-	END;
+	animations.push_back(Animation::create(_Glitter, new_led_arrangements));
+
+	END2;
 }
 
 // Use the run function to define what the animation must do every frame.
