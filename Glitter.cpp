@@ -12,7 +12,7 @@ void Glitter::erase_previous_frame()
 {
 	START;
 
-	led_set->fadeToBlackBy(vars_new.fade.value.value * speed_scale_factor);
+	led_set->fadeToBlackBy(vars(fade) * speed_scale_factor);
 
 	END;
 }
@@ -23,7 +23,7 @@ void Glitter::calculate_frame()
 
 	for (auto& pixel : *led_set)
 	{
-		if (random(1000) < vars_new.density.value.value * speed_scale_factor)
+		if (random(1000) < vars(density) * speed_scale_factor)
 		{
 			pixel = CRGB::White;
 		}

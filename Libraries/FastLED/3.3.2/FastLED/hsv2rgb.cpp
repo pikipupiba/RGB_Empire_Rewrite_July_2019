@@ -165,7 +165,7 @@ void hsv2rgb_raw_avr(const struct CHSV & hsv, struct CRGB & rgb)
     saturation = hsv.sat;
     value =      hsv.val;
 
-    // Saturation more useful the other way around
+    // Saturation more useful the other way Around
     saturation = 255 - saturation;
     uint8_t invsat = APPLY_DIMMING( saturation );
 

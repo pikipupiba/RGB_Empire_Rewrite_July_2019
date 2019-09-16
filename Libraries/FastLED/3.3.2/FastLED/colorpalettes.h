@@ -44,7 +44,7 @@ extern const TProgmemRGBPalette16 PartyColors_p FL_PROGMEM;
 /// the FastLED 'HeatColor' function.
 /// Recommend that you use values 0-240 rather than
 /// the usual 0-255, as the last 15 colors will be
-/// 'wrapping around' from the hot end to the cold end,
+/// 'wrapping Around' from the hot end to the cold end,
 /// which looks wrong.
 extern const TProgmemRGBPalette16 HeatColors_p FL_PROGMEM;
 

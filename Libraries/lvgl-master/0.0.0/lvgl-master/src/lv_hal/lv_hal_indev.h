@@ -44,7 +44,7 @@ enum {
     LV_INDEV_TYPE_NONE,    /**< Uninitialized state*/
     LV_INDEV_TYPE_POINTER, /**< Touch pad, mouse, external button*/
     LV_INDEV_TYPE_KEYPAD,  /**< Keypad or keyboard*/
-    LV_INDEV_TYPE_BUTTON,  /**< External (hardware button) which is assigned to a specific point of the
+    LV_INDEV_TYPE_Button,  /**< External (hardware button) which is assigned to a specific point of the
                               screen*/
     LV_INDEV_TYPE_ENCODER, /**< Encoder with only Left, Right turn and a Button*/
 };
@@ -59,7 +59,7 @@ typedef struct
 {
     lv_point_t point; /**< For LV_INDEV_TYPE_POINTER the currently pressed point*/
     uint32_t key;     /**< For LV_INDEV_TYPE_KEYPAD the currently pressed key*/
-    uint32_t btn_id;  /**< For LV_INDEV_TYPE_BUTTON the currently pressed button*/
+    uint32_t btn_id;  /**< For LV_INDEV_TYPE_Button the currently pressed button*/
     int16_t enc_diff; /**< For LV_INDEV_TYPE_ENCODER number of steps since the previous read*/
 
     lv_indev_state_t state; /**< LV_INDEV_STATE_REL or LV_INDEV_STATE_PR*/

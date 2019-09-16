@@ -57,7 +57,7 @@ However, this is open source an released with GNU V3 so you can fork library and
 ***
 <b>Background:</b><br>
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but I was extremely disappointed about performances/features and bugs, so I decided to write a new one from scratch based on my popular TFT_ILI9163C. Since this devices are very similar I have decided to build up an unique library.<br>
-I have 2 old libraries here on github, but digging inside datasheet I discover that I can get much more by rewrote almost everithing. As result I got all chip features enabled and it's probably the faster driver around, much more than adafruit and works with all features at any screen rotation by using all the time his hardware accellerated primitives<br>
+I have 2 old libraries here on github, but digging inside datasheet I discover that I can get much more by rewrote almost everithing. As result I got all chip features enabled and it's probably the faster driver Around, much more than adafruit and works with all features at any screen rotation by using all the time his hardware accellerated primitives<br>
 Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last libraries here on github, of course there's differences related to hardware (OLED don't have backlight pin, etc.)
 ***
 <b>Features:</b><br>
@@ -111,7 +111,7 @@ Of course some oled has just SPI exposed but some can be configured for parallel
 - Do not use logic converters based on mosfet or similar or bidirectional ones (Adafruit and Sparkfun sell a lot of these), they are crap, waveforms are distorted and DO NOT USE PARTITION RESISTOR's for that, it's a bad idea, you can damage oled and cpu in the same time.
 - Most of you know already this but remember that Arduino UNO or similar can provide 3v3 but the logic levels are always at 5V!!!
 - The RST pin is not strictly necessary but if not used must pullup to 3v3, never leave float! When is necessary? When you develop a library for example but if you change libraries you may need a complete power cycle if you are not using this pin.
-- ESP8266 has very weak SPI, should be 3v3 but most of the times is much less so better avoid use any logic chip between it and oled, I spend days around a circuit before discovering this.
+- ESP8266 has very weak SPI, should be 3v3 but most of the times is much less so better avoid use any logic chip between it and oled, I spend days Around a circuit before discovering this.
 - On ESP8266, from April 2016 the pin GPIO16 misteriously doesn't works as CS, don't ask me why. I'm currently using GPIO2 or GPIO4.
 - Since I'm using the fast SPI possible, keep wires short and remember to provide a decoupling capacitor for your oled.<br>
 - If you plan to use SPI for other devices as well it's a good idea pullup the CS with a 10K resistor to +3v3, this will keep oled disabled until your CPU access it for initialization and avoid interferences.

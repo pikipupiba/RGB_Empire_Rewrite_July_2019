@@ -24,7 +24,7 @@ FASTLED_NAMESPACE_BEGIN
 
 
  - Saturating unsigned 8-bit add and subtract.
-   Instead of wrapping around if an overflow occurs,
+   Instead of wrapping Around if an overflow occurs,
    these routines just 'clamp' the output at a maxumum
    of 255, or a minimum of 0.  Useful for adding pixel
    values.  E.g., qadd8( 200, 100) = 255.
@@ -570,7 +570,7 @@ LIB8STATIC uint8_t map8( uint8_t in, uint8_t rangeStart, uint8_t rangeEnd)
 //
 
 /// ease8InOutQuad: 8-bit quadratic ease-in / ease-out function
-///                Takes around 13 cycles on AVR
+///                Takes Around 13 cycles on AVR
 #if EASE8_C == 1
 LIB8STATIC uint8_t ease8InOutQuad( uint8_t i)
 {
@@ -633,7 +633,7 @@ LIB8STATIC uint16_t ease16InOutQuad( uint16_t i)
 
 
 /// ease8InOutCubic: 8-bit cubic ease-in / ease-out function
-///                 Takes around 18 cycles on AVR
+///                 Takes Around 18 cycles on AVR
 LIB8STATIC fract8 ease8InOutCubic( fract8 i)
 {
     uint8_t ii  = scale8_LEAVING_R1_DIRTY(  i, i);
@@ -660,7 +660,7 @@ LIB8STATIC fract8 ease8InOutCubic( fract8 i)
 ///                   from the actual cubic S-curve, and it executes
 ///                   more than twice as fast.  Use when the cycles
 ///                   are more important than visual smoothness.
-///                   Asm version takes around 7 cycles on AVR.
+///                   Asm version takes Around 7 cycles on AVR.
 
 #if EASE8_C == 1
 LIB8STATIC fract8 ease8InOutApprox( fract8 i)
@@ -686,7 +686,7 @@ LIB8STATIC fract8 ease8InOutApprox( fract8 i)
 #elif EASE8_AVRASM == 1
 LIB8STATIC uint8_t ease8InOutApprox( fract8 i)
 {
-    // takes around 7 cycles on AVR
+    // takes Around 7 cycles on AVR
     asm volatile (
         "  subi %[i], 64         \n\t"
         "  cpi  %[i], 128        \n\t"

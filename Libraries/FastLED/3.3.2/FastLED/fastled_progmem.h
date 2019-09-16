@@ -40,7 +40,7 @@ FASTLED_NAMESPACE_BEGIN
 #define FL_PGM_READ_WORD_NEAR(x)  (pgm_read_word_near(x))
 #define FL_PGM_READ_DWORD_NEAR(x) (pgm_read_dword_near(x))
 
-// Workaround for http://gcc.gnu.org/bugzilla/show_bug.cgi?id=34734
+// WorkAround for http://gcc.gnu.org/bugzilla/show_bug.cgi?id=34734
 #if __GNUC__ < 4 || (__GNUC__ == 4 && (__GNUC_MINOR__ < 6))
 #ifdef FASTLED_AVR
 #ifdef PROGMEM

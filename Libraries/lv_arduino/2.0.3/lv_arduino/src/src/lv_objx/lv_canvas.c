@@ -259,9 +259,9 @@ void lv_canvas_copy_buf(lv_obj_t * canvas, const void * to_copy, lv_coord_t x, l
  * @param offset_x offset X to tell where to put the result data on destination canvas
  * @param offset_y offset X to tell where to put the result data on destination canvas
  * @param pivot_x pivot X of rotation. Relative to the source canvas
- *                Set to `source width / 2` to rotate around the center
+ *                Set to `source width / 2` to rotate Around the center
  * @param pivot_y pivot Y of rotation. Relative to the source canvas
- *                Set to `source height / 2` to rotate around the center
+ *                Set to `source height / 2` to rotate Around the center
  */
 void lv_canvas_rotate(lv_obj_t * canvas, lv_img_dsc_t * img, int16_t angle, lv_coord_t offset_x, lv_coord_t offset_y,
                       int32_t pivot_x, int32_t pivot_y)

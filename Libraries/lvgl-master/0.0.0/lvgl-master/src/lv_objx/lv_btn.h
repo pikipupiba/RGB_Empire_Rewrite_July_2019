@@ -320,7 +320,7 @@ const lv_style_t * lv_btn_get_style(const lv_obj_t * btn, lv_btn_style_t type);
  *      MACROS
  **********************/
 
-#endif /*LV_USE_BUTTON*/
+#endif /*LV_USE_Button*/
 
 #ifdef __cplusplus
 } /* extern "C" */

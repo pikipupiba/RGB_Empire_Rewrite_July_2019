@@ -7,6 +7,7 @@
 std::vector<name_and_time> Bug::function_stack;
 std::vector<int> Bug::thing_stack;
 //int Bug::framesPerSecond = 0;
+float speed_scale_factor = 1;
 
 Bug::Bug()
 {
@@ -49,6 +50,3 @@ Bug::Bug()
 //
 //	END;
 //}
-
-float speed_scale_factor = 1;
-

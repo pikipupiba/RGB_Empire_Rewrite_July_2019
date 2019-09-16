@@ -282,7 +282,7 @@ void lv_chart_set_y_tick_texts(lv_obj_t * chart, const char * list_of_values, ui
                                lv_chart_axis_options_t options);
 
 /**
- * Set the margin around the chart, used for axes value and ticks
+ * Set the margin Around the chart, used for axes value and ticks
  * @param chart     pointer to an chart object
  * @param margin    value of the margin [px]
  */
@@ -340,7 +340,7 @@ static inline const lv_style_t * lv_chart_get_style(const lv_obj_t * chart, lv_c
 }
 
 /**
- * Get the margin around the chart, used for axes value and labels
+ * Get the margin Around the chart, used for axes value and labels
  * @param chart pointer to an chart object
  * @param return value of the margin
  */

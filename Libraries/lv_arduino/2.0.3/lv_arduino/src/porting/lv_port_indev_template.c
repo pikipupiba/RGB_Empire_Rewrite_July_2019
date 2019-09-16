@@ -53,7 +53,7 @@ lv_indev_t * indev_touchpad;
 lv_indev_t * indev_mouse;
 lv_indev_t * indev_keypad;
 lv_indev_t * indev_encoder;
-lv_indev_t * indev_button;
+lv_indev_t * indev_Button;
 
 static int32_t encoder_diff;
 static lv_indev_state_t encoder_state;
@@ -158,16 +158,16 @@ void lv_port_indev_init(void)
 
     /*Register a button input device*/
     lv_indev_drv_init(&indev_drv);
-    indev_drv.type = LV_INDEV_TYPE_BUTTON;
+    indev_drv.type = LV_INDEV_TYPE_Button;
     indev_drv.read_cb = button_read;
-    indev_button = lv_indev_drv_register(&indev_drv);
+    indev_Button = lv_indev_drv_register(&indev_drv);
 
     /*Assign buttons to points on the screen*/
     static const lv_point_t btn_points[2] = {
             {10, 10},   /*Button 0 -> x:10; y:10*/
             {40, 100},  /*Button 1 -> x:40; y:100*/
     };
-    lv_indev_set_button_points(indev_button, btn_points);
+    lv_indev_set_Button_points(indev_Button, btn_points);
 }
 
 /**********************

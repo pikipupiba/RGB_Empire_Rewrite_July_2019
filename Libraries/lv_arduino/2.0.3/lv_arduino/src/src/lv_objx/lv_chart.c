@@ -498,7 +498,7 @@ void lv_chart_set_y_tick_texts(lv_obj_t * chart, const char * list_of_values, ui
 }
 
 /**
- * Set the margin around the chart, used for axes value and ticks
+ * Set the margin Around the chart, used for axes value and ticks
  * @param chart     pointer to an chart object
  * @param margin    value of the margin [px]
  */
@@ -582,7 +582,7 @@ void lv_chart_refresh(lv_obj_t * chart)
 }
 
 /**
- * Get the margin around the chart, used for axes value and labels
+ * Get the margin Around the chart, used for axes value and labels
  * @param chart pointer to an chart object
  * @param return value of the margin
  */
@@ -660,7 +660,7 @@ static lv_res_t lv_chart_signal(lv_obj_t * chart, lv_signal_t sign, void * param
         }
         buf->type[i] = "lv_chart";
     } else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {
-        /*Provide extra px draw area around the chart*/
+        /*Provide extra px draw area Around the chart*/
         chart->ext_draw_pad = ext->margin;
     }
 

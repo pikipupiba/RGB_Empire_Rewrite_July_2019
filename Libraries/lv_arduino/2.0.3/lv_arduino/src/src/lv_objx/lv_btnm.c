@@ -28,18 +28,18 @@
  **********************/
 static lv_res_t lv_btnm_signal(lv_obj_t * btnm, lv_signal_t sign, void * param);
 static bool lv_btnm_design(lv_obj_t * btnm, const lv_area_t * mask, lv_design_mode_t mode);
-static uint8_t get_button_width(lv_btnm_ctrl_t ctrl_bits);
+static uint8_t get_Button_width(lv_btnm_ctrl_t ctrl_bits);
 static bool button_is_hidden(lv_btnm_ctrl_t ctrl_bits);
 static bool button_is_repeat_disabled(lv_btnm_ctrl_t ctrl_bits);
 static bool button_is_inactive(lv_btnm_ctrl_t ctrl_bits);
 static bool button_is_click_trig(lv_btnm_ctrl_t ctrl_bits);
 static bool button_is_tgl_enabled(lv_btnm_ctrl_t ctrl_bits);
 static bool button_get_tgl_state(lv_btnm_ctrl_t ctrl_bits);
-static uint16_t get_button_from_point(lv_obj_t * btnm, lv_point_t * p);
+static uint16_t get_Button_from_point(lv_obj_t * btnm, lv_point_t * p);
 static void allocate_btn_areas_and_controls(const lv_obj_t * btnm, const char ** map);
-static void invalidate_button_area(const lv_obj_t * btnm, uint16_t btn_idx);
+static void invalidate_Button_area(const lv_obj_t * btnm, uint16_t btn_idx);
 static bool maps_are_identical(const char ** map1, const char ** map2);
-static void make_one_button_toggled(lv_obj_t * btnm, uint16_t btn_idx);
+static void make_one_Button_toggled(lv_obj_t * btnm, uint16_t btn_idx);
 
 /**********************
  *  STATIC VARIABLES
@@ -195,7 +195,7 @@ void lv_btnm_set_map(const lv_obj_t * btnm, const char * map[])
         btn_cnt  = 0;
         /*Count the buttons in a line*/
         while(strcmp(map_p_tmp[btn_cnt], "\n") != 0 && strlen(map_p_tmp[btn_cnt]) != 0) { /*Check a line*/
-            unit_cnt += get_button_width(ext->ctrl_bits[btn_i + btn_cnt]);
+            unit_cnt += get_Button_width(ext->ctrl_bits[btn_i + btn_cnt]);
             btn_cnt++;
         }
 
@@ -218,7 +218,7 @@ void lv_btnm_set_map(const lv_obj_t * btnm, const char * map[])
                 /* one_unit_w = all_unit_w / unit_cnt
                  * act_unit_w = one_unit_w * button_width
                  * do this two operations but the multiply first to divide a greater number */
-                act_unit_w = (all_unit_w * get_button_width(ext->ctrl_bits[btn_i])) / unit_cnt;
+                act_unit_w = (all_unit_w * get_Button_width(ext->ctrl_bits[btn_i])) / unit_cnt;
                 act_unit_w--; /*-1 because e.g. width = 100 means 101 pixels (0..100)*/
 
                 /*Always recalculate act_x because of rounding errors */
@@ -235,7 +235,7 @@ void lv_btnm_set_map(const lv_obj_t * btnm, const char * map[])
                     lv_area_set(&ext->button_areas[btn_i], act_x, act_y, act_x + act_unit_w, act_y + btn_h);
                 }
 
-                unit_act_cnt += get_button_width(ext->ctrl_bits[btn_i]);
+                unit_act_cnt += get_Button_width(ext->ctrl_bits[btn_i]);
 
                 i_tot++;
                 btn_i++;
@@ -349,7 +349,7 @@ void lv_btnm_set_btn_ctrl(const lv_obj_t * btnm, uint16_t btn_id, lv_btnm_ctrl_t
     if(btn_id >= ext->btn_cnt) return;
 
     ext->ctrl_bits[btn_id] |= ctrl;
-    invalidate_button_area(btnm, btn_id);
+    invalidate_Button_area(btnm, btn_id);
 }
 
 /**
@@ -364,7 +364,7 @@ void lv_btnm_clear_btn_ctrl(const lv_obj_t * btnm, uint16_t btn_id, lv_btnm_ctrl
     if(btn_id >= ext->btn_cnt) return;
 
     ext->ctrl_bits[btn_id] &= (~ctrl);
-    invalidate_button_area(btnm, btn_id);
+    invalidate_Button_area(btnm, btn_id);
 }
 
 /**
@@ -431,7 +431,7 @@ void lv_btnm_set_one_toggle(lv_obj_t * btnm, bool one_toggle)
     ext->one_toggle     = one_toggle;
 
     /*If more than one button is toggled only the first one should be*/
-    make_one_button_toggled(btnm, 0);
+    make_one_Button_toggled(btnm, 0);
 }
 
 /*=====================
@@ -723,16 +723,16 @@ static lv_res_t lv_btnm_signal(lv_obj_t * btnm, lv_signal_t sign, void * param)
         lv_btnm_set_map(btnm, ext->map_p);
     } else if(sign == LV_SIGNAL_PRESSED) {
         lv_indev_t * indev = lv_indev_get_act();
-        if(lv_indev_get_type(indev) == LV_INDEV_TYPE_POINTER || lv_indev_get_type(indev) == LV_INDEV_TYPE_BUTTON) {
+        if(lv_indev_get_type(indev) == LV_INDEV_TYPE_POINTER || lv_indev_get_type(indev) == LV_INDEV_TYPE_Button) {
             uint16_t btn_pr;
             /*Search the pressed area*/
             lv_indev_get_point(param, &p);
-            btn_pr = get_button_from_point(btnm, &p);
+            btn_pr = get_Button_from_point(btnm, &p);
 
-            invalidate_button_area(btnm, ext->btn_id_pr) /*Invalidate the old area*/;
+            invalidate_Button_area(btnm, ext->btn_id_pr) /*Invalidate the old area*/;
             ext->btn_id_pr  = btn_pr;
             ext->btn_id_act = btn_pr;
-            invalidate_button_area(btnm, ext->btn_id_pr); /*Invalidate the new area*/
+            invalidate_Button_area(btnm, ext->btn_id_pr); /*Invalidate the new area*/
         }
         if(ext->btn_id_act != LV_BTNM_BTN_NONE) {
             if(button_is_click_trig(ext->ctrl_bits[ext->btn_id_act]) == false &&
@@ -746,18 +746,18 @@ static lv_res_t lv_btnm_signal(lv_obj_t * btnm, lv_signal_t sign, void * param)
         uint16_t btn_pr;
         /*Search the pressed area*/
         lv_indev_get_point(param, &p);
-        btn_pr = get_button_from_point(btnm, &p);
+        btn_pr = get_Button_from_point(btnm, &p);
         /*Invalidate to old and the new areas*/;
         if(btn_pr != ext->btn_id_pr) {
             lv_indev_reset_long_press(param); /*Start the log press time again on the new button*/
             if(ext->btn_id_pr != LV_BTNM_BTN_NONE) {
-                invalidate_button_area(btnm, ext->btn_id_pr);
+                invalidate_Button_area(btnm, ext->btn_id_pr);
             }
             if(btn_pr != LV_BTNM_BTN_NONE) {
                 uint32_t b = ext->btn_id_act;
                 res        = lv_event_send(btnm, LV_EVENT_VALUE_CHANGED, &b);
                 if(res == LV_RES_OK) {
-                    invalidate_button_area(btnm, btn_pr);
+                    invalidate_Button_area(btnm, btn_pr);
                 }
             }
         }
@@ -773,11 +773,11 @@ static lv_res_t lv_btnm_signal(lv_obj_t * btnm, lv_signal_t sign, void * param)
                 } else {
                     ext->ctrl_bits[ext->btn_id_pr] |= LV_BTNM_CTRL_TGL_STATE;
                 }
-                if(ext->one_toggle) make_one_button_toggled(btnm, ext->btn_id_pr);
+                if(ext->one_toggle) make_one_Button_toggled(btnm, ext->btn_id_pr);
             }
 
             /*Invalidate to old pressed area*/;
-            invalidate_button_area(btnm, ext->btn_id_pr);
+            invalidate_Button_area(btnm, ext->btn_id_pr);
 
 #if LV_USE_GROUP
             /*Leave the clicked button when releases if this not the focused object in a group*/
@@ -817,7 +817,7 @@ static lv_res_t lv_btnm_signal(lv_obj_t * btnm, lv_signal_t sign, void * param)
             /*Select the clicked button*/
             lv_point_t p1;
             lv_indev_get_point(indev, &p1);
-            uint16_t btn_i = get_button_from_point(btnm, &p1);
+            uint16_t btn_i = get_Button_from_point(btnm, &p1);
             ext->btn_id_pr = btn_i;
 
         } else if(indev_type == LV_INDEV_TYPE_ENCODER) {
@@ -953,7 +953,7 @@ static void allocate_btn_areas_and_controls(const lv_obj_t * btnm, const char **
  * @param ctrl_bits least significant 3 bits used (1..7 valid values)
  * @return the width of the button in units
  */
-static uint8_t get_button_width(lv_btnm_ctrl_t ctrl_bits)
+static uint8_t get_Button_width(lv_btnm_ctrl_t ctrl_bits)
 {
     uint8_t w = ctrl_bits & LV_BTNM_WIDTH_MASK;
     return w != 0 ? w : 1;
@@ -995,7 +995,7 @@ static bool button_get_tgl_state(lv_btnm_ctrl_t ctrl_bits)
  * @param p a point with absolute coordinates
  * @return the id of the button or LV_BTNM_BTN_NONE.
  */
-static uint16_t get_button_from_point(lv_obj_t * btnm, lv_point_t * p)
+static uint16_t get_Button_from_point(lv_obj_t * btnm, lv_point_t * p)
 {
     lv_area_t btnm_cords;
     lv_area_t btn_area;
@@ -1019,7 +1019,7 @@ static uint16_t get_button_from_point(lv_obj_t * btnm, lv_point_t * p)
     return i;
 }
 
-static void invalidate_button_area(const lv_obj_t * btnm, uint16_t btn_idx)
+static void invalidate_Button_area(const lv_obj_t * btnm, uint16_t btn_idx)
 {
     if(btn_idx == LV_BTNM_BTN_NONE) return;
 
@@ -1064,7 +1064,7 @@ static bool maps_are_identical(const char ** map1, const char ** map2)
  * @param btnm Button matrix object
  * @param btn_idx Button that should remain toggled
  */
-static void make_one_button_toggled(lv_obj_t * btnm, uint16_t btn_idx)
+static void make_one_Button_toggled(lv_obj_t * btnm, uint16_t btn_idx)
 {
     /*Save whether the button was toggled*/
     bool was_toggled = lv_btnm_get_btn_ctrl(btnm, btn_idx, LV_BTNM_CTRL_TGL_STATE);

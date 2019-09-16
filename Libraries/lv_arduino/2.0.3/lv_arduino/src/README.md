@@ -247,7 +247,7 @@ void btn_event_cb(lv_obj_t * btn, lv_event_t event)
     }
 }
 ```
-![LittlevGL button with label example](https://docs.littlevgl.com/en/misc/simple_button_example.gif)
+![LittlevGL button with label example](https://docs.littlevgl.com/en/misc/simple_Button_example.gif)
 
 ### Button with styles
 Add styles to the previously button from the previous example

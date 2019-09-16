@@ -39,11 +39,11 @@ void fill_rainbow( struct CHSV * targetArray, int numToFill,
 
 // fill_gradient - fill an array of colors with a smooth HSV gradient
 //                 between two specified HSV colors.
-//                 Since 'hue' is a value around a color wheel,
+//                 Since 'hue' is a value Around a color wheel,
 //                 there are always two ways to sweep from one hue
 //                 to another.
 //                 This function lets you specify which way you want
-//                 the hue gradient to sweep around the color wheel:
+//                 the hue gradient to sweep Around the color wheel:
 //                   FORWARD_HUES: hue always goes clockwise
 //                   BACKWARD_HUES: hue always goes counter-clockwise
 //                   SHORTEST_HUES: hue goes whichever way is shortest
@@ -68,11 +68,11 @@ typedef enum { FORWARD_HUES, BACKWARD_HUES, SHORTEST_HUES, LONGEST_HUES } TGradi
 
 /// fill_gradient - fill an array of colors with a smooth HSV gradient
 /// between two specified HSV colors.
-/// Since 'hue' is a value around a color wheel,
+/// Since 'hue' is a value Around a color wheel,
 /// there are always two ways to sweep from one hue
 /// to another.
 /// This function lets you specify which way you want
-/// the hue gradient to sweep around the color wheel:
+/// the hue gradient to sweep Around the color wheel:
 ///
 ///     FORWARD_HUES: hue always goes clockwise
 ///     BACKWARD_HUES: hue always goes counter-clockwise

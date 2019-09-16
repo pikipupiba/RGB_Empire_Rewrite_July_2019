@@ -73,7 +73,7 @@ Controller::Controller():
 	//wifi_input.connect();	// TODO: implement this
 	//wifi_input.check();	// TODO: implement this
 
-	FastLED.setBrightness(10);
+	FastLED.setBrightness(30);
 
 	MEM;
 
@@ -95,7 +95,7 @@ void Controller::run()
 
 	EVERY_N_MILLISECONDS(250)
 	{
-		display.update();	// Update the oled screen.
+		//display.update();	// Update the oled screen.
 	}
 
 	animation_controller.run();

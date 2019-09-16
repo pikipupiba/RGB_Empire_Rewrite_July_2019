@@ -771,7 +771,7 @@ static lv_res_t release_handler(lv_obj_t * ddlist)
 #endif
 
         /*Search the clicked option (For KEYPAD and ENCODER the new value should be already set)*/
-        if(lv_indev_get_type(indev) == LV_INDEV_TYPE_POINTER || lv_indev_get_type(indev) == LV_INDEV_TYPE_BUTTON) {
+        if(lv_indev_get_type(indev) == LV_INDEV_TYPE_POINTER || lv_indev_get_type(indev) == LV_INDEV_TYPE_Button) {
             lv_point_t p;
             lv_indev_get_point(indev, &p);
             p.y -= ext->label->coords.y1;

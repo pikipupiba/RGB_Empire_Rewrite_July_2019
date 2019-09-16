@@ -18,6 +18,7 @@
 
 #include "Fixture_Parameters.h"
 #include "LED_Strip.h"
+#include "LED_Arrangements.h"
 
 
 class LED_Fixture

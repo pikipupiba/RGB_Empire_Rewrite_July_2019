@@ -74,7 +74,7 @@ void lv_indev_reset_long_press(lv_indev_t * indev);
 void lv_indev_enable(lv_indev_t * indev, bool en);
 
 /**
- * Set a cursor for a pointer input device (for LV_INPUT_TYPE_POINTER and LV_INPUT_TYPE_BUTTON)
+ * Set a cursor for a pointer input device (for LV_INPUT_TYPE_POINTER and LV_INPUT_TYPE_Button)
  * @param indev pointer to an input device
  * @param cur_obj pointer to an object to be used as cursor
  */
@@ -90,15 +90,15 @@ void lv_indev_set_group(lv_indev_t * indev, lv_group_t * group);
 #endif
 
 /**
- * Set the an array of points for LV_INDEV_TYPE_BUTTON.
+ * Set the an array of points for LV_INDEV_TYPE_Button.
  * These points will be assigned to the buttons to press a specific point on the screen
  * @param indev pointer to an input device
  * @param group point to a group
  */
-void lv_indev_set_button_points(lv_indev_t * indev, const lv_point_t * points);
+void lv_indev_set_Button_points(lv_indev_t * indev, const lv_point_t * points);
 
 /**
- * Get the last point of an input device (for LV_INDEV_TYPE_POINTER and LV_INDEV_TYPE_BUTTON)
+ * Get the last point of an input device (for LV_INDEV_TYPE_POINTER and LV_INDEV_TYPE_Button)
  * @param indev pointer to an input device
  * @param point pointer to a point to store the result
  */
@@ -113,7 +113,7 @@ uint32_t lv_indev_get_key(const lv_indev_t * indev);
 
 /**
  * Check if there is dragging with an input device or not (for LV_INDEV_TYPE_POINTER and
- * LV_INDEV_TYPE_BUTTON)
+ * LV_INDEV_TYPE_Button)
  * @param indev pointer to an input device
  * @return true: drag is in progress
  */
@@ -121,7 +121,7 @@ bool lv_indev_is_dragging(const lv_indev_t * indev);
 
 /**
  * Get the vector of dragging of an input device (for LV_INDEV_TYPE_POINTER and
- * LV_INDEV_TYPE_BUTTON)
+ * LV_INDEV_TYPE_Button)
  * @param indev pointer to an input device
  * @param point pointer to a point to store the vector
  */

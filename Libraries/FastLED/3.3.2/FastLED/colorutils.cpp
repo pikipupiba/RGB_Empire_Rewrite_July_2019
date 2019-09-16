@@ -443,7 +443,7 @@ void blurColumns(CRGB* leds, uint8_t width, uint8_t height, fract8 blur_amount)
 // This is NOT a chromatically correct 'black body radiation'
 // spectrum, but it's surprisingly close, and it's fast and small.
 //
-// On AVR/Arduino, this typically takes around 70 bytes of program memory,
+// On AVR/Arduino, this typically takes Around 70 bytes of program memory,
 // versus 768 bytes for a full 256-entry RGB lookup table.
 
 CRGB HeatColor( uint8_t temperature)

@@ -5,12 +5,12 @@ Animation_Controller::Animation_Controller(LED_Fixture* new_fixture)
 {
 	START;
 
-	transition_type = _Fade;
+	transition_type = _tt_Fade;
 	transitioning = false;
 	transition_total_time = 4000;
 	transition_start_time = 0;
 
-	LED_Fixture::print_arrangement_info(Default_Strip);
+	LED_Fixture::print_arrangement_info(_sdm_Default);
 
 	start_animation();
 
@@ -43,9 +43,9 @@ void Animation_Controller::run()
 
 	erase_prev_frame();
 
-	EVERY_N_SECONDS(12)
+	EVERY_N_SECONDS(20)
 	{
-		change_animation(Animation_Name(random8(0,5)));
+		//change_animation(Animation_Name(random8(0,NUM_AUTOPLAY_ANIMATIONS)));
 	}
 
 	if (transitioning)
@@ -100,10 +100,10 @@ void Animation_Controller::change_animation(Animation_Name new_animation_name)
 
 		next_animation = Animation::create(new_animation_name, LED_Fixture::get_arrangements());
 
-		if (transition_type == _Dissolve || transition_type == _Wipe)
+		if (transition_type == _tt_Dissolve || transition_type == _tt_Wipe)
 		{
 			mask = new bool[current_animation->num_leds];
-			num_dissolved = 0;
+			num_tDissolved = 0;
 
 			for (int i = 0; i < current_animation->num_leds; i++)
 			{
@@ -117,8 +117,8 @@ void Animation_Controller::change_animation(Animation_Name new_animation_name)
 
 // Surely there is a better way to do this that doesn't require so many comparisons?
 // Make the input classes friend class of the animation class!
-void Animation_Controller::change_animation_variables(Animation_Variables_Old new_vars)
-{
+//void Animation_Controller::change_animation_variables(Animation_Variables_Old new_vars)
+//{
 	//current_animation->vars.brightness = (new_vars.brightness == NULL) ? current_animation->vars.brightness : new_vars.brightness;
 	//current_animation->vars.brightness_speed = (new_vars.brightness_speed == NULL) ? current_animation->vars.brightness_speed : new_vars.brightness_speed;
 	//current_animation->vars.brightness_acceleration = (new_vars.brightness_acceleration == NULL) ? current_animation->vars.brightness_acceleration : new_vars.brightness_acceleration;
@@ -150,7 +150,7 @@ void Animation_Controller::change_animation_variables(Animation_Variables_Old ne
 	//		led_set->fill_rainbow(vars.hue, vars.hue_offset);
 	//	}
 	//}
-}
+//}
 
 void Animation_Controller::erase_prev_frame()
 {
@@ -170,17 +170,17 @@ void Animation_Controller::show()
 	{
 		switch (transition_type)
 		{
-		case _Fade:
-			transition_fade();
+		case _tt_Fade:
+			transition_Fade();
 			break;
-		case _Wipe:
-			transition_wipe();
+		case _tt_Wipe:
+			transition_Wipe();
 			break;
-		case _Dissolve:
-			transition_dissolve();
+		case _tt_Dissolve:
+			transition_Dissolve();
 			break;
 		default:
-			transition_fade();
+			transition_Fade();
 		}
 	}
 	else
@@ -208,7 +208,7 @@ void Animation_Controller::show()
 	END;
 }
 
-void Animation_Controller::transition_fade()
+void Animation_Controller::transition_Fade()
 {
 	START;
 
@@ -242,7 +242,7 @@ void Animation_Controller::transition_fade()
 	END;
 }
 
-void Animation_Controller::transition_wipe()
+void Animation_Controller::transition_Wipe()
 {
 	int cur_led_num = 0;
 
@@ -282,7 +282,7 @@ void Animation_Controller::transition_wipe()
 	}
 }
 
-void Animation_Controller::transition_dissolve()
+void Animation_Controller::transition_Dissolve()
 {
 	START;
 
@@ -300,13 +300,13 @@ void Animation_Controller::transition_dissolve()
 
 	ratio = (float)((float)ease16InOutQuad(int((float)UINT16_MAX * ratio)) / (float)UINT16_MAX);
 
-	int new_num_dissolved = current_animation->num_leds * (1 - ratio);
+	int new_num_tDissolved = current_animation->num_leds * (1 - ratio);
 
-	while (new_num_dissolved > num_dissolved)
+	while (new_num_tDissolved > num_tDissolved)
 	{
 		int index = random(0, current_animation->num_leds - 1);
 
-		//Serial.println(num_dissolved);
+		//Serial.println(num_tDissolved);
 
 		if (mask[index])
 		{
@@ -343,7 +343,7 @@ void Animation_Controller::transition_dissolve()
 		
 		mask[index] = true;
 		
-		num_dissolved++;
+		num_tDissolved++;
 	}
 
 	for (LED_Group& group : current_animation->compressed_arrangement.led_groups)

@@ -25,11 +25,11 @@ class Physical_Input
 protected:
 	bool enabled;
 
-	EasyButton best_button;
-	EasyButton rotary_button;
+	EasyButton best_Button;
+	EasyButton rotary_Button;
 	//Encoder encoder;
 
-	static void best_button_on_pressed();
+	static void best_Button_on_pressed();
 
 public:
 	Physical_Input();

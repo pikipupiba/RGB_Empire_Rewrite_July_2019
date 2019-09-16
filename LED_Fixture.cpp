@@ -142,7 +142,7 @@ LED_Arrangements* LED_Fixture::get_arrangements()
 
 	for (auto& strip : led_strips)
 	{
-		temp_arrangements->arrangements.push_back(strip.led_arrangements.arrangements[Default_Strip]);
+		temp_arrangements->arrangements.push_back(strip.led_arrangements.arrangements[_sdm_Default]);
 	}
 
 	END;

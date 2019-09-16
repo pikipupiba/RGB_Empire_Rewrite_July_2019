@@ -4,21 +4,21 @@
 
 #include "LED_Strip.h"
 
-void reset_group(LED_Group& group)
+void LED_Strip::reset_group(LED_Group& group)
 {
 	group.group_number = 0;
 
 	group.leds.clear();
 }
 
-void next_group(LED_Group& group)
+void LED_Strip::next_group(LED_Group& group)
 {
 	group.group_number++;
 
 	group.leds.clear();
 }
 
-void reset_arrangement(LED_Arrangement& arrangement)
+void LED_Strip::reset_arrangement(LED_Arrangement& arrangement)
 {
 	arrangement.led_groups.clear();
 }
@@ -29,17 +29,17 @@ void LED_Strip::create_arrangements()
 
 	switch (strip_parameters.shape)
 	{
-	case Linear:
+	case _s_Linear:
 
 		create_linear_arrangements();
 		break;
 
-	case Folded:
+	case _s_Folded:
 		
 		create_folded_arrangements();
 		break;
 
-	case Panel:
+	case _s_Panel:
 
 		create_panel_arrangements();
 		break;
@@ -59,7 +59,7 @@ void LED_Strip::create_linear_arrangements()
 	LED_Group temp_group;
 
 
-	temp_arrangement.strip_display_mode = Default_Strip;
+	temp_arrangement.strip_display_mode = _sdm_Default;
 	reset_group(temp_group);
 	reset_arrangement(temp_arrangement);
 	
@@ -73,17 +73,17 @@ void LED_Strip::create_linear_arrangements()
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
 
-	temp_arrangement.strip_display_mode = Left_To_Right;
+	temp_arrangement.strip_display_mode = _sdm_Left_To_Right;
 	// Same as Default
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
 
-	temp_arrangement.strip_display_mode = Around;
+	temp_arrangement.strip_display_mode = _sdm_Around;
 	// Same as Default
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
 
-	temp_arrangement.strip_display_mode = Middle_Out;
+	temp_arrangement.strip_display_mode = _sdm_Middle_Out;
 	reset_group (temp_group);
 	reset_arrangement(temp_arrangement);
 
@@ -109,7 +109,7 @@ void LED_Strip::create_folded_arrangements()
 	LED_Arrangement temp_arrangement;
 	LED_Group temp_group;
 
-	temp_arrangement.strip_display_mode = Default_Strip;
+	temp_arrangement.strip_display_mode = _sdm_Default;
 	reset_group(temp_group);
 	reset_arrangement(temp_arrangement);
 
@@ -135,12 +135,12 @@ void LED_Strip::create_folded_arrangements()
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
 
-	temp_arrangement.strip_display_mode = Left_To_Right;
+	temp_arrangement.strip_display_mode = _sdm_Left_To_Right;
 	// Same as Default
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
 
-	temp_arrangement.strip_display_mode = Around;
+	temp_arrangement.strip_display_mode = _sdm_Around;
 	reset_group(temp_group);
 	reset_arrangement(temp_arrangement);
 
@@ -153,7 +153,7 @@ void LED_Strip::create_folded_arrangements()
 
 	led_arrangements.arrangements.push_back(temp_arrangement);
 
-	temp_arrangement.strip_display_mode = Middle_Out;
+	temp_arrangement.strip_display_mode = _sdm_Middle_Out;
 	reset_group(temp_group);
 	reset_arrangement(temp_arrangement);
 
@@ -231,7 +231,7 @@ LED_Arrangement LED_Strip::get_led_arrangement(Strip_Display_Mode new_display_mo
 		}
 	}
 
-	return led_arrangements.arrangements[Default_Strip];
+	return led_arrangements.arrangements[_sdm_Default];
 
 	END;
 }

@@ -48,11 +48,11 @@ enum {
 typedef uint8_t lv_layout_t;
 
 /**
- * How to resize the container around the children.
+ * How to resize the container Around the children.
  */
 enum {
     LV_FIT_NONE,  /**< Do not change the size automatically*/
-    LV_FIT_TIGHT, /**< Shrink wrap around the children */
+    LV_FIT_TIGHT, /**< Shrink wrap Around the children */
     LV_FIT_FLOOD, /**< Align the size to the parent's edge*/
     LV_FIT_FILL,  /**< Align the size to the parent's edge first but if there is an object out of it
                      then get larger */

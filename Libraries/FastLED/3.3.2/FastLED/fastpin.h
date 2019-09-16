@@ -156,7 +156,7 @@ public:
 /// There are platform specific instantiations of this class that provide direct i/o register access to pins for much higher speed pin twiddling.
 ///
 /// Note that these classes are all static functions.  So the proper usage is Pin<13>::hi(); or such.  Instantiating objects is not recommended,
-/// as passing Pin objects around will likely -not- have the effect you're expecting.
+/// as passing Pin objects Around will likely -not- have the effect you're expecting.
 #ifdef FASTLED_FORCE_SOFTWARE_PINS
 template<uint8_t PIN> class FastPin {
 	static RwReg sPinMask;

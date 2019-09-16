@@ -5,18 +5,15 @@ Rainbow_Wave::Rainbow_Wave(LED_Arrangements* new_led_arrangements)
 	:Animation(new_led_arrangements)
 {
 	START;
-
-	//Serial.println("what the heck = " + led_set.len);
 	
 	END;
-	
 }
 
 void Rainbow_Wave::calculate_frame()
 {
 	START;
 
-	led_set->fill_rainbow(vars_new.hue.value.value, vars_new.hue.offset.value);
+	led_set->fill_rainbow(vars(hue), vars(hue, a_offset)->value);
 	//fill_rainbow(leds, num_leds, vars.hue, vars.hue_offset);
 
 	END;

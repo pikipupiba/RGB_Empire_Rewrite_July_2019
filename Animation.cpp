@@ -35,12 +35,12 @@ void Animation::update_vars()
 	//vars.start = vars.position - vars.size / 2;
 	//vars.end = vars.position + vars.size / 2;
 
-	vars_new.brightness.update();
-	vars_new.position.update();
-	vars_new.hue.update();
-	vars_new.size.update();
-	vars_new.density.update();
-	vars_new.fade.update();
+	vars.vars[brightness].update();
+	vars.vars[position].update();
+	vars.vars[hue].update();
+	vars.vars[size].update();
+	vars.vars[density].update();
+	vars.vars[fade].update();
 
 	//if (vars.palette_cycle != 0)
 	//{
@@ -76,7 +76,7 @@ Animation::Animation(LED_Arrangements* new_led_arrangements)
 	num_leds(led_arrangements->get_size()),
 	leds(new CRGB[num_leds]),
 	led_set(new CRGBSet(leds, num_leds)),
-	vars_new(Animation_Variables(0,num_leds - 1)),
+	vars(Animation_Variables(0,num_leds - 1)),
 	compressed_arrangement(led_arrangements->compress())
 {
 	START;
@@ -99,7 +99,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Mr_Poopy_Worm(new_led_arrangements);
+		return new Meteor(new_led_arrangements);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_led_arrangements);
 	case _Glitter:
@@ -111,6 +111,10 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 		return new Sinelon(new_led_arrangements);
 	case _Mr_Poopy_Worm:
 		return new Mr_Poopy_Worm(new_led_arrangements);
+	case _Solid_Color:
+		return new Solid_Color(new_led_arrangements);
+	case _Meteor:
+		return new Meteor(new_led_arrangements);
 	case _Artnet:
 		return new Artnet(new_led_arrangements);
 	default:
@@ -262,7 +266,7 @@ int Animation::next(int cur, int dir, bool mask[])
 		{
 			finished = true;
 		}
-		else if (next == cur)	// have gone all the way around the mask array
+		else if (next == cur)	// have gone all the way Around the mask array
 		{
 			finished = true;
 		}

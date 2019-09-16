@@ -48,7 +48,7 @@ enum {
     LV_CURSOR_NONE, /**< No cursor */
     LV_CURSOR_LINE, /**< Vertical line */
     LV_CURSOR_BLOCK, /**< Rectangle */
-    LV_CURSOR_OUTLINE, /**< Outline around character */
+    LV_CURSOR_OUTLINE, /**< Outline Around character */
     LV_CURSOR_UNDERLINE, /**< Horizontal line under character */
     LV_CURSOR_HIDDEN = 0x08, /**< This flag can be ORed to any of the other values to temporarily hide the cursor */
 };

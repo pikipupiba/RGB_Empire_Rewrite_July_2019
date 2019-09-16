@@ -35,7 +35,7 @@
 static void indev_pointer_proc(lv_indev_t * i, lv_indev_data_t * data);
 static void indev_keypad_proc(lv_indev_t * i, lv_indev_data_t * data);
 static void indev_encoder_proc(lv_indev_t * i, lv_indev_data_t * data);
-static void indev_button_proc(lv_indev_t * i, lv_indev_data_t * data);
+static void indev_Button_proc(lv_indev_t * i, lv_indev_data_t * data);
 static void indev_proc_press(lv_indev_proc_t * proc);
 static void indev_proc_release(lv_indev_proc_t * proc);
 static void indev_proc_reset_query_handler(lv_indev_t * indev);
@@ -109,8 +109,8 @@ void lv_indev_read_task(lv_task_t * task)
             indev_keypad_proc(indev_act, &data);
         } else if(indev_act->driver.type == LV_INDEV_TYPE_ENCODER) {
             indev_encoder_proc(indev_act, &data);
-        } else if(indev_act->driver.type == LV_INDEV_TYPE_BUTTON) {
-            indev_button_proc(indev_act, &data);
+        } else if(indev_act->driver.type == LV_INDEV_TYPE_Button) {
+            indev_Button_proc(indev_act, &data);
         }
         /*Handle reset query if it happened in during processing*/
         indev_proc_reset_query_handler(indev_act);
@@ -186,7 +186,7 @@ void lv_indev_enable(lv_indev_t * indev, bool en)
 }
 
 /**
- * Set a cursor for a pointer input device (for LV_INPUT_TYPE_POINTER and LV_INPUT_TYPE_BUTTON)
+ * Set a cursor for a pointer input device (for LV_INPUT_TYPE_POINTER and LV_INPUT_TYPE_Button)
  * @param indev pointer to an input device
  * @param cur_obj pointer to an object to be used as cursor
  */
@@ -214,26 +214,26 @@ void lv_indev_set_group(lv_indev_t * indev, lv_group_t * group)
 #endif
 
 /**
- * Set the an array of points for LV_INDEV_TYPE_BUTTON.
+ * Set the an array of points for LV_INDEV_TYPE_Button.
  * These points will be assigned to the buttons to press a specific point on the screen
  * @param indev pointer to an input device
  * @param group point to a group
  */
-void lv_indev_set_button_points(lv_indev_t * indev, const lv_point_t * points)
+void lv_indev_set_Button_points(lv_indev_t * indev, const lv_point_t * points)
 {
-    if(indev->driver.type == LV_INDEV_TYPE_BUTTON) {
+    if(indev->driver.type == LV_INDEV_TYPE_Button) {
         indev->btn_points = points;
     }
 }
 
 /**
- * Get the last point of an input device (for LV_INDEV_TYPE_POINTER and LV_INDEV_TYPE_BUTTON)
+ * Get the last point of an input device (for LV_INDEV_TYPE_POINTER and LV_INDEV_TYPE_Button)
  * @param indev pointer to an input device
  * @param point pointer to a point to store the result
  */
 void lv_indev_get_point(const lv_indev_t * indev, lv_point_t * point)
 {
-    if(indev->driver.type != LV_INDEV_TYPE_POINTER && indev->driver.type != LV_INDEV_TYPE_BUTTON) {
+    if(indev->driver.type != LV_INDEV_TYPE_POINTER && indev->driver.type != LV_INDEV_TYPE_Button) {
         point->x = -1;
         point->y = -1;
     } else {
@@ -257,20 +257,20 @@ uint32_t lv_indev_get_key(const lv_indev_t * indev)
 
 /**
  * Check if there is dragging with an input device or not (for LV_INDEV_TYPE_POINTER and
- * LV_INDEV_TYPE_BUTTON)
+ * LV_INDEV_TYPE_Button)
  * @param indev pointer to an input device
  * @return true: drag is in progress
  */
 bool lv_indev_is_dragging(const lv_indev_t * indev)
 {
     if(indev == NULL) return false;
-    if(indev->driver.type != LV_INDEV_TYPE_POINTER && indev->driver.type != LV_INDEV_TYPE_BUTTON) return false;
+    if(indev->driver.type != LV_INDEV_TYPE_POINTER && indev->driver.type != LV_INDEV_TYPE_Button) return false;
     return indev->proc.types.pointer.drag_in_prog == 0 ? false : true;
 }
 
 /**
  * Get the types.pointer.vector of dragging of an input device (for LV_INDEV_TYPE_POINTER and
- * LV_INDEV_TYPE_BUTTON)
+ * LV_INDEV_TYPE_Button)
  * @param indev pointer to an input device
  * @param point pointer to a point to store the types.pointer.vector
  */
@@ -282,7 +282,7 @@ void lv_indev_get_vect(const lv_indev_t * indev, lv_point_t * point)
         return;
     }
 
-    if(indev->driver.type != LV_INDEV_TYPE_POINTER && indev->driver.type != LV_INDEV_TYPE_BUTTON) {
+    if(indev->driver.type != LV_INDEV_TYPE_POINTER && indev->driver.type != LV_INDEV_TYPE_Button) {
         point->x = 0;
         point->y = 0;
     } else {
@@ -657,7 +657,7 @@ static void indev_encoder_proc(lv_indev_t * i, lv_indev_data_t * data)
  * @param x x coordinate of the next point
  * @param y y coordinate of the next point
  */
-static void indev_button_proc(lv_indev_t * i, lv_indev_data_t * data)
+static void indev_Button_proc(lv_indev_t * i, lv_indev_data_t * data)
 {
     i->proc.types.pointer.act_point.x = i->btn_points[data->btn_id].x;
     i->proc.types.pointer.act_point.y = i->btn_points[data->btn_id].y;
@@ -954,7 +954,7 @@ static void indev_proc_release(lv_indev_proc_t * proc)
 }
 
 /**
- * Process a new point from LV_INDEV_TYPE_BUTTON input device
+ * Process a new point from LV_INDEV_TYPE_Button input device
  * @param i pointer to an input device
  * @param data pointer to the data read from the input device
  * Reset input device if a reset query has been sent to it

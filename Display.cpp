@@ -10,7 +10,7 @@ void Display::build_screen()
 }
 
 Display::Display()
-	:mode(_Default_Display),
+	:mode(_ddm_Default),
 	tft(SSD_13XX(_cs, _dc)),
 	errorCode(0),
 	time_to_display_avg(6),
@@ -59,10 +59,10 @@ void Display::update()
 
 	switch (mode)
 	{
-	case _Default_Display:
+	case _ddm_Default:
 		draw_screen_1();
 		break;
-	case _Test:
+	case _ddm_Test:
 		display_test(tft);
 		show_button_presses();
 		break;

@@ -33,7 +33,7 @@ typedef uint8_t EDitherMode;
 
 /// Base definition for an LED controller.  Pretty much the methods that every LED controller object will make available.
 /// Note that the showARGB method is not impelemented for all controllers yet.   Note also the methods for eventual checking
-/// of background writing of data (I'm looking at you, teensy 3.0 DMA controller!).  If you want to pass LED controllers around
+/// of background writing of data (I'm looking at you, teensy 3.0 DMA controller!).  If you want to pass LED controllers Around
 /// to methods, make them references to this type, keeps your code saner.  However, most people won't be seeing/using these objects
 /// directly at all
 class CLEDController {
@@ -258,7 +258,7 @@ struct PixelController {
             static uint8_t R = 0;
             R++;
 
-            // R is wrapped around at 2^ditherBits,
+            // R is wrapped Around at 2^ditherBits,
             // so if ditherBits is 2, R will cycle through (0,1,2,3)
             uint8_t ditherBits = VIRTUAL_BITS;
             R &= (0x01 << ditherBits) - 1;
@@ -362,7 +362,7 @@ struct PixelController {
         template<int SLOT>  __attribute__((always_inline)) inline static uint8_t getd(PixelController & pc) { return pc.d[RO(SLOT)]; }
         template<int SLOT>  __attribute__((always_inline)) inline static uint8_t getscale(PixelController & pc) { return pc.mScale.raw[RO(SLOT)]; }
 
-        // Helper functions to get around gcc stupidities
+        // Helper functions to get Around gcc stupidities
         __attribute__((always_inline)) inline uint8_t loadAndScale0(int lane, uint8_t scale) { return loadAndScale<0>(*this, lane, scale); }
         __attribute__((always_inline)) inline uint8_t loadAndScale1(int lane, uint8_t scale) { return loadAndScale<1>(*this, lane, scale); }
         __attribute__((always_inline)) inline uint8_t loadAndScale2(int lane, uint8_t scale) { return loadAndScale<2>(*this, lane, scale); }

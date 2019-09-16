@@ -42,7 +42,7 @@ private:
 	long transition_start_time;
 
 	bool* mask;
-	int num_dissolved;
+	int num_tDissolved;
 
 	// All speeds will be scaled as though they were running at this rate.
 	// For example, if an animation is currently running at 200 fps, all speeds are cut in half.
@@ -62,15 +62,13 @@ public:
 
 	void change_animation(Animation_Name new_animation_name);
 
-	void change_animation_variables(Animation_Variables_Old new_vars);
-
 	void erase_prev_frame();
 
 	void show();
 
-	void transition_fade();
+	void transition_Fade();
 
-	void transition_wipe();
+	void transition_Wipe();
 
-	void transition_dissolve();
+	void transition_Dissolve();
 };

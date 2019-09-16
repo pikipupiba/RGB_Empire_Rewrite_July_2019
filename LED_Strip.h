@@ -11,6 +11,7 @@
 #include "My_Enums.h"
 #include <vector>
 #include "Bug.h"
+#include "LED_Arrangements.h"
 
 
 
@@ -46,6 +47,13 @@ class LED_Strip
 	LED_Arrangement get_led_arrangement(Strip_Display_Mode new_display_mode);
 
 	void print_arrangement_info(Strip_Display_Mode new_display_mode);
+
+	void reset_group(LED_Group& group);
+
+	void next_group(LED_Group& group);
+
+	void reset_arrangement(LED_Arrangement& arrangement);
+
 };
 
 #endif

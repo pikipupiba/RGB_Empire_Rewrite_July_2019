@@ -19,7 +19,7 @@ We have multiple goals with this library:
 
 * Quick start for new developers - hook up your leds and go, no need to think about specifics of the led chipsets being used
 * Zero pain switching LED chipsets - you get some new leds that the library supports, just change the definition of LEDs you're using, et. voila!  Your code is running with the new leds.
-* High performance - with features like zero cost global brightness scaling, high performance 8-bit math for RGB manipulation, and some of the fastest bit-bang'd SPI support around, FastLED wants to keep as many CPU cycles available for your led patterns as possible
+* High performance - with features like zero cost global brightness scaling, high performance 8-bit math for RGB manipulation, and some of the fastest bit-bang'd SPI support Around, FastLED wants to keep as many CPU cycles available for your led patterns as possible
 
 ## Getting help
 

@@ -11,7 +11,7 @@
 // methods for pin access vs. direct hardware port access
 // #define FASTLED_FORCE_SOFTWARE_PINS
 
-// Use this option only for debugging bitbang'd spi access or to work around bugs in hardware
+// Use this option only for debugging bitbang'd spi access or to work Around bugs in hardware
 // spi access.  Forces use of bit-banged spi, even on pins that has hardware SPI available.
 // #define FASTLED_FORCE_SOFTWARE_SPI
 

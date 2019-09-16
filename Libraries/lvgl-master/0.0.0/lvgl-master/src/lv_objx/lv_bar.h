@@ -62,7 +62,7 @@ typedef struct
     lv_anim_value_t anim_state;
     lv_anim_value_t anim_time;
 #endif
-    uint8_t sym : 1;                /*Symmetric: means the center is around zero value*/
+    uint8_t sym : 1;                /*Symmetric: means the center is Around zero value*/
     const lv_style_t * style_indic; /*Style of the indicator*/
 } lv_bar_ext_t;
 

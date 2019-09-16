@@ -22,6 +22,8 @@
 #include "Oscillator.h"
 #include "My_Enums.h"
 #include "LED_Fixture.h"
+#include "LED_Arrangements.h"
+#include "Animation_Variables.h"
 #include "Bug.h"
 
 
@@ -62,13 +64,13 @@ class Animation
 	CRGB* leds;
 	CRGBSet* led_set;
 
+
 	friend class Animation_Controller;
 
  public:
 	 // A struct that contains all the variables associated with the animation.
-	Animation_Variables vars_new;
-	LED_Arrangement compressed_arrangement;
-
+	 Animation_Variables vars;
+	 LED_Arrangement compressed_arrangement;
 
 	Animation(LED_Arrangements* new_led_arrangements);
 
@@ -78,9 +80,7 @@ class Animation
 
 	// Print out all relevant animation information.
 	void print_info();
-
 	void print_arrangement_info();
-
 
 	virtual void update_vars();
 
@@ -95,9 +95,10 @@ class Animation
 	// Generate the next frame of the animation.
 	virtual void calculate_frame();
 
-	int next(int cur, int dir, bool mask[]);
-
 	CRGB* next_frame();
+
+
+	int next(int cur, int dir, bool mask[]);
 
 };
 
