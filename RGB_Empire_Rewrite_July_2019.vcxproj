@@ -132,6 +132,7 @@
     <ClInclude Include="Bounded_Variable.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Bug.h" />
+    <ClInclude Include="Crazy_Time.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Display_Test.h" />
     <ClInclude Include="Fixture_Parameters.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Solid_Color.h" />
     <ClInclude Include="Tasks.h" />
     <ClInclude Include="Template_Animation.h" />
+    <ClInclude Include="Wave.h" />
     <ClInclude Include="Wifi_Class.h" />
     <ClInclude Include="__vm\.RGB_Empire_Rewrite_July_2019.vsarduino.h" />
   </ItemGroup>
@@ -165,6 +167,7 @@
     <ClCompile Include="Bounded_Variable.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Bug.cpp" />
+    <ClCompile Include="Crazy_Time.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Display_Test.cpp" />
     <ClCompile Include="Fixture_Parameters.cpp" />
@@ -185,6 +188,7 @@
     <ClCompile Include="Solid_Color.cpp" />
     <ClCompile Include="Tasks.cpp" />
     <ClCompile Include="Template_Animation.cpp" />
+    <ClCompile Include="Wave.cpp" />
     <ClCompile Include="Wifi_Class.cpp" />
   </ItemGroup>
   <ItemGroup>

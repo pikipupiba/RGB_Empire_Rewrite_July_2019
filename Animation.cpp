@@ -115,6 +115,10 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Arrangements
 		return new Solid_Color(new_led_arrangements);
 	case _Meteor:
 		return new Meteor(new_led_arrangements);
+	case _Wave:
+		return new Wave(new_led_arrangements);
+	case _Crazy_Time:
+		return new Crazy_Time(new_led_arrangements);
 	case _Artnet:
 		return new Artnet(new_led_arrangements);
 	default:

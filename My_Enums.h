@@ -11,7 +11,7 @@
 #include <FastLED.h>
 #include "Bug.h"
 
-#define NUM_AUTOPLAY_ANIMATIONS 7
+#define NUM_AUTOPLAY_ANIMATIONS 9
 
 enum Animation_Name
 {
@@ -22,6 +22,8 @@ enum Animation_Name
 	_Mr_Poopy_Worm,
 	_Solid_Color,
 	_Meteor,
+	_Wave,
+	_Crazy_Time,
 
 	_Artnet,
 

@@ -45,7 +45,7 @@ void Animation_Controller::run()
 
 	EVERY_N_SECONDS(20)
 	{
-		//change_animation(Animation_Name(random8(0,NUM_AUTOPLAY_ANIMATIONS)));
+		change_animation(Animation_Name(random8(0,NUM_AUTOPLAY_ANIMATIONS)));
 	}
 
 	if (transitioning)
@@ -312,7 +312,7 @@ void Animation_Controller::transition_Dissolve()
 		{
 			//Serial.println(index);
 
-			if (random(0, 1))
+			if (random(0, 2))
 			{
 				
 				while (mask[index])
