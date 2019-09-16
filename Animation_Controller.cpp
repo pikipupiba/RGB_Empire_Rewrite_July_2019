@@ -43,7 +43,7 @@ void Animation_Controller::run()
 
 	erase_prev_frame();
 
-	EVERY_N_SECONDS(20)
+	EVERY_N_SECONDS(10)
 	{
 		change_animation(Animation_Name(random8(0,NUM_AUTOPLAY_ANIMATIONS)));
 	}

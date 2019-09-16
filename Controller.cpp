@@ -95,7 +95,7 @@ void Controller::run()
 
 	EVERY_N_MILLISECONDS(250)
 	{
-		//display.update();	// Update the oled screen.
+		display.update();	// Update the oled screen.
 	}
 
 	animation_controller.run();
