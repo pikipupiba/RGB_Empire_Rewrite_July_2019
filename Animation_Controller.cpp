@@ -10,7 +10,7 @@ Animation_Controller::Animation_Controller(LED_Fixture* new_fixture)
 	transition_total_time = 4000;
 	transition_start_time = 0;
 
-	LED_Fixture::print_arrangement_info(_sdm_Default);
+	fixture->print_arrangement_info(_sdm_Default);
 
 	start_animation();
 
@@ -79,7 +79,7 @@ void Animation_Controller::start_animation()
 
 	//delete current_animation;
 
-	current_animation = Animation::create(_Default, LED_Fixture::get_arrangements());
+	current_animation = Animation::create(_Default, fixture);
 
 	END;
 }
@@ -98,7 +98,7 @@ void Animation_Controller::change_animation(Animation_Name new_animation_name)
 
 		transition_start_time = millis();
 
-		next_animation = Animation::create(new_animation_name, LED_Fixture::get_arrangements());
+		next_animation = Animation::create(new_animation_name, fixture);
 
 		if (transition_type == _tt_Dissolve || transition_type == _tt_Wipe)
 		{
@@ -190,18 +190,18 @@ void Animation_Controller::show()
 		CRGB* current_next_frame = current_animation->next_frame();
 		CRGBSet current_next_frame_set = CRGBSet(current_next_frame, current_animation->num_leds);
 
-		for (LED_Group& group : current_animation->compressed_arrangement.led_groups)
+		for (auto& group : current_animation->arrangement->led_groups)
 		{
-			for (CRGBSet& arr_led_set : group.leds)
+			for (auto& arr_led_set : group->leds)
 			{
 				int i = 0;
 
-				for (auto& led : arr_led_set)
+				for (auto& led : *arr_led_set)
 				{
 					led = current_animation->leds[cur_led_num + i++];
 				}
 			}
-			cur_led_num += group.size;
+			cur_led_num += group->size;
 		}
 	}
 
@@ -222,13 +222,13 @@ void Animation_Controller::transition_Fade()
 
 	float ratio = (float)(transition_total_time - (millis() - transition_start_time)) / transition_total_time;
 
-	for (LED_Group& group : current_animation->compressed_arrangement.led_groups)
+	for (auto& group : current_animation->arrangement->led_groups)
 	{
-		for (CRGBSet& arr_led_set : group.leds)
+		for (auto& arr_led_set : group->leds)
 		{
 			int i = 0;
 
-			for (auto& led : arr_led_set)
+			for (auto& led : *arr_led_set)
 			{
 				led = next_animation->leds[cur_led_num + i].nscale8_video(255 * (1 - ratio));
 				led += current_animation->leds[cur_led_num + i].nscale8_video(255 * ratio);
@@ -236,7 +236,7 @@ void Animation_Controller::transition_Fade()
 				i++;
 			}
 		}
-		cur_led_num += group.size;
+		cur_led_num += group->size;
 	}
 
 	END;
@@ -258,15 +258,15 @@ void Animation_Controller::transition_Wipe()
 	float ratio = (float)(transition_total_time - (millis() - transition_start_time)) / transition_total_time;
 
 
-	for (LED_Group& group : current_animation->compressed_arrangement.led_groups)
+	for (auto& group : current_animation->arrangement->led_groups)
 	{
-		for (CRGBSet& arr_led_set : group.leds)
+		for (auto& arr_led_set : group->leds)
 		{
 			int i = 0;
 
-			for (auto& led : arr_led_set)
+			for (auto& led : *arr_led_set)
 			{
-				if (i < abs(arr_led_set.len) * (1 - ratio))
+				if (i < abs(arr_led_set->len) * (1 - ratio))
 				{
 					led = next_animation->leds[cur_led_num + i];
 				}
@@ -278,7 +278,7 @@ void Animation_Controller::transition_Wipe()
 				i++;
 			}
 		}
-		cur_led_num += group.size;
+		cur_led_num += group->size;
 	}
 }
 
@@ -346,13 +346,13 @@ void Animation_Controller::transition_Dissolve()
 		num_tDissolved++;
 	}
 
-	for (LED_Group& group : current_animation->compressed_arrangement.led_groups)
+	for (auto& group : current_animation->arrangement->led_groups)
 	{
-		for (CRGBSet& arr_led_set : group.leds)
+		for (auto& arr_led_set : group->leds)
 		{
 			int i = 0;
 
-			for (auto& led : arr_led_set)
+			for (auto& led : *arr_led_set)
 			{
 				if (mask[i])
 				{
@@ -365,7 +365,7 @@ void Animation_Controller::transition_Dissolve()
 				i++;
 			}
 		}
-		cur_led_num += group.size;
+		cur_led_num += group->size;
 	}
 
 	END;

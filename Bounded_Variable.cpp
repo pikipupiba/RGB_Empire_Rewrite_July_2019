@@ -10,13 +10,13 @@ Bounded_Variable::Bounded_Variable(float new_value, float new_min, float new_max
 	max(new_max),
 	eor(new_eor)
 {
-	START;
-	END;
+	//START;
+	//END;
 }
 
 bool Bounded_Variable::is_at_eor()
 {
-	START;
+	//START;
 
 	if (value < min)
 	{
@@ -34,7 +34,7 @@ bool Bounded_Variable::is_at_eor()
 		default:	// same as _Loop
 			value = max;
 		}
-		END;
+		//END;
 
 		return true;
 	}
@@ -55,13 +55,13 @@ bool Bounded_Variable::is_at_eor()
 			value = min;
 		}
 
-		END;
+		//END;
 
 		return true;
 	}
 	else
 	{
-		END;
+		//END;
 
 		return false;
 	}

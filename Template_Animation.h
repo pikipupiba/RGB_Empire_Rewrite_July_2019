@@ -3,7 +3,7 @@
 // 4 steps to seemless animation integration.
 
 // Create a new animation using this template.
-// Include this file in "All_Animations.h"
+// Include this file in "Animations/All_Animations.h"
 // Add the Animation_Name to the enum in "My_Enums.h"
 // Add an entry in Animation::create(new_animation_name)
 
@@ -25,7 +25,7 @@ protected:
 	const Animation_Name name = _Template_Animation;
 
 public:
-	Template_Animation(LED_Arrangements* new_led_arrangements);
+	Template_Animation(LED_Fixture* new_fixture);
 
 	// Only define the functions you need the animation to use.
 	// Otherwise the default functions in the Animation class are used.

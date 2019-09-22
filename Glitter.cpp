@@ -1,7 +1,7 @@
 #include "Glitter.h"
 
-Glitter::Glitter(LED_Arrangements* new_led_arrangements)
-	:Animation(new_led_arrangements)
+Glitter::Glitter(LED_Fixture* new_fixture, LED_Group* new_group)
+	:Animation(new_fixture, new_group)
 {
 	START;
 

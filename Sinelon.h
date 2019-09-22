@@ -3,7 +3,7 @@
 // 4 steps to seemless animation integration.
 
 // Create a new animation using this template.
-// Include this file in "All_Animations.h"
+// Include this file in "Animations/All_Animations.h"
 // Add the Animation_Name to the enum in "My_Enums.h"
 // Add an entry in Animation::create(new_animation_name)
 
@@ -28,7 +28,7 @@ protected:
 	float end;
 
 public:
-	Sinelon(LED_Arrangements* new_led_arrangements);
+	Sinelon(LED_Fixture* new_fixture, LED_Group* new_group);
 
 	// Only define the functions you need the animation to use.
 	// Otherwise the default functions in the Animation class are used.

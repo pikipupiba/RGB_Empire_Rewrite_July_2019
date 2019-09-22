@@ -53,7 +53,7 @@
 //}
 
 Controller::Controller():
-	fixture(LED_Fixture::create()),
+	fixture(LED_Fixture(fixture_parameters)),
 	animation_controller(Animation_Controller::create(&fixture)),
 	display(Display::create()),
 	physical_input(Physical_Input())
@@ -91,12 +91,9 @@ void Controller::run()
 
 	// Check for input from buttons and wifi.
 	//physical_input.check();
-	//wifi_input.check();	// TODO: implement this
+	//wifi_input.check();
 
-	EVERY_N_MILLISECONDS(250)
-	{
-		display.update();	// Update the oled screen.
-	}
+	//display.update();	// Update the oled screen.
 
 	animation_controller.run();
 

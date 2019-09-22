@@ -44,7 +44,7 @@ Bounded_Variable* Animation_Variable::operator()(Animation_Variable_Name new_ani
 
 void Animation_Variable::update()
 {
-	START;
+	//START;
 
 	vars[a_value].value += vars[a_speed].value * speed_scale_factor;
 	vars[a_speed].value += vars[a_acceleration].value * speed_scale_factor;
@@ -117,5 +117,5 @@ void Animation_Variable::update()
 		}
 	}
 
-	END;
+	//END;
 }

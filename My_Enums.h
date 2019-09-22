@@ -62,18 +62,21 @@ enum Display_Display_Mode
 	_ddm_Test
 };
 
+// TODO: make an iterator for this enum
 enum Strip_Display_Mode
 {
 	_sdm_Default,
 	_sdm_Left_To_Right,
 	_sdm_Around,
-	_sdm_Middle_Out
+	_sdm_Middle_Out,
+	_Master_Arrangement
 };
 
 enum Fixture_Display_Mode
 {
 	_fdm_Default,
 	_fdm_Parallel,
+	_fdm_Seperate,
 	_fdm_Sequential,
 	_fdm_Every_Other_Sequential,
 };

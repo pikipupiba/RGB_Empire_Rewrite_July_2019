@@ -22,7 +22,7 @@ bool connect_wifi(void)
 	Serial.print("Connecting");
 	while (WiFi.status() != WL_CONNECTED)
 	{
-		delay(250);
+		delay(500);
 		Serial.print(".");
 		if (i > 40) {
 			state = false;
@@ -48,14 +48,13 @@ bool connect_wifi(void)
 	return state;
 }
 
-Artnet::Artnet(LED_Arrangements* new_led_arrangements)
-	:Animation(new_led_arrangements),
+Artnet::Artnet(LED_Fixture* new_fixture, LED_Group* new_group)
+	:Animation(new_fixture, new_group),
 	send_frame(1),
 	previous_data_length(0)
 {
 	START;
 
-	num_leds = led_arrangements->get_artnet_size();
 	num_universes = (num_leds * 3) / 512 + (((num_leds * 3) % 512) ? 1 : 0);
 	universes_received = new bool[num_universes];
 	

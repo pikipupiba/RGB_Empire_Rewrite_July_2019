@@ -1,7 +1,7 @@
 #include "Wave.h"
 
-Wave::Wave(LED_Arrangements* new_led_arrangements)
-	:Animation(new_led_arrangements)
+Wave::Wave(LED_Fixture* new_fixture, LED_Group* new_group)
+	:Animation(new_fixture, new_group)
 {
 	START;
 

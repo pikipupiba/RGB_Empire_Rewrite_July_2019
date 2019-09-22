@@ -11,7 +11,7 @@ protected:
 	const Animation_Name name = _Rainbow_Wave;
 
 public:
-	Rainbow_Wave(LED_Arrangements* new_led_arrangements);
+	Rainbow_Wave(LED_Fixture* new_fixture, LED_Group* new_group);
 
 	void calculate_frame();
 };

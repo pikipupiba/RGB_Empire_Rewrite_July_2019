@@ -1,7 +1,7 @@
 #include "Template_Animation.h"
 
-Template_Animation::Template_Animation(LED_Arrangements* new_led_arrangements)
-	:Animation(new_led_arrangements)
+Template_Animation::Template_Animation(LED_Fixture* new_fixture)
+	:Animation(new_fixture)
 {
 	START;
 

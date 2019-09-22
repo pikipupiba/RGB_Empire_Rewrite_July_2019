@@ -24,7 +24,7 @@ protected:
 	int previous_data_length;
 
 public:
-	Artnet(LED_Arrangements* new_led_arrangements);
+	Artnet(LED_Fixture* new_fixture, LED_Group* new_group);
 
 	void run();
 

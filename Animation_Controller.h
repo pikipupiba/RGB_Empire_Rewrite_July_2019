@@ -36,6 +36,8 @@ private:
 	Animation* current_animation;
 	Animation* next_animation;
 
+	int same_group_offset;
+
 	Transition_Type transition_type;
 	bool transitioning;
 	int transition_total_time;

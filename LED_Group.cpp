@@ -1,38 +1,82 @@
 #include "LED_Group.h"
 
+LED_Group::LED_Group(int new_group_number)
+	:group_number(new_group_number),
+	size(0)
+{
 
-int LED_Group::get_size()
+}
+
+
+void LED_Group::add_to_group(LED_Group* new_group)
+{
+	for (auto& led_set : new_group->leds)
+	{
+		leds.push_back(led_set);
+
+		if (abs(led_set->len) > size)
+		{
+			size = abs(led_set->len);
+		}
+	}
+}
+
+void LED_Group::add_to_group(CRGBSet* new_led_set)
+{
+	leds.push_back(new_led_set);
+	
+	if (abs(new_led_set->len) > size)
+	{
+		size = abs(new_led_set->len);
+	}
+}
+
+int LED_Group::recalculate_size()
 {
 	START;
 
-	int group_num_leds = 0;
-	int cur_group_num = 0;
-	int total_num_leds = 0;
+	int temp_size = 0;
+
+	size = 0;
+	total_size = 0;
 
 	for (auto& led_set : leds)
 	{
-		if (abs(led_set.len) > group_num_leds)
+		temp_size = abs(led_set->len);
+
+		total_size += temp_size;
+
+		if (temp_size > size)
 		{
-			total_num_leds = abs(led_set.len);
+			size = temp_size;
 		}
 	}
 
-	//Serial.println("number of LEDs in group = " + (String)total_num_leds);
-
 	END;
 
-	return total_num_leds;
+	return size;
 }
 
-void LED_Group::add_to_group(LED_Group new_group)
+int LED_Group::get_size()
 {
-	for (auto& led_set : new_group.leds)
+	return size;
+}
+
+void LED_Group::print_info()
+{
+	Serial.println("            Group # " + (String)group_number);
+
+	int i = 0;
+
+	for (auto& led_set : leds)
 	{
-		leds.push_back(led_set);
+		Serial.println("                  CRGBSet # " + (String)i++ + " contains " + (String)abs(led_set->len) + " leds");
 	}
 }
 
-void LED_Group::add_to_group(CRGBSet new_led_set)
+LED_Group* LED_Group::change_group_number(int new_group_number)
 {
-	leds.push_back(new_led_set);
+	group_number = new_group_number;
+
+	return this;
 }

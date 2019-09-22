@@ -1,69 +1,91 @@
 #include "LED_Arrangement.h"
 
-int LED_Arrangement::get_num_groups()
+LED_Arrangement::LED_Arrangement(Strip_Display_Mode new_strip_display_mode)
+	:strip_display_mode(new_strip_display_mode),
+	num_groups(0),
+	size(0)
 {
 	START;
 
-	int cur_group_num = -1;
-	int total_num_groups = 0;
-
-
-	for (auto& group : led_groups)
-	{
-		if (group.group_number != cur_group_num)
-		{
-			total_num_groups++;
-
-			cur_group_num = group.group_number;
-		}
-	}
-
-	Serial.println("number of Groups in arrangement = " + (String)total_num_groups);
-
-	num_groups = total_num_groups;
-
 	END;
-
-	return total_num_groups;
 }
 
-int LED_Arrangement::get_size()
+void LED_Arrangement::add(LED_Group* new_led_group)
 {
 	START;
 
-	int group_num_leds = 0;
-	int cur_group_num = 0;
-	int total_num_leds = 0;
+	if (new_led_group->group_number < num_groups)
+	{
+
+		led_groups[new_led_group->group_number]->add_to_group(new_led_group);
+	}
+	else
+	{
+
+		while (num_groups < new_led_group->group_number)
+		{	
+			led_groups.push_back(new LED_Group(num_groups++));
+		}
+
+		led_groups.push_back(new_led_group);
+
+		num_groups++;
+	}
+
+	recalculate_size();
+
+	END;
+}
+
+void LED_Arrangement::add(LED_Arrangement* new_led_arrangement)
+{
+	START;
+
+	for (auto& new_led_group : new_led_arrangement->led_groups)
+	{
+		this->add(new_led_group);
+	}
+
+	END;
+}
+
+void LED_Arrangement::extend(LED_Arrangement* new_led_arrangement)
+{
+	START;
+
+	for (auto& new_led_group : new_led_arrangement->led_groups)
+	{
+		this->add(new_led_group->change_group_number(num_groups));
+
+		num_groups++;
+	}
+
+	END;
+}
+
+int LED_Arrangement::recalculate_size()
+{
+	START;
+
+	size = 0;
 
 	for (auto& group : led_groups)
 	{
-		if (group.group_number != cur_group_num)
-		{
-			total_num_leds += group_num_leds;
-
-			group_num_leds = 0;
-
-			cur_group_num = group.group_number;
-		}
-
-
-		for (auto& led_set : group.leds)
-		{
-			if (abs(led_set.len) > group_num_leds)
-			{
-				group_num_leds = abs(led_set.len);
-			}
-		}
-
+		size += group->size;
 	}
-
-	total_num_leds += group_num_leds;
-
-	Serial.println("number of LEDs in arrangement = " + (String)total_num_leds);
-
-	size = total_num_leds;
 
 	END;
 
-	return total_num_leds;
+	return size;
+
+}
+
+void LED_Arrangement::print_info()
+{
+	Serial.println("      Strip Display Mode # " + (String)strip_display_mode);
+
+	for (auto& group : led_groups)
+	{
+		group->print_info();
+	}
 }

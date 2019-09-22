@@ -1,7 +1,7 @@
 #include "Meteor.h"
 
-Meteor::Meteor(LED_Arrangements* new_led_arrangements)
-	:Animation(new_led_arrangements)
+Meteor::Meteor(LED_Fixture* new_fixture, LED_Group* new_group)
+	:Animation(new_fixture, new_group)
 {
 	START;
 
@@ -35,7 +35,9 @@ void Meteor::calculate_frame()
 
 	if (vars(position) < num_leds + vars(size))
 	{
-		for (int i = 0; i < vars(size); i++)
+		leds[(int)vars(position)] += CHSV(vars(hue), 255, vars(brightness) * (1 - (vars(position) - (int)vars(position))));
+
+		for (int i = 1; i < vars(size); i++)
 		{
 			if (vars(position) - i > 0 && vars(position) - i < num_leds)
 			{

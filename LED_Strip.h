@@ -11,9 +11,7 @@
 #include "My_Enums.h"
 #include <vector>
 #include "Bug.h"
-#include "LED_Arrangements.h"
-
-
+#include "LED_Arrangement.h"
 
 
 class LED_Strip
@@ -26,17 +24,13 @@ class LED_Strip
 
 	 Strip_Parameters strip_parameters;
 
-	 LED_Arrangements led_arrangements;
+	 Strip_Display_Mode strip_display_mode;
+
+	 std::vector<LED_Arrangement*> arrangements;
 
 	 friend class LED_Fixture;
 
 	 void print_info();
-
-	 void create_arrangements();
-	 void create_linear_arrangements();
-	 void create_folded_arrangements();
-	 void create_panel_arrangements();
-	 void create_polygon_arrangements();
 	 
 
  public:
@@ -44,16 +38,13 @@ class LED_Strip
 	LED_Strip(int new_strip_index, CRGBSet* leds, Strip_Parameters new_strip_parameters);
 	~LED_Strip();
 
-	LED_Arrangement get_led_arrangement(Strip_Display_Mode new_display_mode);
+	LED_Arrangement* get_led_arrangement(Strip_Display_Mode new_strip_display_mode);
+
+	LED_Arrangement* arrangement();
+
+	LED_Arrangement* operator[](Strip_Display_Mode new_strip_display_mode);
 
 	void print_arrangement_info(Strip_Display_Mode new_display_mode);
-
-	void reset_group(LED_Group& group);
-
-	void next_group(LED_Group& group);
-
-	void reset_arrangement(LED_Arrangement& arrangement);
-
 };
 
 #endif

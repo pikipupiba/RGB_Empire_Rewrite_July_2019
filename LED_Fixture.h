@@ -18,37 +18,30 @@
 
 #include "Fixture_Parameters.h"
 #include "LED_Strip.h"
-#include "LED_Arrangements.h"
-
 
 class LED_Fixture
 {
  protected:
 
-	 int num_strips;
-	 int fixture_num_leds;
+	 Fixture_Parameters fixture_params;
 
 	 Shape shape;
 
-	 Fixture_Display_Mode display_mode;
+	 Fixture_Display_Mode fixture_display_mode;
 
 	 CRGBArray<fixture_parameters.total_num_leds> g_leds;
 
-	 static std::vector<LED_Strip> led_strips;
+	 std::vector<LED_Strip> led_strips;
 
 	 friend class Animation_Controller;
 
 	 void create_strips();
 
  public:
-	LED_Fixture();
+	LED_Fixture(Fixture_Parameters new_fixture_params);
 	~LED_Fixture();
 
-	static LED_Fixture create();
-
-	static LED_Arrangements* get_arrangements();
-
-	static void print_arrangement_info(Strip_Display_Mode new_display_mode);
+	void print_arrangement_info(Strip_Display_Mode new_display_mode);
 
 	void print_info();
 
@@ -58,6 +51,8 @@ class LED_Fixture
 	template<int n>
 	void stripLoop(int num_leds_so_far);
 
+	LED_Arrangement* make_arrangement(Fixture_Display_Mode new_fixture_display_mode);
+	LED_Arrangement* make_arrangement();
 };
 
 

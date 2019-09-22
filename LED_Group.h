@@ -10,13 +10,11 @@
 class LED_Group
 {
 protected:
-	std::vector<CRGBSet> leds;	// Vector of CRGBSets that refer directly to parts of the LED_Fixture g_leds.
+	std::vector<CRGBSet*> leds;	// Vector of CRGBSets that refer directly to parts of the LED_Fixture g_leds.
 	int group_number;	// The group number. Even groups on different strips will copy each other if their group number is the same.
-	int strip_number;	// The strip that this group is on.
 
 	int size;			// The size of a group is equal to the largest CRGBSet it contains.
-
-	int get_size();		// Calculates the size of the group.
+	int total_size;		// The total size is the sum of the sizes of all CRGBSets in the group.
 
 	friend class LED_Arrangement;
 	friend class LED_Arrangements;
@@ -27,7 +25,15 @@ protected:
 	friend class LED_Strip;
 
 public:
-	void add_to_group(LED_Group new_group);
-	void add_to_group(CRGBSet new_led_set);
-};
+	LED_Group(int new_group_number);
 
+	void add_to_group(LED_Group* new_group);
+	void add_to_group(CRGBSet* new_led_set);
+
+	int recalculate_size();	// Returns the size of the largest CRGBSet in the group.
+	int get_size();
+
+	void print_info();
+
+	LED_Group* change_group_number(int new_group_number);
+};

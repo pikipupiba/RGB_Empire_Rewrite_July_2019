@@ -28,8 +28,10 @@
 #define THING BUG5(Bug::thing_counter(__PRETTY_FUNCTION__))
 #define THING2 BUG2(Bug::thing_counter(__PRETTY_FUNCTION__))
 #define END BUG5(Bug::end(__PRETTY_FUNCTION__))
+//#define END(x) BUG5(Bug::end(__PRETTY_FUNCTION__ + x))
 #define END2 BUG2(Bug::end(__PRETTY_FUNCTION__))
 #define MEM Bug::display_memory(" after " + String(__PRETTY_FUNCTION__))
+
 
 #define P(x) Bug::print(#x, x)
 #define P1(x) BUG1(Bug::print(#x, x))
@@ -143,10 +145,10 @@ inline void Bug::start(String new_string)
 
 	for (int i = 0; i < function_stack.size() - 1; i++)
 	{
-		Serial.print("      ");
+		//Serial.print("      ");
 	}
 
-	Serial.println("Starting " + new_string);
+	//Serial.println("Starting " + new_string);
 
 	heap_caps_check_integrity_all(true);
 
@@ -165,13 +167,13 @@ inline int Bug::end(String new_string)
 
 		for (int i = 0; i < function_stack.size() - 1; i++)
 		{
-			Serial.print("      ");
+			//Serial.print("      ");
 		}
 
 		function_stack.pop_back();
 		thing_stack.pop_back();
 
-		Serial.println("Ending " + n_and_t.function_name + " after " + (function_time)+" millis");
+		//Serial.println("Ending " + n_and_t.function_name + " after " + (function_time)+" millis");
 	}
 	else
 	{
@@ -183,6 +185,8 @@ inline int Bug::end(String new_string)
 
 inline void Bug::thing_counter(String new_string)
 {
+	heap_caps_check_integrity_all(true);
+
 	if (thing_stack.empty())
 	{
 		thing_stack.push_back(0);

@@ -21,8 +21,8 @@
 #include <FastLED.h>
 #include "Oscillator.h"
 #include "My_Enums.h"
+#include "LED_Arrangement.h"
 #include "LED_Fixture.h"
-#include "LED_Arrangements.h"
 #include "Animation_Variables.h"
 #include "Bug.h"
 
@@ -39,24 +39,19 @@ class Animation
 	// "Base" is t he name of the interface.
 	const Animation_Name name = _Base;
 
-	// Unique ID for each animation object. Base animation has ID = 0.
-	const int animation_ID;
-
 	// Moved this to the Animation_Controller class.
 	// Vector that contains all children of this interface. Push onto this vector in the header of each child.
 	//static std::vector<Animation> animation_list;
-
-	// The current total number of animation objects.
-	static int num_animations;
 
 	// Vector to contain any other animation objects this one creates.
 	std::vector<Animation*> animations;
 
 	// A pointer to the fixture object that contains all necessary information about the LEDs.
-	//LED_Fixture* fixture;
+	LED_Fixture* fixture;
 
-	//CRGBArray* leds;
-	LED_Arrangements* led_arrangements;
+	LED_Arrangement* arrangement;
+
+	LED_Group* group;
 
 	// Each animation object should store its own LED data to be combined by the animation_controller.
 	// Maybe store led data like this?
@@ -70,11 +65,15 @@ class Animation
  public:
 	 // A struct that contains all the variables associated with the animation.
 	 Animation_Variables vars;
-	 LED_Arrangement compressed_arrangement;
 
-	Animation(LED_Arrangements* new_led_arrangements);
+	Animation(Animation_Name new_animation_name, LED_Fixture* new_fixture);
+	Animation(LED_Fixture* new_fixture);
+	Animation(LED_Fixture* new_fixture, LED_Group* new_group);
 
-	static Animation* create(Animation_Name new_animation_name, LED_Arrangements* new_led_arrangements);
+	static Animation* create(Animation_Name new_animation_name, LED_Fixture* new_fixture);
+	static Animation* create(Animation_Name new_animation_name, LED_Fixture* new_fixture, LED_Group* new_group);
+
+	void add_aniamtion(Animation_Name new_animation_name, LED_Fixture* new_fixture, LED_Group* new_group);
 
 	virtual ~Animation();
 
@@ -99,7 +98,6 @@ class Animation
 
 
 	int next(int cur, int dir, bool mask[]);
-
 };
 
 //std::vector<boost::variant<first, second> > vec2;
