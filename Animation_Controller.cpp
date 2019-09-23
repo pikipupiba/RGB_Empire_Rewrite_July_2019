@@ -45,7 +45,7 @@ void Animation_Controller::run()
 
 	EVERY_N_SECONDS(10)
 	{
-		change_animation(Animation_Name(random8(0,NUM_AUTOPLAY_ANIMATIONS)));
+		//change_animation(Animation_Name(random8(0,NUM_AUTOPLAY_ANIMATIONS)));
 	}
 
 	if (transitioning)

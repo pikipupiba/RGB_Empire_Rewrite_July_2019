@@ -3,6 +3,8 @@
 // General pointer to facilitate calling back to non-static function Artnet::on_DMX_frame()
 void* pt2Object;
 
+
+
 bool connect_wifi(void)
 {
 	START;
@@ -10,6 +12,21 @@ bool connect_wifi(void)
 	char* ssid = "Trap_House";
 	char* password = "ThIsHoUsEisatrap72";
 
+	//// Set your Static IP address
+	//IPAddress local_IP(2, 111, 1, 111);
+	//// Set your Gateway IP address
+	//IPAddress gateway(192, 168, 1, 1);
+
+	//IPAddress subnet(255, 0, 0, 0);
+
+	//IPAddress primaryDNS(8, 8, 8, 8);   //optional
+	//IPAddress secondaryDNS(8, 8, 4, 4); //
+
+	//if (!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) {
+	//	Serial.println("STA Failed to configure");
+	//}
+
+	WiFi.mode(WIFI_AP_STA);
 
 	boolean state = true;
 	int i = 0;
@@ -22,7 +39,7 @@ bool connect_wifi(void)
 	Serial.print("Connecting");
 	while (WiFi.status() != WL_CONNECTED)
 	{
-		delay(250);
+		delay(1000);
 		Serial.print(".");
 		if (i > 40) {
 			state = false;
@@ -55,21 +72,23 @@ Artnet::Artnet(LED_Arrangements* new_led_arrangements)
 {
 	START;
 
-	num_leds = led_arrangements->get_artnet_size();
-	num_universes = (num_leds * 3) / 512 + (((num_leds * 3) % 512) ? 1 : 0);
-	universes_received = new bool[num_universes];
-	
-	connect_wifi();
 
-	artnet.begin();
+		num_leds = led_arrangements->get_artnet_size();
+		num_universes = (num_leds * 3) / 512 + (((num_leds * 3) % 512) ? 1 : 0);
+		universes_received = new bool[num_universes];
 
-	THING;
+		connect_wifi();
 
-	artnet.setArtDmxCallback(Artnet::on_DMX_frame_wrapper);
+		artnet.begin();
 
-	THING;
+		THING;
 
-	pt2Object = (void*) this;
+		artnet.setArtDmxCallback(Artnet::on_DMX_frame_wrapper);
+
+		THING;
+
+		pt2Object = (void*)this;
+
 
 	END;
 }
@@ -78,7 +97,15 @@ void Artnet::run()
 {
 	START;
 
-	artnet.read();
+	if (WiFi.status() == WL_CONNECTED)
+	{
+		artnet.read();
+	}
+	else
+	{
+		connect_wifi();
+	}
+	
 
 	END;
 }
