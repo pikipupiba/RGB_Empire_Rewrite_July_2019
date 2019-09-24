@@ -73,7 +73,7 @@ Controller::Controller():
 	//wifi_input.connect();	// TODO: implement this
 	//wifi_input.check();	// TODO: implement this
 
-	FastLED.setBrightness(30);
+	FastLED.setBrightness(255);
 
 	MEM;
 

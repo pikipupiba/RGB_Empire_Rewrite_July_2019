@@ -145,7 +145,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Fixture* new
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Artnet(new_fixture, new_group);
+		return new Rainbow_Wave(new_fixture, new_group);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_fixture, new_group);
 	case _Glitter:
