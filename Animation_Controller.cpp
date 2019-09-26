@@ -187,14 +187,23 @@ void Animation_Controller::show()
 	{
 		int cur_led_num = 0;
 
+		THING;
+
 		CRGB* current_next_frame = current_animation->next_frame();
 		CRGBSet current_next_frame_set = CRGBSet(current_next_frame, current_animation->num_leds);
 
+		THING;
+
 		for (auto& group : current_animation->arrangement->led_groups)
 		{
+			//P(group->group_number);
+			//P(group->size);
+
 			for (auto& arr_led_set : group->leds)
 			{
 				int i = 0;
+
+				//P(cur_led_num);
 
 				for (auto& led : *arr_led_set)
 				{
@@ -224,6 +233,7 @@ void Animation_Controller::transition_Fade()
 
 	for (auto& group : current_animation->arrangement->led_groups)
 	{
+
 		for (auto& arr_led_set : group->leds)
 		{
 			int i = 0;

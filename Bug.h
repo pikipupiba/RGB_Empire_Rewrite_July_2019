@@ -145,10 +145,10 @@ inline void Bug::start(String new_string)
 
 	for (int i = 0; i < function_stack.size() - 1; i++)
 	{
-		//Serial.print("      ");
+		Serial.print("      ");
 	}
 
-	//Serial.println("Starting " + new_string);
+	Serial.println("Starting " + new_string);
 
 	heap_caps_check_integrity_all(true);
 
@@ -167,13 +167,13 @@ inline int Bug::end(String new_string)
 
 		for (int i = 0; i < function_stack.size() - 1; i++)
 		{
-			//Serial.print("      ");
+			Serial.print("      ");
 		}
 
 		function_stack.pop_back();
 		thing_stack.pop_back();
 
-		//Serial.println("Ending " + n_and_t.function_name + " after " + (function_time)+" millis");
+		Serial.println("Ending " + n_and_t.function_name + " after " + (function_time)+" millis");
 	}
 	else
 	{

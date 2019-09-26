@@ -27,6 +27,7 @@ public:
 	LED_Arrangement(Strip_Display_Mode new_strip_display_mode);
 
 	void add(LED_Group* new_led_group);
+	void add(LED_Group* new_led_group, int new_group_number);
 	void add(LED_Arrangement* new_led_arrangement);
 	void extend(LED_Arrangement* new_led_arrangement);
 

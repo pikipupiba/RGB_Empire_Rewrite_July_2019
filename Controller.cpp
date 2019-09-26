@@ -93,7 +93,10 @@ void Controller::run()
 	//physical_input.check();
 	//wifi_input.check();
 
-	//display.update();	// Update the oled screen.
+	EVERY_N_MILLISECONDS(250)
+	{
+		display.update();	// Update the oled screen.
+	}
 
 	animation_controller.run();
 

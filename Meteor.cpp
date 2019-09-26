@@ -6,6 +6,7 @@ Meteor::Meteor(LED_Fixture* new_fixture, LED_Group* new_group)
 	START;
 
 	vars(position, a_value)->eor = _eor_Loop;
+	vars(position, a_speed)->value = float(random8(100,255)) / 200.0;
 	vars(fade, a_value)->value = 2;
 	vars(hue, a_speed)->value = 0;
 
@@ -31,11 +32,12 @@ void Meteor::calculate_frame()
 	if (vars(position) == 0)
 	{
 		vars(hue, a_value)->value = random8();
+		vars(position, a_speed)->value = float(random8(100,255)) / 200.0;
 	}
 
 	if (vars(position) < num_leds + vars(size))
 	{
-		leds[(int)vars(position)] += CHSV(vars(hue), 255, vars(brightness) * (1 - (vars(position) - (int)vars(position))));
+		leds[(int)vars(position)] = CHSV(vars(hue), 255, vars(brightness) * ((vars(position) - (int)vars(position))));
 
 		for (int i = 1; i < vars(size); i++)
 		{

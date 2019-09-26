@@ -10,7 +10,7 @@
 // TODO currently incomplete
 void Animation::update_vars()
 {
-	START;
+	//START;
 
 	vars.vars[brightness].update();
 	vars.vars[position].update();
@@ -32,7 +32,7 @@ void Animation::update_vars()
 
 	//nblendPaletteTowardPalette(vars.palette_current, vars.palette_next, vars.palette_cycle_speed);
 
-	END;
+	//END;
 }
 
 void Animation::erase_previous_frame()
@@ -49,18 +49,20 @@ void Animation::erase_previous_frame()
 
 Animation::Animation(Animation_Name new_animation_name, LED_Fixture* new_fixture)
 	:fixture(new_fixture),
-	arrangement(fixture->make_arrangement()),
+	arrangement(fixture->make_arrangement(_fdm_Seperate)),
 	num_leds(arrangement->size),
 	leds(new CRGB[num_leds]),
 	led_set(new CRGBSet(leds, num_leds)),
 	vars(Animation_Variables(0, num_leds - 1))
 {
-	for (auto& group : new_fixture->make_arrangement(_fdm_Seperate)->led_groups)
+	//P(arrangement->num_groups);
+
+	for (auto& group : arrangement->led_groups)
 	{
 		animations.push_back(create(new_animation_name, new_fixture, group));
 	}
 
-	Serial.println("what the heck BACK-2-BACK = " + (String)led_set->len);
+	//Serial.println("what the heck BACK-2-BACK = " + (String)led_set->len);
 
 	fill_solid(leds, num_leds, CRGB::Black);
 }
@@ -77,7 +79,7 @@ Animation::Animation(LED_Fixture* new_fixture)
 
 
 
-	Serial.println("what the heck = " + (String)led_set->len);
+	//Serial.println("what the heck = " + (String)led_set->len);
 
 	fill_solid(leds, num_leds, CRGB::Black);
 
@@ -87,12 +89,15 @@ Animation::Animation(LED_Fixture* new_fixture)
 
 Animation::Animation(LED_Fixture* new_fixture, LED_Group* new_group)
 	:fixture(new_fixture),
+	arrangement(new LED_Arrangement(_sdm_Default)),
 	num_leds(new_group->size),
 	leds(new CRGB[num_leds]),
 	led_set(new CRGBSet(leds, num_leds)),
 	vars(Animation_Variables(0, num_leds - 1))
 {
-	Serial.println("what the heck BACK-2-BACK = " + (String)led_set->len);
+	arrangement->add(new_group, 0);
+
+	//Serial.println("what the heck BACK-2-BACK = " + (String)led_set->len);
 
 	fill_solid(leds, num_leds, CRGB::Black);
 }
@@ -142,10 +147,12 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Fixture* new
 
 	END;
 
+	//P(new_animation_name);
+
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Rainbow_Wave(new_fixture, new_group);
+		return new Meteor(new_fixture, new_group);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_fixture, new_group);
 	case _Glitter:
@@ -200,7 +207,7 @@ Animation::~Animation()
 
 	THING;
 
-	MEM;
+	//MEM;
 	END;
 }
 
@@ -352,14 +359,41 @@ CRGB* Animation::next_frame()
 {
 	START;
 
-	for (auto& animation : animations)
-	{
-		CRGB* next_frame = animation->next_frame();
-		//CRGBSet next_frame_set = CRGBSet(next_frame, animation->num_leds);
+	int cur_led_num = 0;
+	int cur_group = 0;
 
-		for (int i = 0; i < animation->num_leds; i++)
+	//P(arrangement->num_groups);
+	//P(arrangement->size);
+
+	if (arrangement->num_groups == 1)
+	{
+		for (auto& animation : animations)
 		{
-			leds[i] +=  next_frame[i];
+			CRGB* next_frame = animation->next_frame();
+
+			for (int i = 0; i < animation->num_leds; i++)
+			{
+				leds[i + cur_led_num] += next_frame[i];
+			}
+		}
+	}
+	else
+	{
+		if (!animations.empty())
+		{
+			for (auto& group : arrangement->led_groups)
+			{
+
+				CRGB* next_frame = animations[cur_group]->next_frame();
+
+				for (int i = 0; i < animations[cur_group]->num_leds; i++)
+				{
+					leds[i + cur_led_num] += next_frame[i];
+				}
+
+				cur_led_num += animations[cur_group++]->num_leds;
+
+			}
 		}
 	}
 

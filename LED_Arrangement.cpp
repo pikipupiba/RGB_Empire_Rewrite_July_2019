@@ -37,6 +37,33 @@ void LED_Arrangement::add(LED_Group* new_led_group)
 	END;
 }
 
+void LED_Arrangement::add(LED_Group* new_led_group, int new_group_number)
+{
+	START;
+
+	if (new_group_number < num_groups)
+	{
+
+		led_groups[new_group_number]->add_to_group(new_led_group);
+	}
+	else
+	{
+
+		while (num_groups < new_group_number)
+		{
+			led_groups.push_back(new LED_Group(num_groups++));
+		}
+
+		led_groups.push_back(new_led_group);
+
+		num_groups++;
+	}
+
+	recalculate_size();
+
+	END;
+}
+
 void LED_Arrangement::add(LED_Arrangement* new_led_arrangement)
 {
 	START;
@@ -56,8 +83,6 @@ void LED_Arrangement::extend(LED_Arrangement* new_led_arrangement)
 	for (auto& new_led_group : new_led_arrangement->led_groups)
 	{
 		this->add(new_led_group->change_group_number(num_groups));
-
-		num_groups++;
 	}
 
 	END;
