@@ -231,6 +231,11 @@ void Animation_Controller::transition_Fade()
 
 	float ratio = (float)(transition_total_time - (millis() - transition_start_time)) / transition_total_time;
 
+	if (ratio < 0)
+	{
+		ratio = 0;
+	}
+
 	for (auto& group : current_animation->arrangement->led_groups)
 	{
 
@@ -267,6 +272,10 @@ void Animation_Controller::transition_Wipe()
 
 	float ratio = (float)(transition_total_time - (millis() - transition_start_time)) / transition_total_time;
 
+	if (ratio < 0)
+	{
+		ratio = 0;
+	}
 
 	for (auto& group : current_animation->arrangement->led_groups)
 	{

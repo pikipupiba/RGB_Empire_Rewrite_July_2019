@@ -5,53 +5,6 @@
 #include "Controller.h"
 #include "Tasks.h"
 
-// connect to wifi – returns true if successful or false if not
-// TODO: move this to Wifi_Class
-//bool connect_wifi(void)
-//{
-	//START;
-
-	//char* ssid = "Trap_House";
-	//char* password = "ThIsHoUsEisatrap72";
-
-
-	//boolean state = true;
-	//int i = 0;
-
-	//WiFi.begin(ssid, password);
-	//Serial.println("");
-	//Serial.println("Connecting to WiFi");
-
-	//// Wait for connection
-	//Serial.print("Connecting");
-	//while (WiFi.status() != WL_CONNECTED)
-	//{
-	//	delay(250);
-	//	Serial.print(".");
-	//	if (i > 40) {
-	//		state = false;
-	//		break;
-	//	}
-	//	i++;
-	//}
-	//if (state) {
-	//	Serial.println("");
-	//	Serial.print("Connected to ");
-	//	Serial.println(ssid);
-	//	Serial.print("IP address: ");
-	//	Serial.println(WiFi.localIP());
-	//}
-	//else {
-	//	Serial.println("");
-	//	Serial.println("Connection failed.");
-	//}
-
-	//MEM;
-	//END;
-
-	//return state;
-//}
-
 Controller::Controller():
 	fixture(LED_Fixture(fixture_parameters)),
 	animation_controller(Animation_Controller::create(&fixture)),
@@ -68,12 +21,12 @@ Controller::Controller():
 
 	physical_input.check();	// TODO: implement this
 
-	//connect_wifi();
+	Wifi_Class::start_wifi();
 
 	//wifi_input.connect();	// TODO: implement this
 	//wifi_input.check();	// TODO: implement this
 
-	FastLED.setBrightness(255);
+	FastLED.setBrightness(30);
 
 	MEM;
 
@@ -91,12 +44,14 @@ void Controller::run()
 
 	// Check for input from buttons and wifi.
 	//physical_input.check();
-	//wifi_input.check();
+	Wifi_Class::get_udp_input();
 
 	EVERY_N_MILLISECONDS(250)
 	{
 		display.update();	// Update the oled screen.
 	}
+
+	//delay(20);
 
 	animation_controller.run();
 

@@ -149,10 +149,13 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Fixture* new
 
 	//P(new_animation_name);
 
+	//new_animation_name = Animation_Name(random8(0, 8));
+	//new_animation_name = _Rainbow_Wave;
+
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Meteor(new_fixture, new_group);
+		return new Rainbow_Wave_With_Glitter(new_fixture, new_group);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_fixture, new_group);
 	case _Glitter:

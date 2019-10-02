@@ -16,8 +16,6 @@
 #define FASTLED_ESP32_I2S true
 
 #include <FastLED.h>
-#include <WiFi.h>		// TODO: Move wifi stuff to Wifi_Class when ready.
-#include <WiFiUdp.h>
 
 //**********************//
 //	Custom Classes		//

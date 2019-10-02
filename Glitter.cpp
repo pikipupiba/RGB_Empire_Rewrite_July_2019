@@ -5,6 +5,8 @@ Glitter::Glitter(LED_Fixture* new_fixture, LED_Group* new_group)
 {
 	START;
 
+	vars(fade, a_value)->value = 100;
+
 	END;
 }
 

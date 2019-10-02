@@ -19,11 +19,12 @@ enum Animation_Name
 	_Glitter,
 	_Rainbow_Wave_With_Glitter,
 	_Sinelon,
-	_Mr_Poopy_Worm,
+	
 	_Solid_Color,
 	_Meteor,
 	_Wave,
 	_Crazy_Time,
+	_Mr_Poopy_Worm,
 
 	_Artnet,
 

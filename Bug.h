@@ -14,6 +14,7 @@
 #define BUG_2	// Used to selectively enable certain macros.
 //#define BUG_3	// 
 //#define BUG_4	// 
+
 //#define BUG_5	// Beginning, middle, and end of every function.
 
 #ifndef _BUG_h

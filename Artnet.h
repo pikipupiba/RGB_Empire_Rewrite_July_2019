@@ -5,8 +5,7 @@
 #include "Animation.h"
 
 #include <ArtnetWifi.h>
-#include <WiFi.h>
-#include <WiFiUdp.h>
+
 #include "Tasks.h"
 
 class Artnet :

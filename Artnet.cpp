@@ -3,50 +3,50 @@
 // General pointer to facilitate calling back to non-static function Artnet::on_DMX_frame()
 void* pt2Object;
 
-bool connect_wifi(void)
-{
-	START;
-
-	char* ssid = "Trap_House";
-	char* password = "ThIsHoUsEisatrap72";
-
-
-	boolean state = true;
-	int i = 0;
-
-	WiFi.begin(ssid, password);
-	Serial.println("");
-	Serial.println("Connecting to WiFi");
-
-	// Wait for connection
-	Serial.print("Connecting");
-	while (WiFi.status() != WL_CONNECTED)
-	{
-		delay(500);
-		Serial.print(".");
-		if (i > 40) {
-			state = false;
-			break;
-		}
-		i++;
-	}
-	if (state) {
-		Serial.println("");
-		Serial.print("Connected to ");
-		Serial.println(ssid);
-		Serial.print("IP address: ");
-		Serial.println(WiFi.localIP());
-	}
-	else {
-		Serial.println("");
-		Serial.println("Connection failed.");
-	}
-
-	MEM;
-	END;
-
-	return state;
-}
+//bool connect_wifi(void)
+//{
+//	START;
+//
+//	char* ssid = "Trap_House";
+//	char* password = "ThIsHoUsEisatrap72";
+//
+//
+//	boolean state = true;
+//	int i = 0;
+//
+//	WiFi.begin(ssid, password);
+//	Serial.println("");
+//	Serial.println("Connecting to WiFi");
+//
+//	// Wait for connection
+//	Serial.print("Connecting");
+//	while (WiFi.status() != WL_CONNECTED)
+//	{
+//		delay(500);
+//		Serial.print(".");
+//		if (i > 40) {
+//			state = false;
+//			break;
+//		}
+//		i++;
+//	}
+//	if (state) {
+//		Serial.println("");
+//		Serial.print("Connected to ");
+//		Serial.println(ssid);
+//		Serial.print("IP address: ");
+//		Serial.println(WiFi.localIP());
+//	}
+//	else {
+//		Serial.println("");
+//		Serial.println("Connection failed.");
+//	}
+//
+//	MEM;
+//	END;
+//
+//	return state;
+//}
 
 Artnet::Artnet(LED_Fixture* new_fixture, LED_Group* new_group)
 	:Animation(new_fixture, new_group),
@@ -58,7 +58,7 @@ Artnet::Artnet(LED_Fixture* new_fixture, LED_Group* new_group)
 	num_universes = (num_leds * 3) / 512 + (((num_leds * 3) % 512) ? 1 : 0);
 	universes_received = new bool[num_universes];
 	
-	connect_wifi();
+	//connect_wifi();
 
 	artnet.begin();
 
