@@ -39,6 +39,7 @@ private:
 	int same_group_offset;
 
 	Transition_Type transition_type;
+	Transition_Type temp_trans_type;
 	bool transitioning;
 	int transition_total_time;
 	long transition_start_time;
@@ -50,6 +51,8 @@ private:
 	// For example, if an animation is currently running at 200 fps, all speeds are cut in half.
 	// If an animation is running at 50 fps, all speeds are doubled.
 	const int target_fps = 100;
+
+	friend class Wifi_Class;
 
 public:
 	Animation_Controller(LED_Fixture* new_fixture);
@@ -67,6 +70,8 @@ public:
 	void erase_prev_frame();
 
 	void show();
+
+	void set_transition(Transition_Type new_transition_type);
 
 	void transition_Fade();
 

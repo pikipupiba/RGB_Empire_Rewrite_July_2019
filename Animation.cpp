@@ -62,9 +62,12 @@ Animation::Animation(Animation_Name new_animation_name, LED_Fixture* new_fixture
 		animations.push_back(create(new_animation_name, new_fixture, group));
 	}
 
+
 	//Serial.println("what the heck BACK-2-BACK = " + (String)led_set->len);
 
 	fill_solid(leds, num_leds, CRGB::Black);
+
+	MEM;
 }
 
 Animation::Animation(LED_Fixture* new_fixture)
@@ -109,7 +112,14 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Fixture* new
 
 	END;
 
-	return new Animation(new_animation_name, new_fixture);
+	//if (new_animation_name != _Artnet)
+	//{
+		return new Animation(new_animation_name, new_fixture);
+	//}
+	//else
+	//{
+	//	return new Artnet(new_fixture, new_fixture->make_arrangement(_fdm_Sequential)->led_groups[0]);
+	//}
 
 		//switch (new_animation_name)
 		//{
@@ -144,7 +154,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Fixture* new
 Animation* Animation::create(Animation_Name new_animation_name, LED_Fixture* new_fixture, LED_Group* new_group)
 {
 	START;
-
+	
 	END;
 
 	//P(new_animation_name);
@@ -155,7 +165,7 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Fixture* new
 	switch (new_animation_name)
 	{
 	case _Default:
-		return new Rainbow_Wave_With_Glitter(new_fixture, new_group);
+		return new Mr_Poopy_Worm(new_fixture, new_group);
 	case _Rainbow_Wave:
 		return new Rainbow_Wave(new_fixture, new_group);
 	case _Glitter:
@@ -171,12 +181,18 @@ Animation* Animation::create(Animation_Name new_animation_name, LED_Fixture* new
 		return new Solid_Color(new_fixture, new_group);
 	case _Meteor:
 		return new Meteor(new_fixture, new_group);
+	case _Multi_Meteor:
+		return new Multi_Meteor(new_fixture, new_group);
 	case _Wave:
 		return new Wave(new_fixture, new_group);
 	case _Crazy_Time:
 		return new Crazy_Time(new_fixture, new_group);
+	case _Confetti:
+		return new Confetti(new_fixture, new_group);
+	case _Color_Waves:
+		return new Color_Waves(new_fixture, new_group);
 	case _Artnet:
-		//return new Artnet(new_fixture, new_group);
+		return new Artnet(new_fixture, new_group);
 	default:
 		return new Crazy_Time(new_fixture, new_group);
 	}
@@ -207,6 +223,8 @@ Animation::~Animation()
 	THING;
 
 	delete led_set;
+
+	delete arrangement;
 
 	THING;
 
@@ -403,4 +421,14 @@ CRGB* Animation::next_frame()
 	END;
 
 	return leds;
+}
+
+void Animation::change_var(Variable_Name new_var_name, Animation_Variable_Name new_ani_var_name, float new_value)
+{
+	vars(new_var_name, new_ani_var_name)->value = new_value;
+
+	for (auto& animation : animations)
+	{
+		animation->vars(new_var_name, new_ani_var_name)->value = new_value;
+	}
 }

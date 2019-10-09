@@ -7,9 +7,9 @@
 
 Controller::Controller():
 	fixture(LED_Fixture(fixture_parameters)),
-	animation_controller(Animation_Controller::create(&fixture)),
-	display(Display::create()),
-	physical_input(Physical_Input())
+	animation_controller(Animation_Controller::create(&fixture))
+	//display(Display::create()),
+	//physical_input(Physical_Input())
 {
 	START;
 
@@ -19,14 +19,17 @@ Controller::Controller():
 	fixture.print_info();
 	animation_controller.print_info();
 
-	physical_input.check();	// TODO: implement this
+	//physical_input.check();	// TODO: implement this
 
-	Wifi_Class::start_wifi();
+	if (Wifi_Class::connected == false)
+	{
+		Wifi_Class::start_wifi(&animation_controller);
+	}
 
 	//wifi_input.connect();	// TODO: implement this
 	//wifi_input.check();	// TODO: implement this
 
-	FastLED.setBrightness(30);
+	FastLED.setBrightness(35);
 
 	MEM;
 
@@ -46,10 +49,10 @@ void Controller::run()
 	//physical_input.check();
 	Wifi_Class::get_udp_input();
 
-	EVERY_N_MILLISECONDS(250)
-	{
-		display.update();	// Update the oled screen.
-	}
+	//EVERY_N_MILLISECONDS(250)
+	//{
+	//	display.update();	// Update the oled screen.
+	//}
 
 	//delay(20);
 

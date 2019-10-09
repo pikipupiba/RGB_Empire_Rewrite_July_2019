@@ -5,13 +5,17 @@ char Wifi_Class::incoming_packet[255];  // buffer for incoming packets
 char Wifi_Class::reply_packet[255];  // a reply string to send back
 
 int Wifi_Class::udpPort = 33333;
+Animation_Controller* Wifi_Class::ani_controller;
 
 bool Wifi_Class::connected = false;
 bool Wifi_Class::timeout = false;
 long Wifi_Class::try_again_time = 0;
 
-char* Wifi_Class::ssid = "Trap_House";
-char* Wifi_Class::password = "ThIsHoUsEisatrap72";
+//char* Wifi_Class::ssid = "Trap_House";
+//char* Wifi_Class::password = "ThIsHoUsEisatrap72";
+
+char* Wifi_Class::ssid = "ESP_Master";
+char* Wifi_Class::password = "ESP_Secure_Password";
 
 void Wifi_Class::WiFiEvent(WiFiEvent_t event) {
 
@@ -23,6 +27,7 @@ void Wifi_Class::WiFiEvent(WiFiEvent_t event) {
 		//When connected set
 		Serial.print("WiFi connected! IP address: ");
 		Serial.println(WiFi.localIP());
+		Serial.println(WiFi.getHostname());
 		//initializes the UDP state
 		//This initializes the transfer buffer
 		udp.begin(WiFi.localIP(), udpPort);
@@ -40,7 +45,6 @@ void Wifi_Class::WiFiEvent(WiFiEvent_t event) {
 	}
 
 	END;
-
 }
 
 void Wifi_Class::connectToWiFi()
@@ -84,8 +88,10 @@ void Wifi_Class::connectToWiFi()
 	WiFi.setSleep(false);
 }
 
-void Wifi_Class::start_wifi()
+void Wifi_Class::start_wifi(Animation_Controller* new_ani_controller)
 {
+	ani_controller = new_ani_controller;
+
 	connectToWiFi();
 }
 
@@ -116,28 +122,29 @@ void Wifi_Class::get_udp_input()
 
 			if (valueFromPacket.substring(0, 3) == "brt")
 			{
-				//universe.uBrightness = value;
-				Serial.println("Brightness = " + String(value));
+				FastLED.setBrightness(value);
+				//Serial.println("Brightness = " + String(value));
 			}
 			else if (valueFromPacket.substring(0, 3) == "spd")
 			{
 				//universe.ChangeSpeedFactor((float)value / 40);
-				Serial.println("Speed = " + String(value));
+
+				speed_scale_factor_modifier = (float)value / 40.0;
+
+				//Serial.println("Speed = " + String(value));
 			}
 			else if (valueFromPacket.substring(0, 3) == "hue")
 			{
-				//universe.SetHue(value);
-				Serial.println("Hue = " + String(value));
+				ani_controller->current_animation->change_var(hue, a_value, value);
 			}
 			else if (valueFromPacket.substring(0, 3) == "hsp")
 			{
-				//universe.ChangeHueFactor((float)value / 80);
-				Serial.println("Hue Speed = " + String(value));
+				ani_controller->current_animation->change_var(hue, a_speed, (float)value / 60.0);
 			}
 			else if (valueFromPacket.substring(0, 3) == "off")
 			{
 				//universe.ChangeOffset(value);
-				Serial.println("Offset = " + String(value));
+				//Serial.println("Offset = " + String(value));
 			}
 			else if (valueFromPacket.substring(0, 3) == "b00")
 			{
@@ -154,11 +161,12 @@ void Wifi_Class::get_udp_input()
 			}
 			else if (valueFromPacket.substring(0, 3) == "b04")
 			{
-				//universe.NextHue();
+				ani_controller->current_animation->change_var(hue, a_value,
+					int(ani_controller->current_animation->vars(hue, a_value)->value + 16) % 255);
 			}
 			else if (valueFromPacket.substring(0, 3) == "b05")
 			{
-				//universe.RandomHue();
+				ani_controller->current_animation->change_var(hue, a_value, random8());
 			}
 			else if (valueFromPacket.substring(0, 3) == "str")
 			{
@@ -170,7 +178,8 @@ void Wifi_Class::get_udp_input()
 			}
 			else if (valueFromPacket.substring(0, 3) == "b06")
 			{
-				//universe.uFlash = (bool)value;
+				//Serial.println(value);
+				ani_controller->set_transition(Transition_Type(value));
 			}
 			else if (valueFromPacket.substring(0, 3) == "b07")
 			{
@@ -182,8 +191,19 @@ void Wifi_Class::get_udp_input()
 			}
 			else if (valueFromPacket.substring(0, 3) == "pat")
 			{
-				Serial.println("Pattern = " + String(value));
+				//Serial.println("Pattern = " + String(value));
 				//universe.SetPattern(value);
+
+				static int current_ani = Animation_Name(value % NUM_AUTOPLAY_ANIMATIONS);
+
+				//Serial.println(Animation_Name(value % NUM_AUTOPLAY_ANIMATIONS));
+				//Serial.println(Animation_Name(ani_controller->current_animation->animations[0]->name));
+
+				if (Animation_Name(value % NUM_AUTOPLAY_ANIMATIONS) != current_ani)
+				{
+					ani_controller->change_animation(Animation_Name(value % NUM_AUTOPLAY_ANIMATIONS));
+					current_ani = Animation_Name(value % NUM_AUTOPLAY_ANIMATIONS);
+				}
 			}
 			else if (valueFromPacket.substring(0, 3) == "act")
 			{
@@ -196,10 +216,11 @@ void Wifi_Class::get_udp_input()
 			}
 			else if (valueFromPacket.substring(0, 3) == "del")
 			{
+				ani_controller->transition_total_time = value * 40;
 				//universe.uSlowDelay = value;
 			}
 
-			Serial.println(valueFromPacket);
+			//Serial.println(valueFromPacket);
 
 		}
 

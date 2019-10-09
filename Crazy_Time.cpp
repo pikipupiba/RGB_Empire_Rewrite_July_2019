@@ -50,6 +50,7 @@ Crazy_Time::Crazy_Time(LED_Fixture* new_fixture, LED_Group* new_group)
 
 	vars(position, a_acceleration)->value = 0.02;
 
+	vars(position, a_value)->value = random16(0, num_leds - 1);
 	vars(position, a_speed)->min = -2;
 	vars(position, a_speed)->max = 2;
 
@@ -67,6 +68,7 @@ Crazy_Time::Crazy_Time(LED_Fixture* new_fixture, LED_Group* new_group)
 	vars(hue, a_speed)->eor = _eor_Bounce;
 	vars(hue, a_acceleration)->eor = _eor_Bounce;
 
+	vars(hue, a_value)->value = random8();
 	vars(hue, a_speed)->min = -1;
 	vars(hue, a_speed)->max = 1;
 
@@ -74,6 +76,8 @@ Crazy_Time::Crazy_Time(LED_Fixture* new_fixture, LED_Group* new_group)
 
 	vars(fade, a_value)->max = 120;
 	vars(fade, a_value)->value = 40;
+
+	modifier = (float)random8() / 64.0 - 2.0;
 
 	END;
 }
@@ -87,9 +91,14 @@ void Crazy_Time::calculate_frame()
 {
 	START;
 
-	vars(position, a_acceleration)->value = (float(beatsin16(10,0,1000) + beatsin16(13,0,1000) + beatsin16(1,0,500) + beatsin16(40,0,500))/ 6000.0 - 0.25);
+	EVERY_N_SECONDS(10)
+	{
+		modifier = (float)random(255) / 64.0 - 2.0;
+	}
 
-	vars(fade, a_value)->value = (float(beatsin16(10, 500, 1000) + beatsin16(13, 500, 1000) + beatsin16(1, 200, 500) + beatsin16(40, 50, 500)) / 216.0);
+	vars(position, a_acceleration)->value = (float(beatsin16(10,0,1000) + beatsin16(13,0,1000) + beatsin16(1,0,500) + beatsin16(40,0,500))/ 6000.0 - 0.25) * modifier;
+
+	vars(fade, a_value)->value = (float(beatsin16(10, 500, 1000) + beatsin16(13, 500, 1000) + beatsin16(1, 200, 500) + beatsin16(40, 50, 500)) / 216.0) * modifier;
 
 	float new_start = vars(position) - vars(size) / 2;
 	float new_end = vars(position) + vars(size) / 2;

@@ -6,6 +6,8 @@ class Crazy_Time :
 protected:
 	const Animation_Name name = _Crazy_Time;
 
+	float modifier;
+
 public:
 	//Crazy_Time(LED_Fixture* new_fixture);
 	Crazy_Time(LED_Fixture* new_fixture, LED_Group* new_group);

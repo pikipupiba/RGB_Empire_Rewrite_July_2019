@@ -7,7 +7,6 @@ class Meteor :
 	public Animation
 {
 protected:
-	const Animation_Name name = _Meteor;
 
 public:
 	Meteor(LED_Fixture* new_fixture, LED_Group* new_group);

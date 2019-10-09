@@ -82,6 +82,7 @@ struct name_and_time
 };
 
 extern float speed_scale_factor;
+extern float speed_scale_factor_modifier;
 
 class Bug
 {

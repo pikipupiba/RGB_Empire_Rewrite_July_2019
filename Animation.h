@@ -37,7 +37,7 @@ class Animation
 
 	// Every animation should have a unique name.
 	// "Base" is t he name of the interface.
-	const Animation_Name name = _Base;
+	Animation_Name name;
 
 	// Moved this to the Animation_Controller class.
 	// Vector that contains all children of this interface. Push onto this vector in the header of each child.
@@ -61,6 +61,7 @@ class Animation
 
 
 	friend class Animation_Controller;
+	friend class Wifi_Class;
 
  public:
 	 // A struct that contains all the variables associated with the animation.
@@ -96,6 +97,7 @@ class Animation
 
 	CRGB* next_frame();
 
+	void change_var(Variable_Name new_var_name, Animation_Variable_Name new_ani_var_name, float new_value);
 
 	int next(int cur, int dir, bool mask[]);
 };

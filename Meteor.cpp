@@ -5,9 +5,11 @@ Meteor::Meteor(LED_Fixture* new_fixture, LED_Group* new_group)
 {
 	START;
 
+	name = _Meteor;
+
 	vars(position, a_value)->eor = _eor_Loop;
 	vars(position, a_speed)->value = float(random8(100,255)) / 200.0;
-	vars(fade, a_value)->value = 2;
+	vars(fade, a_value)->value = 3;
 	vars(hue, a_speed)->value = 0;
 
 	END;

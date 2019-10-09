@@ -13,7 +13,7 @@
 #include "arduino.h"
 
 // Had to define this in FastLED_esp32.h for some reason it didn't work here.
-#define FASTLED_ESP32_I2S true
+//#define FASTLED_ESP32_I2S true
 
 #include <FastLED.h>
 
@@ -22,8 +22,8 @@
 //**********************//
 #include "LED_Fixture.h"
 #include "Animation_Controller.h"
-#include "Display.h"
-#include "Physical_Input.h"
+//#include "Display.h"
+//#include "Physical_Input.h"
 #include "Wifi_Class.h"
 
 //**********************//
@@ -36,11 +36,10 @@ class Controller
  protected:
 	 LED_Fixture fixture;						// The object containing all our LEDs.
 	 Animation_Controller animation_controller;	// The animation that is currently running.
-	 Display display;							// The oled screen object.
+	 //Display display;							// The oled screen object.
 
-	 Physical_Input physical_input;	// The object that interacts with the buttons.
-	 Wifi_Class wifi_input;			// The object for sending and recieving wifi data.
-	 
+	 //Physical_Input physical_input;	// The object that interacts with the buttons.
+
  public:
 	Controller();
 	~Controller();

@@ -39,7 +39,7 @@ void Animation_Controller::run()
 {
 	START;
 
-	speed_scale_factor = FastLED.getFPS() > 0 ? float(100.0 / FastLED.getFPS()) : 1;
+	speed_scale_factor = FastLED.getFPS() > 0 ? float(100.0 / FastLED.getFPS() * speed_scale_factor_modifier) : 0.5;
 
 	erase_prev_frame();
 
@@ -88,29 +88,48 @@ void Animation_Controller::change_animation(Animation_Name new_animation_name)
 {
 	START;
 
-	if (!transitioning)
+	if (transitioning)
 	{
-		//delete mask;
+		delete current_animation;
 
-		transition_type = Transition_Type(random8(0, 3));
+		current_animation = next_animation;
 
-		transitioning = true;
+		next_animation = nullptr;
 
-		transition_start_time = millis();
+		transitioning = false;
+	}
 
-		next_animation = Animation::create(new_animation_name, fixture);
+	transitioning = true;
 
-		if (transition_type == _tt_Dissolve || transition_type == _tt_Wipe)
+	Serial.println(transition_type);
+
+	temp_trans_type = transition_type == _tt_Random ? Transition_Type(random(0, 4)) : transition_type;
+
+	// ^^^ BETTER CODE ^^^
+	//if (transition_type == _tt_Random)
+	//{
+	//	temp_trans_type = Transition_Type(random(0, 4));
+	//}
+	//else
+	//{
+	//	temp_trans_type = transition_type;
+	//}
+
+	transition_start_time = millis();
+
+	next_animation = Animation::create(new_animation_name, fixture);
+
+	if (temp_trans_type == _tt_Dissolve || temp_trans_type == _tt_Wipe)
+	{
+		mask = new bool[current_animation->num_leds];
+		num_tDissolved = 0;
+
+		for (int i = 0; i < current_animation->num_leds; i++)
 		{
-			mask = new bool[current_animation->num_leds];
-			num_tDissolved = 0;
-
-			for (int i = 0; i < current_animation->num_leds; i++)
-			{
-				mask[i] = false;
-			}
+			mask[i] = false;
 		}
 	}
+
 
 	END;
 }
@@ -168,7 +187,7 @@ void Animation_Controller::show()
 
 	if (transitioning)
 	{
-		switch (transition_type)
+		switch (temp_trans_type)
 		{
 		case _tt_Fade:
 			transition_Fade();
@@ -215,6 +234,11 @@ void Animation_Controller::show()
 	}
 
 	END;
+}
+
+void Animation_Controller::set_transition(Transition_Type new_transition_type)
+{
+	transition_type = new_transition_type;
 }
 
 void Animation_Controller::transition_Fade()

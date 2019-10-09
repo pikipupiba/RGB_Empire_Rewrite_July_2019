@@ -4,7 +4,10 @@
 
 #include "Animation.h"
 
+#include <WiFi.h>
+#include <WiFiUdp.h>
 #include <ArtnetWifi.h>
+#include "Wifi_Class.h"
 
 #include "Tasks.h"
 
@@ -17,10 +20,14 @@ protected:
 	ArtnetWifi artnet;
 	const int start_universe = 0;
 
-	int num_universes;
+	static int num_universes;
+	static int total_num_leds;
 	bool* universes_received;
 	bool send_frame;
-	int previous_data_length;
+	static int previous_data_length;
+	int start_pos;
+
+	static bool started;
 
 public:
 	Artnet(LED_Fixture* new_fixture, LED_Group* new_group);

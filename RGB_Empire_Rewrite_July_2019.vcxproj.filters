@@ -135,6 +135,15 @@
     <ClInclude Include="resource.h">
       <Filter>DO NOT TOUCH</Filter>
     </ClInclude>
+    <ClInclude Include="Multi_Meteor.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Color_Waves.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Confetti.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LED_Arrangement.cpp">
@@ -223,6 +232,15 @@
     </ClCompile>
     <ClCompile Include="Wifi_Class.cpp">
       <Filter>5. Input and Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Multi_Meteor.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Color_Waves.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Confetti.cpp">
+      <Filter>4. Animations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
