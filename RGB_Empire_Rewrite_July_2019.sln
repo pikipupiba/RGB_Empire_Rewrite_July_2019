@@ -5,7 +5,48 @@ VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RGB_Empire_Rewrite_July_2019", "RGB_Empire_Rewrite_July_2019.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FastLED-3.3.2", "Libraries\FastLED\3.3.2\FastLED\FastLED-3.3.2.vcxitems", "{59446662-0FEA-4359-B365-C3CA7DBF61E6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SSD_13XX-1.0", "Libraries\SSD_13XX\1.0\SSD_13XX\SSD_13XX-1.0.vcxitems", "{8F1D6CC4-6549-4B8D-8AF0-A0454F911575}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPI-1.0", "Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems", "{E6C23868-B4F1-41E4-A101-8DF758B849E2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WiFi-1.0", "Libraries\WiFi\1.0\WiFi\WiFi-1.0.vcxitems", "{92A4F555-76F2-48DD-A42C-538377B48286}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EasyButton-1.0.1", "Libraries\EasyButton\1.0.1\EasyButton\EasyButton-1.0.1.vcxitems", "{0EA3A49D-37E0-410B-B905-A6A989DB426D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ESP32-1.0", "Libraries\ESP32\1.0\ESP32\ESP32-1.0.vcxitems", "{C0E22943-8B01-4689-B018-731759E73142}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsyncTCP-1.0.3", "Libraries\AsyncTCP\1.0.3\AsyncTCP\AsyncTCP-1.0.3.vcxitems", "{C4C9C8F7-DE54-424E-821E-AB173C780B3B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtnetWifi-master-1.2.2", "Libraries\ArtnetWifi-master\1.2.2\ArtnetWifi-master\ArtnetWifi-master-1.2.2.vcxitems", "{19CC7F79-4E6F-4F94-B06F-87F12606B734}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FS-1.0", "Libraries\FS\1.0\FS\FS-1.0.vcxitems", "{FBB3E0C4-AFF8-4A03-AB0B-F3F380EEEB86}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPIFFS-1.0", "Libraries\SPIFFS\1.0\SPIFFS\SPIFFS-1.0.vcxitems", "{DFE81D7E-FE92-4E36-BC16-D55AC1E0A177}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Libraries\EasyButton\1.0.1\EasyButton\EasyButton-1.0.1.vcxitems*{0ea3a49d-37e0-410b-b905-a6a989db426d}*SharedItemsImports = 9
+		Libraries\ArtnetWifi-master\1.2.2\ArtnetWifi-master\ArtnetWifi-master-1.2.2.vcxitems*{19cc7f79-4e6f-4f94-b06f-87f12606b734}*SharedItemsImports = 9
+		Libraries\FastLED\3.3.2\FastLED\FastLED-3.3.2.vcxitems*{59446662-0fea-4359-b365-c3ca7dbf61e6}*SharedItemsImports = 9
+		Libraries\SSD_13XX\1.0\SSD_13XX\SSD_13XX-1.0.vcxitems*{8f1d6cc4-6549-4b8d-8af0-a0454f911575}*SharedItemsImports = 9
+		Libraries\WiFi\1.0\WiFi\WiFi-1.0.vcxitems*{92a4f555-76f2-48dd-a42c-538377b48286}*SharedItemsImports = 9
+		Libraries\ESP32\1.0\ESP32\ESP32-1.0.vcxitems*{c0e22943-8b01-4689-b018-731759e73142}*SharedItemsImports = 9
+		Libraries\AsyncTCP\1.0.3\AsyncTCP\AsyncTCP-1.0.3.vcxitems*{c4c9c8f7-de54-424e-821e-ab173c780b3b}*SharedItemsImports = 9
+		Libraries\ArtnetWifi-master\1.2.2\ArtnetWifi-master\ArtnetWifi-master-1.2.2.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\EasyButton\1.0.1\EasyButton\EasyButton-1.0.1.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\ESP32\1.0\ESP32\ESP32-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\FastLED\3.3.2\FastLED\FastLED-3.3.2.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\SSD_13XX\1.0\SSD_13XX\SSD_13XX-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\WiFi\1.0\WiFi\WiFi-1.0.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Libraries\SPIFFS\1.0\SPIFFS\SPIFFS-1.0.vcxitems*{dfe81d7e-fe92-4e36-bc16-d55ac1e0a177}*SharedItemsImports = 9
+		Libraries\SPI\1.0\SPI\SPI-1.0.vcxitems*{e6c23868-b4f1-41e4-a101-8df758b849e2}*SharedItemsImports = 9
+		Libraries\FS\1.0\FS\FS-1.0.vcxitems*{fbb3e0c4-aff8-4a03-ab0b-f3f380eeeb86}*SharedItemsImports = 9
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
@@ -18,6 +59,18 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{59446662-0FEA-4359-B365-C3CA7DBF61E6} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{8F1D6CC4-6549-4B8D-8AF0-A0454F911575} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{E6C23868-B4F1-41E4-A101-8DF758B849E2} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{92A4F555-76F2-48DD-A42C-538377B48286} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{0EA3A49D-37E0-410B-B905-A6A989DB426D} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{C0E22943-8B01-4689-B018-731759E73142} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{C4C9C8F7-DE54-424E-821E-AB173C780B3B} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{19CC7F79-4E6F-4F94-B06F-87F12606B734} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{FBB3E0C4-AFF8-4A03-AB0B-F3F380EEEB86} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
+		{DFE81D7E-FE92-4E36-BC16-D55AC1E0A177} = {25B2D5DF-65CD-4B84-AEE8-890D01BD5B36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD5F92B5-FFC2-4438-BE8B-A189D0B3BFB0}

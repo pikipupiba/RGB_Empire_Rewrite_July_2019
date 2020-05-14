@@ -6,12 +6,11 @@
     Author:     DESKTOP-UV9PIGM\pikipupiba
 */
 
-
-
 //**********************//
 //	Helper Files		//
 //**********************//
-#include "Debug.h"
+
+#include "Bug.h"
 
 //**********************//
 //	Custom Libraries	//
@@ -19,34 +18,39 @@
 #include "Controller.h"
 
 // Create the pointer to our controller
-Controller *controller;
-
+Controller* controller;
 
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
-	// Delay to allow uploader time to fix unstable software.
-	// Reduce or remove this for production.
-	delay(3000);
+	delay(500);
 
 	Serial.begin(115200);
 
-	//Serial.println("start");
+	// Delay to allow uploader time to fix unstable software.
+	// Reduce or remove this for production.
+	delay(500);
+
+	START;
 
 	// Create the controller object
 	// It initializes everything based on the values in Fixture_Parameters.h
 	controller = new Controller();
 
+	MEM;
+	END;
 }
 
 
 void loop()
 {
-	//Serial.println("loop");
-
+	START;
 
 	controller->run();
 
-	fps(5);
+	// Obsolete ever since I discovered FastLED.getFPS()
+	//BUG1(Bug::fps(500, 5));
+
+	END;
 
 }

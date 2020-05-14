@@ -1,105 +1,251 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="DO NOT TOUCH">
+      <UniqueIdentifier>{6b01bfff-3eda-4433-be9c-532f27477b3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DO NOT TOUCH\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="1. Top Level Classes">
+      <UniqueIdentifier>{dc43812f-da56-462f-9304-5ceb3452938d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. LED_Structure_Classes">
+      <UniqueIdentifier>{a1836210-3e2a-4109-91db-52ae24b8c3c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Variable_Classes">
+      <UniqueIdentifier>{48dcf8c9-dd65-405c-8204-731189bc8f51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Animations">
+      <UniqueIdentifier>{6c323e37-c0fd-4d6e-b62e-415fa6ecd1b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5. Input and Output">
+      <UniqueIdentifier>{3cf441b6-0db2-46dd-8573-1e1e36b8eb4b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="RGB_Empire_Rewrite_July_2019.ino" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.RGB_Empire_Rewrite_July_2019.vsarduino.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Physical_Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UDP_Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tasks.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="LED_Arrangement.h">
+      <Filter>2. LED_Structure_Classes</Filter>
     </ClInclude>
     <ClInclude Include="LED_Fixture.h">
-      <Filter>Header Files</Filter>
+      <Filter>2. LED_Structure_Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pattern.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="LED_Group.h">
+      <Filter>2. LED_Structure_Classes</Filter>
     </ClInclude>
     <ClInclude Include="LED_Strip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="My_Enums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Oscillator.h">
-      <Filter>Header Files</Filter>
+      <Filter>2. LED_Structure_Classes</Filter>
     </ClInclude>
     <ClInclude Include="Fixture_Parameters.h">
-      <Filter>Header Files</Filter>
+      <Filter>2. LED_Structure_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Wave.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="All_Animations.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Artnet.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Crazy_Time.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Glitter.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Meteor.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Mr_Poopy_Worm.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Rainbow_Wave.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Rainbow_Wave_With_Glitter.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Sinelon.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Solid_Color.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Template_Animation.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Oscillator.h">
+      <Filter>1. Top Level Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>1. Top Level Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_Controller.h">
+      <Filter>1. Top Level Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Bug.h">
+      <Filter>1. Top Level Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>1. Top Level Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="My_Enums.h">
+      <Filter>1. Top Level Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Bounded_Variable.h">
+      <Filter>3. Variable_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_Variables.h">
+      <Filter>3. Variable_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_Variable.h">
+      <Filter>3. Variable_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.h">
+      <Filter>5. Input and Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Display_Test.h">
+      <Filter>5. Input and Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Physical_Input.h">
+      <Filter>5. Input and Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Tasks.h">
+      <Filter>5. Input and Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Wifi_Class.h">
+      <Filter>5. Input and Output</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.RGB_Empire_Rewrite_July_2019.vsarduino.h">
+      <Filter>DO NOT TOUCH</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>DO NOT TOUCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Multi_Meteor.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Color_Waves.h">
+      <Filter>4. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Confetti.h">
+      <Filter>4. Animations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Physical_Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UDP_Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tasks.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="LED_Arrangement.cpp">
+      <Filter>2. LED_Structure_Classes</Filter>
     </ClCompile>
     <ClCompile Include="LED_Fixture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>2. LED_Structure_Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pattern.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="LED_Group.cpp">
+      <Filter>2. LED_Structure_Classes</Filter>
     </ClCompile>
     <ClCompile Include="LED_Strip.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>2. LED_Structure_Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Create_Strip_Arrangements.cpp">
+      <Filter>2. LED_Structure_Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Wave.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Artnet.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Crazy_Time.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Glitter.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Meteor.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Mr_Poopy_Worm.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Rainbow_Wave.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Rainbow_Wave_With_Glitter.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Sinelon.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Solid_Color.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Template_Animation.cpp">
+      <Filter>4. Animations</Filter>
     </ClCompile>
     <ClCompile Include="Oscillator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>1. Top Level Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Fixture_Parameters.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Animation.cpp">
+      <Filter>1. Top Level Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Controller.cpp">
+      <Filter>1. Top Level Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Bug.cpp">
+      <Filter>1. Top Level Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>1. Top Level Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Variable.cpp">
+      <Filter>3. Variable_Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Variables.cpp">
+      <Filter>3. Variable_Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Bounded_Variable.cpp">
+      <Filter>3. Variable_Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>5. Input and Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Display_Test.cpp">
+      <Filter>5. Input and Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Physical_Input.cpp">
+      <Filter>5. Input and Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Tasks.cpp">
+      <Filter>5. Input and Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Wifi_Class.cpp">
+      <Filter>5. Input and Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Multi_Meteor.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Color_Waves.cpp">
+      <Filter>4. Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Confetti.cpp">
+      <Filter>4. Animations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RGB_Empire_Rewrite_July_2019.rc">
-      <Filter>Resource Files</Filter>
+      <Filter>DO NOT TOUCH\Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>

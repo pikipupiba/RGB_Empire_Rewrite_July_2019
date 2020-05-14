@@ -16,7 +16,12 @@ then waits for a notification that it is done.
 */
 void FastLED_Show_ESP32()
 {
+	START;
+
+	yield();
+
 	if (user_Task_Handle == 0) {
+
 		// -- Store the handle of the current task, so that the show task can
 		//    notify it when it's done
 		user_Task_Handle = xTaskGetCurrentTaskHandle();
@@ -29,6 +34,8 @@ void FastLED_Show_ESP32()
 		ulTaskNotifyTake(pdTRUE, xMaxBlockTime);
 		user_Task_Handle = 0;
 	}
+
+	END;
 }
 
 /** show Task
@@ -38,6 +45,7 @@ void FastLED_Show_Task(void* pvParameters)
 {
 	// -- run forever...
 	for (;;) {
+
 		// -- Wait for the trigger
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 
@@ -46,12 +54,13 @@ void FastLED_Show_Task(void* pvParameters)
 
 		// -- Notify the calling task
 		xTaskNotifyGive(user_Task_Handle);
+
 	}
 }
 
 void create_tasks()
 {
-
+	START;
 
 	// Print the core the main code is running on.
 	// Make sure to change FASTLED_SHOW_CORE if it is the same as this one.
@@ -62,5 +71,5 @@ void create_tasks()
 	// -- Create the FastLED show task
 	xTaskCreatePinnedToCore(FastLED_Show_Task, "FastLED_Show_Task", 2048, NULL, 2, &FastLED_Show_Task_Handle, FASTLED_SHOW_CORE);
 
-
+	END;
 }

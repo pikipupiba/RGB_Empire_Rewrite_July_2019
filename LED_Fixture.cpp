@@ -4,109 +4,140 @@
 
 #include "LED_Fixture.h"
 
+int fixture_num_leds = 0;
+
 //**********************//
 //	Protected Methods	//
 //**********************//
 
 void LED_Fixture::create_strips()
 {
+	START;
 
-	fixture_num_leds = 0;
+	// TODO: I don't think this is neccesary, but don't know how to get rid of it.
 	int num_leds_so_far = 0;
-	num_strips = fixture_parameters.num_strips;
 
-
-	// Can use template metaprogramming to fix this section.
-	for (int i = 0; i < num_strips; i++)
-	{
-		if (i == 0)
-		{
-			FastLED.addLeds<WS2812B, strip_parameters[0].strip_pin, GRB>
-				(g_leds, num_leds_so_far, strip_parameters[i].num_leds).setCorrection(TypicalLEDStrip);
-
-			num_leds_so_far += strip_parameters[i].num_leds;
-		}
-		else if (i == 1)
-		{
-			FastLED.addLeds<WS2812B, strip_parameters[1].strip_pin, GRB>
-				(g_leds, num_leds_so_far, strip_parameters[i].num_leds).setCorrection(TypicalLEDStrip);
-
-			num_leds_so_far += strip_parameters[i].num_leds;
-		}
-		else if (i == 2)
-		{
-			FastLED.addLeds<WS2812B, strip_parameters[2].strip_pin, GRB>
-				(g_leds, num_leds_so_far, strip_parameters[i].num_leds).setCorrection(TypicalLEDStrip);
-
-			num_leds_so_far += strip_parameters[i].num_leds;
-		}
-		else if (i == 3)
-		{
-			FastLED.addLeds<WS2812B, strip_parameters[3].strip_pin, GRB>
-				(g_leds, num_leds_so_far, strip_parameters[i].num_leds).setCorrection(TypicalLEDStrip);
-
-			num_leds_so_far += strip_parameters[i].num_leds;
-		}
-		else if (i == 4)
-		{
-			FastLED.addLeds<WS2812B, strip_parameters[4].strip_pin, GRB>
-				(g_leds, num_leds_so_far, strip_parameters[i].num_leds).setCorrection(TypicalLEDStrip);
-
-			num_leds_so_far += strip_parameters[i].num_leds;
-		}
-		else if (i == 5)
-		{
-			FastLED.addLeds<WS2812B, strip_parameters[5].strip_pin, GRB>
-				(g_leds, num_leds_so_far, strip_parameters[i].num_leds).setCorrection(TypicalLEDStrip);
-
-			num_leds_so_far += strip_parameters[i].num_leds;
-		}
-		else if (i == 6)
-		{
-			FastLED.addLeds<WS2812B, strip_parameters[6].strip_pin, GRB>
-				(g_leds, num_leds_so_far, strip_parameters[i].num_leds).setCorrection(TypicalLEDStrip);
-
-			num_leds_so_far += strip_parameters[i].num_leds;
-		}
-		else if (i == 7)
-		{
-			FastLED.addLeds<WS2812B, strip_parameters[7].strip_pin, GRB>
-				(g_leds, num_leds_so_far, strip_parameters[i].num_leds).setCorrection(TypicalLEDStrip);
-
-			num_leds_so_far += strip_parameters[i].num_leds;
-		}
-
-		led_strips[i] = new LED_Strip
-			(i,
-				new CRGBSet(g_leds(fixture_num_leds, num_leds_so_far - 1)),
-				strip_parameters[i]);
-
-		fixture_num_leds = num_leds_so_far;
-	}
+	// Create the strips using this template.
+	stripLoop<fixture_parameters.num_strips>(num_leds_so_far);
 
 	FastLED.setMaxPowerInVoltsAndMilliamps(volts, milli_amps);
 
 	g_leds.fill_solid(CRGB::Black);
+
+	MEM;
+
+	END;
 }
 
 void LED_Fixture::print_info()
 {
-	for (int i = 0; i < num_strips; i++)
+	for (auto& strip: led_strips)
 	{
-		led_strips[i]->print_info();
+		strip.print_info();
 	}
+}
+
+LED_Arrangement* LED_Fixture::make_arrangement(Fixture_Display_Mode new_fixture_display_mode)
+{
+	START;
+
+	LED_Arrangement* temp_arrangement = new LED_Arrangement(_Master_Arrangement);
+
+	switch (new_fixture_display_mode)
+	{
+	case _fdm_Default:	// same as parallel
+	case _fdm_Parallel:
+		for (auto& strip : led_strips)
+		{
+			temp_arrangement->add(strip.arrangement());
+		}
+		break;
+
+	case _fdm_Seperate:
+		for (auto& strip : led_strips)
+		{
+			temp_arrangement->extend(strip.arrangement());
+		}
+		break;
+
+	case _fdm_Sequential:
+		//TODO: same as parallel for now, need to figure out how to manipulate groups for this
+		for (auto& strip : led_strips)
+		{
+			temp_arrangement->add(strip.arrangement());
+		}
+		break;
+
+	default:	// same as parallel
+		for (auto& strip : led_strips)
+		{
+			temp_arrangement->add(strip.arrangement());
+		}
+	}
+
+	END;
+
+	return temp_arrangement;
+}
+
+LED_Arrangement* LED_Fixture::make_arrangement()
+{
+	START;
+
+	LED_Arrangement* temp_arrangement = new LED_Arrangement(_Master_Arrangement);
+
+	switch (fixture_display_mode)
+	{
+	case _fdm_Default:	// same as parallel
+	case _fdm_Parallel:
+		for (auto& strip : led_strips)
+		{
+			temp_arrangement->add(strip.arrangement());
+		}
+		break;
+
+	case _fdm_Seperate:
+		for (auto& strip : led_strips)
+		{
+			temp_arrangement->extend(strip.arrangement());
+		}
+		break;
+
+	case _fdm_Sequential:
+		//TODO: same as parallel for now, need to figure out how to manipulate groups for this
+		for (auto& strip : led_strips)
+		{
+			temp_arrangement->add(strip.arrangement());
+		}
+		break;
+
+	default:	// same as parallel
+		for (auto& strip : led_strips)
+		{
+			temp_arrangement->add(strip.arrangement());
+		}
+	}
+
+	END;
+
+	return temp_arrangement;
 }
 
 //**********************//
 //	Public Methods		//
 //**********************//
 
-LED_Fixture::LED_Fixture()
+LED_Fixture::LED_Fixture(Fixture_Parameters new_fixture_params)
+	:fixture_params(new_fixture_params),
+	fixture_display_mode(_fdm_Default)
 {
+	START;
 
 	create_strips();
 
 	//initilize_vars();
+
+	END;
 
 }
 
@@ -115,3 +146,44 @@ LED_Fixture::~LED_Fixture()
 }
 
 
+void LED_Fixture::print_arrangement_info(Strip_Display_Mode new_display_mode)
+{
+	START;
+
+	for (auto& strip : led_strips)
+	{
+		strip.print_arrangement_info(new_display_mode);
+	}
+
+	END;
+}
+
+template <int pin>
+void LED_Fixture::setStrip(int num_leds_so_far, int new_num_leds)
+{
+	FastLED.addLeds<WS2812B, pin, GRB>
+		(g_leds, num_leds_so_far, new_num_leds).setCorrection(TypicalLEDStrip);
+
+}
+
+template<int n>
+void LED_Fixture::stripLoop(int num_leds_so_far)
+{
+	setStrip<strip_parameters[n - 1].strip_pin>(num_leds_so_far, strip_parameters[n-1].num_leds);
+	num_leds_so_far += strip_parameters[n - 1].num_leds;
+
+	led_strips.push_back(
+		LED_Strip
+		(n-1,
+		new CRGBSet(g_leds(fixture_num_leds, num_leds_so_far - 1)),
+		strip_parameters[n-1])
+	);
+
+	fixture_num_leds = num_leds_so_far;
+
+	stripLoop<n - 1>(num_leds_so_far);
+}
+
+template<>
+void LED_Fixture::stripLoop<0>(int num_leds_so_far) {};
+ 

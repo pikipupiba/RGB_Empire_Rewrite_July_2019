@@ -5,32 +5,35 @@
 #include "Controller.h"
 #include "Tasks.h"
 
-void Controller::create_fixture()
+Controller::Controller():
+	fixture(LED_Fixture(fixture_parameters)),
+	animation_controller(Animation_Controller::create(&fixture))
+	//display(Display::create()),
+	//physical_input(Physical_Input())
 {
-}
+	START;
 
-Controller::Controller()
-{
+	create_tasks();	// Start all the independently managed tasks.
 
-	setup_physical_input();		// initialize physical buttons and knobs.
-	setup_UDP_input();			// initialize UDP Input ports.
+	// Print some info about the fixture and animation to make sure everything initialized correctly.
+	fixture.print_info();
+	animation_controller.print_info();
 
-	create_tasks();				// Start all the independently managed tasks.
+	//physical_input.check();	// TODO: implement this
 
-	fixture = new LED_Fixture();
+	if (Wifi_Class::connected == false)
+	{
+		Wifi_Class::start_wifi(&animation_controller);
+	}
 
-	fixture->print_info();
+	//wifi_input.connect();	// TODO: implement this
+	//wifi_input.check();	// TODO: implement this
 
-	current_animation = new Animation(fixture);
+	FastLED.setBrightness(35);
 
-	current_animation->print_info();
+	MEM;
 
-	FastLED.setBrightness(255);
-
-	FastLED_Show_ESP32();
-
-	//Debug.Display_Memory(" after controller initialization.");
-
+	END;
 }
 
 Controller::~Controller()
@@ -40,17 +43,22 @@ Controller::~Controller()
 
 void Controller::run()
 {
+	START;
 
-	check_physical_input();
+	// Check for input from buttons and wifi.
+	//physical_input.check();
+	Wifi_Class::get_udp_input();
 
-	check_UDP_input();
+	//EVERY_N_MILLISECONDS(250)
+	//{
+	//	display.update();	// Update the oled screen.
+	//}
 
-	//change();
+	//delay(20);
 
-	current_animation->run();
+	animation_controller.run();
 
 	FastLED_Show_ESP32();
 
+	END;
 }
-
-
