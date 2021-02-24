@@ -5,32 +5,79 @@
 #include "Controller.h"
 #include "Tasks.h"
 
-void Controller::create_fixture()
+// connect to wifi – returns true if successful or false if not
+// TODO: move this to Wifi_Class
+//bool connect_wifi(void)
+//{
+	//START;
+
+	//char* ssid = "Trap_House";
+	//char* password = "ThIsHoUsEisatrap72";
+
+
+	//boolean state = true;
+	//int i = 0;
+
+	//WiFi.begin(ssid, password);
+	//Serial.println("");
+	//Serial.println("Connecting to WiFi");
+
+	//// Wait for connection
+	//Serial.print("Connecting");
+	//while (WiFi.status() != WL_CONNECTED)
+	//{
+	//	delay(250);
+	//	Serial.print(".");
+	//	if (i > 40) {
+	//		state = false;
+	//		break;
+	//	}
+	//	i++;
+	//}
+	//if (state) {
+	//	Serial.println("");
+	//	Serial.print("Connected to ");
+	//	Serial.println(ssid);
+	//	Serial.print("IP address: ");
+	//	Serial.println(WiFi.localIP());
+	//}
+	//else {
+	//	Serial.println("");
+	//	Serial.println("Connection failed.");
+	//}
+
+	//MEM;
+	//END;
+
+	//return state;
+//}
+
+Controller::Controller():
+	fixture(LED_Fixture(fixture_parameters)),
+	animation_controller(Animation_Controller::create(&fixture)),
+	display(Display::create()),
+	physical_input(Physical_Input())
 {
-}
+	START;
 
-Controller::Controller()
-{
+	create_tasks();	// Start all the independently managed tasks.
 
-	setup_physical_input();		// initialize physical buttons and knobs.
-	setup_UDP_input();			// initialize UDP Input ports.
+	// Print some info about the fixture and animation to make sure everything initialized correctly.
+	fixture.print_info();
+	animation_controller.print_info();
 
-	create_tasks();				// Start all the independently managed tasks.
+	physical_input.check();	// TODO: implement this
 
-	fixture = new LED_Fixture();
+	//connect_wifi();
 
-	fixture->print_info();
-
-	current_animation = new Animation(fixture);
-
-	current_animation->print_info();
+	//wifi_input.connect();	// TODO: implement this
+	//wifi_input.check();	// TODO: implement this
 
 	FastLED.setBrightness(255);
 
-	FastLED_Show_ESP32();
+	MEM;
 
-	//Debug.Display_Memory(" after controller initialization.");
-
+	END;
 }
 
 Controller::~Controller()
@@ -40,17 +87,20 @@ Controller::~Controller()
 
 void Controller::run()
 {
+	START;
 
-	check_physical_input();
+	// Check for input from buttons and wifi.
+	//physical_input.check();
+	//wifi_input.check();
 
-	check_UDP_input();
+	EVERY_N_MILLISECONDS(250)
+	{
+		display.update();	// Update the oled screen.
+	}
 
-	//change();
-
-	current_animation->run();
+	animation_controller.run();
 
 	FastLED_Show_ESP32();
 
+	END;
 }
-
-

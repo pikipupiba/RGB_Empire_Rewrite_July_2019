@@ -7,31 +7,96 @@
 #define _MY_ENUMS_h
 
 #include "arduino.h"
+#include <vector>
+#include <FastLED.h>
+#include "Bug.h"
+
+#define NUM_AUTOPLAY_ANIMATIONS 9
+
+enum Animation_Name
+{
+	_Rainbow_Wave,
+	_Glitter,
+	_Rainbow_Wave_With_Glitter,
+	_Sinelon,
+	_Mr_Poopy_Worm,
+	_Solid_Color,
+	_Meteor,
+	_Wave,
+	_Crazy_Time,
+
+	_Artnet,
+
+	_Default,
+	_Base,
+	_Template_Animation
+};
 
 // Shapes from 0-9 are strips.
 // Shapes from 10-99 are fixtures.
 enum Shape
 {
-	Linear = 0,
-	Folded = 1,
-	Panel = 2,
-	Circle = 3,
-	Spiral = 4,
-	Plant = 10,
-	Tree = 11,
-	Vertical_Lamp = 12
+	_s_Linear,
+	_s_Folded,
+	_s_Panel,
+	_s_Circle,
+	_s_Polygon,
+	_s_Spiral,
+	_s_Plant = 10,
+	_s_Tree = 11,
+	_s_Vertical_Lamp = 12
 };
 
-enum Display_Mode
+enum End_Of_Range
 {
-	Default = 0,
-	Parallel = 1,
-	Sequential = 2,
-	Every_Other_Sequential = 3
+	_eor_Default,
+	_eor_Loop,
+	_eor_Bounce,
+	_eor_Stop
+};
+
+enum Display_Display_Mode
+{
+	_ddm_Default,
+	_ddm_SD_Card,
+	_ddm_Test
+};
+
+// TODO: make an iterator for this enum
+enum Strip_Display_Mode
+{
+	_sdm_Default,
+	_sdm_Left_To_Right,
+	_sdm_Around,
+	_sdm_Middle_Out,
+	_Master_Arrangement
+};
+
+enum Fixture_Display_Mode
+{
+	_fdm_Default,
+	_fdm_Parallel,
+	_fdm_Seperate,
+	_fdm_Sequential,
+	_fdm_Every_Other_Sequential,
+};
+
+enum Transition_Type
+{
+	_tt_Fade,
+	_tt_Wipe,
+	_tt_Dissolve
+};
+
+enum Input_Type
+{
+	_it_Button,
+	_it_Encoder,
+	_it_Potentiometer,
+	_it_Switch
 };
 
 // Use structs to make passing parameters into methods fast and easy.
-
 struct Strip_Parameters
 {
 	const int strip_pin;
@@ -51,37 +116,30 @@ struct Fixture_Parameters
 	const Strip_Parameters* strip_parameters[8];
 };
 
-// Easy way to store all the parameters an animation or pattern needs to evolve over time.
-struct Animation_Parameters
+enum Variable_Name
 {
-	float brightness = 255;
-	float brightness_speed = 0;
-	float brightness_acceleration = 0;
-	float brightness_offset = 0;
+	brightness,
+	position,
+	hue,
+	size,
+	density,
+	fade
+};
 
-	float position = 0;
-	float speed = 0.5;
-	float acceleration = 0;
-	float position_offset = 0;
+enum Bounded_Variable_Name
+{
+	b_value,
+	b_min,
+	b_max
+};
 
-	float hue = 0;
-	float hue_speed = 0.5;
-	float hue_acceleration = 0;
-	float hue_offset = 0;
-
-	float size = 5;
-	float size_speed = 0;
-	float size_acceleration = 0;
-	float size_offset = 0;
-
-	float range_start = 0;
-	float range_end = 0;
-
-	int current_palette = 0;
-	int target_palete = 0;
-	float cycle_palettes = 0;	// =0 means palette does not cycle, >0 equals the time between palette changes
-
-	int stage = 0;				// =0 means it has not started and must be initialized, >0 can be used to keep track of various stages
+enum Animation_Variable_Name
+{
+	a_value,
+	a_speed,
+	a_acceleration,
+	a_offset,
+	a_eor
 };
 
 #endif

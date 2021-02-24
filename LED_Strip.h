@@ -7,8 +7,11 @@
 
 
 #include "arduino.h"
-#include "FastLED.h"
+#include <FastLED.h>
 #include "My_Enums.h"
+#include <vector>
+#include "Bug.h"
+#include "LED_Arrangement.h"
 
 
 class LED_Strip
@@ -19,22 +22,29 @@ class LED_Strip
 
 	 CRGBSet* leds;
 
-	 int num_leds;
-	 int leds_per_meter;
-	 Shape shape;
+	 Strip_Parameters strip_parameters;
 
-	 int length_in_leds;
-	 int width_in_leds;
+	 Strip_Display_Mode strip_display_mode;
+
+	 std::vector<LED_Arrangement*> arrangements;
 
 	 friend class LED_Fixture;
-	 friend class Pattern;
 
 	 void print_info();
+	 
 
  public:
 
 	LED_Strip(int new_strip_index, CRGBSet* leds, Strip_Parameters new_strip_parameters);
 	~LED_Strip();
+
+	LED_Arrangement* get_led_arrangement(Strip_Display_Mode new_strip_display_mode);
+
+	LED_Arrangement* arrangement();
+
+	LED_Arrangement* operator[](Strip_Display_Mode new_strip_display_mode);
+
+	void print_arrangement_info(Strip_Display_Mode new_display_mode);
 };
 
 #endif

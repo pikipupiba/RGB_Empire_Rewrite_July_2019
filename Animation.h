@@ -15,44 +15,95 @@
 #define _ANIMATION_h
 
 #include "arduino.h"
-#include "Pattern.h"
+#include <vector>
+#include <typeinfo>
+
+#include <FastLED.h>
 #include "Oscillator.h"
 #include "My_Enums.h"
+#include "LED_Arrangement.h"
 #include "LED_Fixture.h"
+#include "Animation_Variables.h"
+#include "Bug.h"
 
-constexpr int max_number_of_patterns = 8;
-constexpr int max_number_of_parameters = 32;
+
+// Factory method eliminates this.
+//extern std::vector<Animation_Class_And_Name> animation_list;
+
 
 class Animation
 {
  protected:
 
-	 int animation_ID;
+	// Every animation should have a unique name.
+	// "Base" is t he name of the interface.
+	const Animation_Name name = _Base;
 
-	 LED_Fixture* fixture;
+	// Moved this to the Animation_Controller class.
+	// Vector that contains all children of this interface. Push onto this vector in the header of each child.
+	//static std::vector<Animation> animation_list;
 
-	 Pattern* pattern[max_number_of_patterns];
+	// Vector to contain any other animation objects this one creates.
+	std::vector<Animation*> animations;
 
-	 int num_patterns;
+	// A pointer to the fixture object that contains all necessary information about the LEDs.
+	LED_Fixture* fixture;
 
-	 Animation_Parameters animation_parameters[max_number_of_parameters];
+	LED_Arrangement* arrangement;
 
-	 Oscillator osc[max_number_of_parameters];
+	LED_Group* group;
 
-	 friend class Pattern;
+	// Each animation object should store its own LED data to be combined by the animation_controller.
+	// Maybe store led data like this?
+	int num_leds;
+	CRGB* leds;
+	CRGBSet* led_set;
 
-	 void update_vars();
+
+	friend class Animation_Controller;
 
  public:
+	 // A struct that contains all the variables associated with the animation.
+	 Animation_Variables vars;
 
+	Animation(Animation_Name new_animation_name, LED_Fixture* new_fixture);
 	Animation(LED_Fixture* new_fixture);
-	~Animation();
+	Animation(LED_Fixture* new_fixture, LED_Group* new_group);
 
+	static Animation* create(Animation_Name new_animation_name, LED_Fixture* new_fixture);
+	static Animation* create(Animation_Name new_animation_name, LED_Fixture* new_fixture, LED_Group* new_group);
+
+	void add_aniamtion(Animation_Name new_animation_name, LED_Fixture* new_fixture, LED_Group* new_group);
+
+	virtual ~Animation();
+
+	// Print out all relevant animation information.
 	void print_info();
+	void print_arrangement_info();
 
-	void run();
+	virtual void update_vars();
 
+	// Erase the previous frame to allow seemless overlapping of animations.
+	// Not sure if this is necessary now that each animation has its own led data.
+	virtual void erase_previous_frame();
+
+
+	// Do whatever is necessary to advance the animation to the next frame.
+	virtual void run();
+
+	// Generate the next frame of the animation.
+	virtual void calculate_frame();
+
+	CRGB* next_frame();
+
+
+	int next(int cur, int dir, bool mask[]);
 };
+
+//std::vector<boost::variant<first, second> > vec2;
+//std::vector<std::unique_ptr<Animation>> vec3;
+
+#include "All_Animations.h"
 
 #endif
 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding ="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+  <PropertyGroup Label="Globals" >
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{59446662-0fea-4359-b365-c3ca7dbf61e6}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)bitswap.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)colorpalettes.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)colorutils.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)FastLED.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)hsv2rgb.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)lib8tion.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)noise.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)platforms.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)power_mgt.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)wiring.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)bitswap.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)chipsets.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)color.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)colorpalettes.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)colorutils.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)controller.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)cpp_compat.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)dmx.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)FastLED.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastled_config.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastled_delay.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastled_progmem.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastpin.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastspi.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastspi_bitbang.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastspi_dma.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastspi_nop.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastspi_ref.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)fastspi_types.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)hsv2rgb.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)led_sysdefs.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)lib8tion.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)noise.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)pixelset.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)pixeltypes.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)platforms.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)power_mgt.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)keywords.txt" />
+<Text Include="$(MSBuildThisFileDirectory)library.properties" />
+<Text Include="$(MSBuildThisFileDirectory)preview_changes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)component.mk" />
+<None Include="$(MSBuildThisFileDirectory)library.json" />
+<None Include="$(MSBuildThisFileDirectory)LICENSE" />
+<None Include="$(MSBuildThisFileDirectory)PORTING.md" />
+<None Include="$(MSBuildThisFileDirectory)README.md" />
+<None Include="$(MSBuildThisFileDirectory)release_notes.md" />
+  </ItemGroup>
+</Project>
